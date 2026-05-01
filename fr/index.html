@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MakerStock — Gestion de production pour artisans BigCommerce</title>
+<link rel="alternate" hreflang="fr"      href="https://TODO-domaine.com/fr/" />
+<link rel="alternate" hreflang="en"      href="https://TODO-domaine.com/en/" />
+<link rel="alternate" hreflang="es"      href="https://TODO-domaine.com/es/" />
+<link rel="alternate" hreflang="x-default" href="https://TODO-domaine.com/en/" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -569,6 +573,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   footer { flex-direction: column; gap: 1.25rem; text-align: center; }
 }
 </style>
+<style>.lang-switcher{display:flex;gap:.25rem;margin-left:.5rem}.lang-btn{padding:.25rem .5rem;border-radius:var(--radius-sm,5px);font-size:.75rem;font-weight:700;text-decoration:none;color:var(--muted,#6b7280);border:1px solid var(--border,#e5e7eb);background:transparent;transition:all .15s}.lang-btn:hover,.lang-btn.active{background:var(--e500,#10b981);border-color:var(--e500,#10b981);color:#fff}</style>
 </head>
 <body>
 
@@ -582,12 +587,13 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
     <a href="#how">Comment ça marche</a>
     <a href="#features">Fonctionnalités</a>
     <a href="#pricing">Tarifs</a>
-    <a href="makerstock_doc_vue_ensemble.html" target="_blank">Documentation</a>
+    <a href="docs/vue-ensemble.html" target="_blank">Documentation</a>
   </div>
   <div class="nav-cta">
     <a href="#" class="btn btn-outlined">Connexion</a>
     <a href="#configurator" class="btn btn-primary">Trouver mon plan →</a>
   </div>
+<div class="lang-switcher"><a href="/fr/" class="lang-btn active">FR</a><a href="/en/" class="lang-btn">EN</a><a href="/es/" class="lang-btn">ES</a></div>
 </nav>
 
 <!-- HERO -->
@@ -956,7 +962,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
     <p class="final-sub">Installez MakerStock depuis l'App Store BigCommerce. Votre premier run en moins de 30 minutes.</p>
     <div class="final-actions">
       <a href="#configurator" class="btn btn-primary btn-lg">Trouver mon plan →</a>
-      <a href="makerstock_doc_vue_ensemble.html" class="btn btn-outlined btn-lg" target="_blank">Lire la documentation</a>
+      <a href="docs/vue-ensemble.html" class="btn btn-outlined btn-lg" target="_blank">Lire la documentation</a>
     </div>
     <div class="final-note">Sans carte bancaire · Annulable à tout moment · Données conservées au passage payant</div>
   </div>
@@ -970,7 +976,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
     <span class="footer-copy">· © 2025 · App BigCommerce</span>
   </div>
   <div class="footer-links">
-    <a href="makerstock_doc_vue_ensemble.html">Documentation</a>
+    <a href="docs/vue-ensemble.html">Documentation</a>
     <a href="#">Confidentialité</a>
     <a href="#">CGU</a>
     <a href="#">Support</a>
