@@ -1,12 +1,7 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/fr/index.html" }
-  ],
   "redirects": [
     { "source": "/privacy", "destination": "/fr/legal/privacy.html", "permanent": false },
-    { "source": "/tos",     "destination": "/fr/legal/tos.html",     "permanent": false },
-    { "source": "/en/privacy", "destination": "/en/legal/privacy.html", "permanent": false },
-    { "source": "/es/privacy", "destination": "/es/legal/privacy.html", "permanent": false }
+    { "source": "/tos",     "destination": "/fr/legal/tos.html",     "permanent": false }
   ],
   "headers": [
     {
