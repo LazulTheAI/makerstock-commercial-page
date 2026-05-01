@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MakerStock — Desktop &amp; Mobile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&amp;family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #0F2137;
+  --navy-mid:    #1A3A5C;
+  --blue:        #2563EB;
+  --blue-light:  #DBEAFE;
+  --blue-pale:   #EFF6FF;
+  --teal:        #0D9488;
+  --teal-light:  #CCFBF1;
+  --teal-pale:   #F0FDFA;
+  --amber:       #B45309;
+  --amber-light: #FEF3C7;
+  --amber-pale:  #FFFBEB;
+  --purple:      #7C3AED;
+  --purple-light:#EDE9FE;
+  --green:       #059669;
+  --green-light: #D1FAE5;
+  --coral:       #DC4B3E;
+  --coral-light: #FEE2E2;
+  --gray-50:     #F8F9FA;
+  --gray-100:    #F1F3F5;
+  --gray-200:    #E9ECEF;
+  --gray-400:    #ADB5BD;
+  --gray-600:    #6C757D;
+  --white:       #FFFFFF;
+  --text:        #1C1F23;
+  --text-muted:  #6C757D;
+  --border:      #E2E8F0;
+  --font-body:   'DM Sans', sans-serif;
+  --font-serif:  'Fraunces', serif;
+  --font-mono:   'DM Mono', monospace;
+  --sidebar-w:   260px;
+  --content-max: 860px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 15px; line-height: 1.75; color: var(--text); background: var(--white); display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar { position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh; background:var(--navy); display:flex; flex-direction:column; overflow-y:auto; z-index:100; }
+.sidebar-brand { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,.08); }
+.brand-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:6px; }
+.brand-icon { width:32px; height:32px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.brand-icon svg { width:18px; height:18px; fill:white; }
+.brand-name { font-weight:600; font-size:16px; color:var(--white); letter-spacing:.02em; }
+.brand-tagline { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.04em; text-transform:uppercase; }
+.sidebar-nav { padding:16px 12px; flex:1; }
+.nav-section { margin-bottom:24px; }
+.nav-section-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); padding:0 12px; margin-bottom:6px; }
+.nav-link { display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:6px; text-decoration:none; font-size:13.5px; color:rgba(255,255,255,.55); transition:all .15s; position:relative; }
+.nav-link:hover { background:rgba(255,255,255,.07); color:rgba(255,255,255,.9); }
+.nav-link.active { background:rgba(37,99,235,.25); color:var(--white); font-weight:500; }
+.nav-link.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:18px; background:var(--blue); border-radius:0 2px 2px 0; }
+.nav-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.2); flex-shrink:0; margin-left:4px; }
+.nav-link.active .nav-dot { background:var(--blue); }
+.sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,.08); }
+.plan-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:4px 12px; font-size:11px; color:rgba(255,255,255,.5); }
+
+/* ── Main layout ── */
+.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; }
+.reading-progress { position:fixed; top:0; left:var(--sidebar-w); right:0; height:2px; background:var(--border); z-index:200; }
+.reading-progress-bar { height:100%; background:var(--purple); width:0%; transition:width .1s; }
+
+/* ── Topbar ── */
+.topbar { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:12px 48px; display:flex; align-items:center; justify-content:space-between; z-index:50; }
+.breadcrumb { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); }
+.breadcrumb a { color:var(--text-muted); text-decoration:none; } .breadcrumb a:hover { color:var(--blue); }
+.breadcrumb span { color:var(--text); font-weight:500; }
+.breadcrumb-sep { color:var(--gray-400); }
+.topbar-actions { display:flex; gap:8px; }
+.btn-sm { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:6px; font-size:12.5px; font-weight:500; cursor:pointer; border:1px solid var(--border); background:var(--white); color:var(--text-muted); text-decoration:none; transition:all .15s; }
+.btn-sm:hover { background:var(--gray-50); color:var(--text); }
+.btn-primary { background:var(--blue); border-color:var(--blue); color:var(--white); }
+.btn-primary:hover { background:#1D4ED8; color:var(--white); }
+
+/* ── Content ── */
+.content { max-width:var(--content-max); margin:0 auto; padding:56px 48px 120px; width:100%; }
+
+/* ── Hero ── */
+.doc-hero { margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid var(--border); }
+.doc-part-label { display:inline-flex; align-items:center; gap:6px; background:var(--purple-light); color:var(--purple); border-radius:20px; padding:4px 14px; font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.doc-title { font-family:var(--font-serif); font-size:44px; font-weight:300; line-height:1.15; color:var(--navy); margin-bottom:16px; letter-spacing:-.02em; }
+.doc-title em { font-style:italic; color:var(--purple); }
+.doc-lead { font-size:17px; line-height:1.7; color:var(--text-muted); max-width:660px; margin-bottom:28px; font-weight:300; }
+.doc-meta { display:flex; align-items:center; gap:20px; font-size:12.5px; color:var(--text-muted); }
+
+/* ── Two-column interface overview ── */
+.interface-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:32px 0 48px; }
+.interface-card { border-radius:14px; overflow:hidden; border:1px solid var(--border); }
+.interface-card-header { padding:18px 20px 14px; display:flex; align-items:center; gap:12px; }
+.interface-card.desktop .interface-card-header { background:var(--navy); }
+.interface-card.mobile  .interface-card-header { background:var(--teal); }
+.interface-header-icon { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.interface-header-label { color:white; }
+.interface-header-label strong { display:block; font-size:15px; font-weight:600; }
+.interface-header-label span { font-size:11.5px; opacity:.7; }
+.interface-card-body { padding:16px 20px 20px; background:var(--white); }
+.interface-menu-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.interface-menu-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text); padding:5px 0; }
+.interface-menu-item::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--gray-400); flex-shrink:0; }
+.interface-menu-item.highlight::before { background:var(--blue); }
+.interface-menu-item.highlight-teal::before { background:var(--teal); }
+.interface-menu-section { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray-400); margin:10px 0 4px; padding-left:13px; }
+
+/* ── TOC ── */
+.toc-card { background:var(--gray-50); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:56px; }
+.toc-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.toc-list a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-size:14px; padding:3px 0; transition:color .12s; }
+.toc-list a:hover { color:var(--purple); }
+.toc-num { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); width:28px; flex-shrink:0; }
+
+/* ── Usecase sections ── */
+.usecase-section { margin-bottom:80px; }
+.usecase-anchor { display:block; height:80px; margin-top:-80px; }
+.usecase-header { margin-bottom:32px; }
+.usecase-eyebrow { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.usecase-title { font-family:var(--font-serif); font-size:30px; font-weight:300; color:var(--navy); line-height:1.25; letter-spacing:-.02em; margin-bottom:10px; }
+.usecase-title em { font-style:italic; }
+.usecase-subtitle { font-size:15px; color:var(--text-muted); max-width:640px; line-height:1.65; }
+
+/* ── Scenario divider ── */
+.scenario-label { display:inline-flex; align-items:center; gap:8px; background:var(--gray-100); border-radius:20px; padding:5px 14px; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:20px; }
+
+/* ── Scene: chat-like narrative ── */
+.scene { margin-bottom:40px; }
+.scene-intro { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:20px; }
+.scene-intro strong { color:var(--navy); }
+
+/* ── Step bubbles ── */
+.step-flow { display:flex; flex-direction:column; gap:2px; position:relative; padding-left:32px; }
+.step-flow::before { content:''; position:absolute; left:10px; top:8px; bottom:8px; width:1px; background:var(--border); }
+.step-bubble { display:flex; gap:14px; align-items:flex-start; position:relative; padding:10px 0; }
+.step-bubble-dot { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:white; flex-shrink:0; position:absolute; left:-31px; top:12px; z-index:1; }
+.step-bubble-dot.d  { background:var(--navy); }
+.step-bubble-dot.m  { background:var(--teal); }
+.step-bubble-dot.auto { background:var(--green); }
+.step-bubble-card { flex:1; border-radius:10px; border:1px solid var(--border); padding:12px 16px; transition:box-shadow .15s; }
+.step-bubble-card:hover { box-shadow:0 2px 10px rgba(0,0,0,.05); }
+.step-bubble-card.is-desktop { border-left:3px solid var(--navy); }
+.step-bubble-card.is-mobile  { border-left:3px solid var(--teal); }
+.step-bubble-card.is-auto    { border-left:3px solid var(--green); background:var(--gray-50); }
+.step-bubble-top { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.step-who { font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+.step-who.d    { color:var(--navy); }
+.step-who.m    { color:var(--teal); }
+.step-who.auto { color:var(--green); }
+.step-where { font-size:10.5px; color:var(--text-muted); font-family:var(--font-mono); }
+.step-action { font-size:14px; font-weight:600; color:var(--text); }
+.step-detail { font-size:13px; color:var(--text-muted); line-height:1.55; margin-top:3px; }
+.step-badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:600; padding:2px 8px; border-radius:4px; margin-top:6px; }
+.step-badge.pro    { background:var(--purple-light); color:var(--purple); }
+.step-badge.info   { background:var(--blue-light);   color:var(--blue); }
+.step-badge.warn   { background:var(--amber-light);  color:var(--amber); }
+
+/* ── Result box ── */
+.result-box { display:flex; gap:12px; background:var(--green-light); border:1px solid #6EE7B7; border-radius:10px; padding:14px 18px; margin-top:20px; }
+.result-icon { font-size:18px; flex-shrink:0; }
+.result-text { font-size:13.5px; color:#065F46; line-height:1.55; }
+.result-text strong { display:block; font-weight:600; margin-bottom:2px; }
+
+/* ── Interface legend pill ── */
+.legend-strip { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:28px; padding:12px 16px; background:var(--gray-50); border-radius:8px; border:1px solid var(--border); }
+.legend-item { display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--text-muted); }
+.legend-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.legend-dot.d    { background:var(--navy); }
+.legend-dot.m    { background:var(--teal); }
+.legend-dot.auto { background:var(--green); }
+
+/* ── Section divider ── */
+.section-divider { border:none; border-top:1px solid var(--border); margin:64px 0; }
+
+/* ── Callout ── */
+.callout { display:flex; gap:14px; border-radius:10px; padding:16px 20px; margin:24px 0; border:1px solid transparent; }
+.callout-info    { background:var(--blue-pale); border-color:var(--blue-light); }
+.callout-teal    { background:var(--teal-pale); border-color:var(--teal-light); }
+.callout-warning { background:var(--amber-pale); border-color:var(--amber-light); }
+.callout-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+.callout-body { font-size:14px; line-height:1.65; color:var(--text); }
+.callout-body strong { font-weight:600; display:block; margin-bottom:3px; }
+
+p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:16px; }
+
+/* ── Fade ── */
+.fade-in { opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ── Footer ── */
+.doc-footer { border-top:1px solid var(--border); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12.5px; }
+.footer-nav { display:flex; gap:24px; }
+.footer-nav a { color:var(--text-muted); text-decoration:none; transition:color .12s; }
+.footer-nav a:hover { color:var(--blue); }
+
+@media (max-width:900px) {
+  :root { --sidebar-w:0px; }
+  .sidebar { display:none; }
+  .content { padding:32px 24px 80px; }
+  .topbar { padding:12px 24px; }
+  .interface-split { grid-template-columns:1fr; }
+  .doc-title { font-size:30px; }
+}
+</style>
+<link href="https://TODO-domaine.com/fr/" hreflang="fr" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="en" rel="alternate"/><link href="https://TODO-domaine.com/es/" hreflang="es" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<div class="reading-progress"><div class="reading-progress-bar" id="progress"></div></div>
+<!-- Sidebar -->
+<aside class="sidebar">
+<div class="sidebar-brand">
+<a class="brand-logo" href="#">
+<div class="brand-icon"><svg viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"></path></svg></div>
+<span class="brand-name">MakerStock</span>
+</a>
+<div class="brand-tagline">Documentation</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<div class="nav-section-label">Navigation</div>
+<a class="nav-link" href="makerstock_doc_vue_ensemble.html"><div class="nav-dot"></div>Part 1 — Overview</a>
+<a class="nav-link" href="makerstock_doc_quickstart.html"><div class="nav-dot"></div>Part 2 — Quick Start</a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">Part 3 — Desktop &amp; Mobile</div>
+<a class="nav-link active" href="#intro"><div class="nav-dot"></div>Introduction</a>
+<a class="nav-link" href="#uc1"><div class="nav-dot"></div>Lundi matin : la semaine démarre</a>
+<a class="nav-link" href="#uc2"><div class="nav-dot"></div>Livraison fournisseur imprévue</a>
+<a class="nav-link" href="#uc3"><div class="nav-dot"></div>Production day intense</a>
+<a class="nav-link" href="#uc4"><div class="nav-dot"></div>Préparer une commande revendeur</a>
+<a class="nav-link" href="#uc5"><div class="nav-dot"></div>End of month : analyse &amp; rapports</a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">À venir</div>
+<a class="nav-link" href="#" style="opacity:.4;pointer-events:none"><div class="nav-dot"></div>Part 4 — Critical points</a>
+</div>
+</nav>
+<div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — April 2025</div></div>
+</aside>
+<!-- Main -->
+<main class="main">
+<div class="topbar">
+<div class="breadcrumb">
+<a href="makerstock_doc_vue_ensemble.html">Documentation</a>
+<span class="breadcrumb-sep">/</span>
+<a href="makerstock_doc_quickstart.html">Quick Start</a>
+<span class="breadcrumb-sep">/</span>
+<span>Desktop &amp; Mobile</span>
+</div>
+<div class="topbar-actions">
+<a class="btn-sm" href="makerstock_doc_quickstart.html">← Part 2</a>
+<a class="btn-sm btn-primary" href="#">Start free trial →</a>
+</div>
+</div>
+<div class="content">
+<!-- Hero -->
+<div class="doc-hero fade-in" id="intro">
+<div class="doc-part-label">🖥️📱 Part 3</div>
+<h1 class="doc-title">Desktop &amp; Mobile — <em>who does what</em></h1>
+<p class="doc-lead">Rather than a correspondence table, here are five typical days in an artisan workshop. You'll naturally see when each team member switches from one interface to the other, and why.</p>
+<div class="doc-meta">
+<div>⏱ Reading ~8 min</div>
+<div>·</div>
+<div>5 illustrated scenarios</div>
+<div>·</div>
+<div>Admin + Operator</div>
+</div>
+</div>
+<!-- Interface overview -->
+<div class="interface-split fade-in">
+<div class="interface-card desktop">
+<div class="interface-card-header">
+<div class="interface-header-icon">🖥️</div>
+<div class="interface-header-label">
+<strong>Interface desktop</strong>
+<span>Web browser — BigCommerce Admin</span>
+</div>
+</div>
+<div class="interface-card-body">
+<div class="interface-menu-section">Approvisionnement</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item highlight">Stock matières</li>
+<li class="interface-menu-item">Suppliers</li>
+<li class="interface-menu-item highlight">Approvisionnements (bons de commande)</li>
+</ul>
+<div class="interface-menu-section">Production</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item highlight">Runs de production</li>
+<li class="interface-menu-item highlight">Recipes</li>
+</ul>
+<div class="interface-menu-section">Ventes &amp; B2B</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item highlight">Produits &amp; stock</li>
+<li class="interface-menu-item">Revendeurs</li>
+<li class="interface-menu-item">Commandes B2B</li>
+</ul>
+<div class="interface-menu-section">Pilotage</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item highlight">Alertes</li>
+<li class="interface-menu-item">Rapports</li>
+</ul>
+<div class="interface-menu-section">Configuration</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item">Ateliers &amp; entrepôts</li>
+<li class="interface-menu-item">Import données</li>
+<li class="interface-menu-item">Utilisateurs</li>
+</ul>
+</div>
+</div>
+<div class="interface-card mobile">
+<div class="interface-card-header">
+<div class="interface-header-icon">📱</div>
+<div class="interface-header-label">
+<strong>Interface mobile</strong>
+<span>Phone browser — /mobile</span>
+</div>
+</div>
+<div class="interface-card-body">
+<div class="interface-menu-section">Bottom navigation bar</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item highlight-teal">Dashboard — daily summary</li>
+<li class="interface-menu-item highlight-teal">Stock — view &amp; adjustment</li>
+<li class="interface-menu-item highlight-teal">Scanner — QR / barcode identification</li>
+<li class="interface-menu-item highlight-teal">Manufacturing — planned &amp; ongoing runs</li>
+<li class="interface-menu-item highlight-teal">Procurement — orders to receive</li>
+<li class="interface-menu-item highlight-teal">Orders — B2B dispatch &amp; tracking</li>
+</ul>
+<div class="interface-menu-section" style="margin-top:16px">At the top of each screen</div>
+<ul class="interface-menu-list">
+<li class="interface-menu-item">Active warehouse selector</li>
+<li class="interface-menu-item">Active alerts banner</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- TOC -->
+<div class="toc-card fade-in">
+<div class="toc-title">Five everyday scenarios</div>
+<ul class="toc-list">
+<li><a href="#uc1"><span class="toc-num">3.1</span> Monday morning — the manager starts her week (desktop)</a></li>
+<li><a href="#uc2"><span class="toc-num">3.2</span> Surprise delivery — an operator receives alone (mobile)</a></li>
+<li><a href="#uc3"><span class="toc-num">3.3</span> Production day — the workshop runs at full capacity (desktop + mobile)</a></li>
+<li><a href="#uc4"><span class="toc-num">3.4</span> Reseller order — from creation to shipment (desktop + mobile)</a></li>
+<li><a href="#uc5"><span class="toc-num">3.5</span> End of month — review and decisions (desktop only)</a></li>
+</ul>
+</div>
+<!-- Legend -->
+<div class="legend-strip fade-in">
+<div class="legend-item"><div class="legend-dot d"></div>Action performed on desktop (admin)</div>
+<div class="legend-item"><div class="legend-dot m"></div>Action performed on mobile (operator)</div>
+<div class="legend-item"><div class="legend-dot auto"></div>Automatic action triggered by MakerStock</div>
+</div>
+<!-- ════════════════════════════════════════════════
+         UC 1 — Lundi matin
+    ════════════════════════════════════════════════ -->
+<section class="usecase-section fade-in">
+<a class="usecase-anchor" id="uc1"></a>
+<div class="usecase-header">
+<div class="usecase-eyebrow">
+<span>🖥️</span>
+<span>Scenario 3.1 — Desktop only</span>
+</div>
+<h2 class="usecase-title">Monday morning — the manager starts her week</em></h2>
+<p class="usecase-subtitle">Sophie, the workshop manager, opens MakerStock from her desk before going down to production. She has 20 minutes to take stock before planning the week.</p>
+</div>
+<div class="step-flow">
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Pilotage → Alertes</span>
+</div>
+<div class="step-action">Consulter le tableau de bord des alertes</div>
+<div class="step-detail">La page d'accueil affiche toutes les alertes actives, rafraîchies toutes les 30 secondes : stock bas sur la cire d'abeille (seuil à 5 kg, stock actuel 3,2 kg), et un run planifié la semaine dernière toujours bloqué faute de stock. Elle acquitte les alertes non critiques.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Approvisionnement → Stock matières</span>
+</div>
+<div class="step-action">Vérifier le détail du stock critique</div>
+<div class="step-detail">Elle ouvre la fiche de la cire d'abeille. Elle consulte l'historique des mouvements des 30 derniers jours : la consommation s'est accélérée cette semaine. Elle ajuste manuellement le seuil d'alerte de 5 à 8 kg pour refléter la nouvelle cadence.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Approvisionnement → Approvisionnements</span>
+</div>
+<div class="step-action">Créer un bon de commande fournisseur</div>
+<div class="step-detail">Elle crée un bon de commande chez son fournisseur habituel : 20 kg de cire, 5 L d'huile de coco. Elle renseigne la date de livraison prévue (jeudi) et envoie le bon en statut <em>Sent</em>. Le fournisseur recevra la commande par email.</div>
+<span class="step-badge pro">Pro+</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Production → Runs de production</span>
+</div>
+<div class="step-action">Planifier les runs de la semaine</div>
+<div class="step-detail">Elle planifie 3 runs : 4 batches de Bougie Vanille pour mardi, 2 batches de Savon au lait pour mercredi, et 6 batches de Bougie Figuier pour vendredi (une fois la cire reçue). Les runs de mardi et mercredi passent en statut <em>Planned</em> immédiatement car le stock est suffisant.</div>
+</div>
+</div>
+</div>
+<div class="result-box">
+<div class="result-icon">✅</div>
+<div class="result-text">
+<strong>En 20 minutes, Sophie a tout cadré.</strong>
+          Les opérateurs trouveront leurs runs en attente sur le mobile dès qu'ils arriveront à l'atelier. Elle n'a pas eu à leur envoyer un seul message.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ════════════════════════════════════════════════
+         UC 2 — Livraison fournisseur
+    ════════════════════════════════════════════════ -->
+<section class="usecase-section fade-in">
+<a class="usecase-anchor" id="uc2"></a>
+<div class="usecase-header">
+<div class="usecase-eyebrow">
+<span>📱</span>
+<span>Scenario 3.2 — Mobile only</span>
+</div>
+<h2 class="usecase-title">Surprise delivery — <em>Thomas receives alone</em></h2>
+<p class="usecase-subtitle">Thomas is an operator. He is alone in the workshop on Thursday morning when the delivery driver arrives with the raw materials order. Sophie is in a meeting, unreachable. Thomas handles everything from his phone.</p>
+</div>
+<div class="step-flow">
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Approvisionnements</span>
+</div>
+<div class="step-action">Consulter les commandes en attente de réception</div>
+<div class="step-detail">Thomas ouvre l'onglet Approvisionnements sur son téléphone. Il voit le bon de commande créé par Sophie lundi, en statut <em>Sent</em>, avec le détail des articles attendus : 20 kg de cire d'abeille et 5 L d'huile de coco.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Réception</span>
+</div>
+<div class="step-action">Ouvrir la fiche de réception et cocher les lignes</div>
+<div class="step-detail">Il tape sur "Réceptionner" depuis la carte de la commande. L'écran de réception affiche chaque ligne du bon avec la quantité commandée et la quantité déjà reçue (0). Il coche les deux lignes reçues.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Réception — saisie lot</span>
+</div>
+<div class="step-action">Saisir les quantités, numéros de lot et DLC</div>
+<div class="step-detail">Pour la cire : il saisit 19,8 kg reçus (le livreur a livré légèrement moins), le numéro de lot <code>CIR-2024-089</code> et la DLC <code>31/12/2026</code>. Pour l'huile : 5 L exactement, lot <code>HCO-2024-012</code>. Il sélectionne l'entrepôt destination "Atelier Principal".</div>
+<span class="step-badge pro">Traçabilité lots — Pro+</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Réception</span>
+</div>
+<div class="step-action">Valider la réception</div>
+<div class="step-detail">Il appuie sur "Valider la réception". Un message de succès confirme l'enregistrement. La commande passe en statut <em>Partiellement reçue</em> (car 0,2 kg manquants sur la cire).</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot auto">✦</div>
+<div class="step-bubble-card is-auto">
+<div class="step-bubble-top">
+<span class="step-who auto">MakerStock automatic</span>
+<span class="step-where">Système</span>
+</div>
+<div class="step-action">Stock mis à jour, alerte de stock bas levée</div>
+<div class="step-detail">Les 19,8 kg de cire sont créditées immédiatement dans l'entrepôt sélectionné, avec le lot et la DLC associés. L'alerte stock bas sur la cire disparaît du tableau de bord. Le run planifié pour vendredi (bloqué faute de stock) peut maintenant être exécuté.</div>
+</div>
+</div>
+</div>
+<div class="result-box">
+<div class="result-icon">✅</div>
+<div class="result-text">
+<strong>Toute la réception est tracée sans que Sophie ait bougé de sa réunion.</strong>
+          Quand elle rouvre MakerStock l'après-midi, le stock est à jour, les lots sont enregistrés et l'alerte a disparu.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ════════════════════════════════════════════════
+         UC 3 — Production day
+    ════════════════════════════════════════════════ -->
+<section class="usecase-section fade-in">
+<a class="usecase-anchor" id="uc3"></a>
+<div class="usecase-header">
+<div class="usecase-eyebrow">
+<span>🖥️📱</span>
+<span>Scenario 3.3 — Desktop + Mobile</span>
+</div>
+<h2 class="usecase-title">Production day — <em>the workshop runs at full capacity</em></h2>
+<p class="usecase-subtitle">Tuesday, Vanilla Candle production is scheduled. Sophie has planned 4 batches from the desktop. Thomas and his colleague Amina will execute them from their respective phones.</p>
+</div>
+<div class="step-flow">
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Fabrication → onglet Planneds</span>
+</div>
+<div class="step-action">Consulter les runs du jour</div>
+<div class="step-detail">En arrivant, Thomas ouvre l'onglet Fabrication. Il voit le run "Bougie Vanille — 4 batches" planifié par Sophie. Il vérifie l'entrepôt associé et lit la note de Sophie : <em>"Attention, peser la cire avec la balance de précision"</em>.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Fabrication → bouton Démarrer</span>
+</div>
+<div class="step-action">Démarrer le run</div>
+<div class="step-detail">Il appuie sur "Démarrer". Le run passe en statut <em>In progress</em>. L'onglet bascule automatiquement sur "In progress" pour qu'il suive l'avancement.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot auto">✦</div>
+<div class="step-bubble-card is-auto">
+<div class="step-bubble-top">
+<span class="step-who auto">MakerStock automatic</span>
+<span class="step-where">Système</span>
+</div>
+<div class="step-action">Le run apparaît en temps réel sur le desktop de Sophie</div>
+<div class="step-detail">Dans Production → Runs de production, Sophie voit le run passer en statut <em>In progress</em> sans avoir rien fait. Elle peut suivre l'état de la production depuis son bureau.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Production → Runs</span>
+</div>
+<div class="step-action">Lancer un run supplémentaire non planifié</div>
+<div class="step-detail">Sophie réalise qu'une commande urgente nécessite 2 batches de Savon au lait immédiatement. Elle lance un run directement depuis le desktop (sans passer par l'étape "Planifier") : le système vérifie le stock, calcule le COGS estimé et exécute.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Amina — Operator</span>
+<span class="step-where">Mobile → Scanner</span>
+</div>
+<div class="step-action">Scanner une matière pour vérifier le stock avant d'ouvrir un sac</div>
+<div class="step-detail">Amina hésite sur un sac de cire : est-ce le bon lot ? Elle scanne le code-barres depuis l'onglet Scanner. MakerStock identifie la matière, affiche le stock disponible, le lot correspondant et la DLC. Elle confirme que c'est le bon sac.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Fabrication → onglet In progress</span>
+</div>
+<div class="step-action">Terminer le run en fin de session</div>
+<div class="step-detail">Deux heures plus tard, les 4 batches sont coulés et refroidissent. Thomas appuie sur "Terminer le run". Le système lui confirme : 48 bougies produites (4 batches × 12 unités), COGS total calculé.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot auto">✦</div>
+<div class="step-bubble-card is-auto">
+<div class="step-bubble-top">
+<span class="step-who auto">MakerStock automatic</span>
+<span class="step-where">Système</span>
+</div>
+<div class="step-action">Déduction matières, crédit stock produits finis, COGS enregistré</div>
+<div class="step-detail">Les matières consommées (cire, mèche, fragrance vanille, contenant) sont déduites du stock FIFO avec la traçabilité des lots utilisés. 48 unités de "Bougie Vanille" sont créditées dans le stock produits finis. Le COGS unitaire est calculé et enregistré.</div>
+</div>
+</div>
+</div>
+<div class="result-box">
+<div class="result-icon">✅</div>
+<div class="result-text">
+<strong>Sophie pilote, Thomas et Amina exécutent — sans se croiser une seule fois.</strong>
+          Les statuts se mettent à jour en temps réel des deux côtés. Chacun voit exactement ce qui le concerne.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ════════════════════════════════════════════════
+         UC 4 — Reseller order
+    ════════════════════════════════════════════════ -->
+<section class="usecase-section fade-in">
+<a class="usecase-anchor" id="uc4"></a>
+<div class="usecase-header">
+<div class="usecase-eyebrow">
+<span>🖥️📱</span>
+<span>Scenario 3.4 — Desktop + Mobile · Business plan</span>
+</div>
+<h2 class="usecase-title">Reseller order — <em>from creation to shipment</em></h2>
+<p class="usecase-subtitle">The shop "Les Petits Plaisirs" (B2B reseller) orders 24 vanilla candles and 12 milk soaps. Sophie creates the order, Thomas prepares and ships it.</p>
+</div>
+<div class="step-flow">
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Ventes &amp; B2B → Commandes</span>
+</div>
+<div class="step-action">Créer la commande B2B</div>
+<div class="step-detail">Sophie sélectionne le revendeur "Les Petits Plaisirs", ajoute les lignes de produits avec les quantités, applique la remise contractuelle de 15 %. La commande est créée en statut <em>Draft</em>, puis confirmée.</div>
+<span class="step-badge pro">Business</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Commandes → onglet Confirmées</span>
+</div>
+<div class="step-action">View la commande apparaître sur son téléphone</div>
+<div class="step-detail">Thomas ouvre l'onglet Commandes sur son mobile. Il voit la nouvelle commande "Les Petits Plaisirs" avec le détail des articles, le statut <em>En préparation</em> et la date de livraison souhaitée. Il commence à préparer le colis.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot m">M</div>
+<div class="step-bubble-card is-mobile">
+<div class="step-bubble-top">
+<span class="step-who m">Thomas — Operator</span>
+<span class="step-where">Mobile → Commandes → détail</span>
+</div>
+<div class="step-action">Consulter le détail et préparer le bon de livraison</div>
+<div class="step-detail">Thomas tape sur la commande pour voir les détails : revendeur, date souhaitée, liste des articles avec quantités, total HT. Il prépare physiquement le colis en se référant à la liste affichée sur son téléphone.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Commandes → avancer statut</span>
+</div>
+<div class="step-action">Faire avancer le statut et télécharger le bon de livraison</div>
+<div class="step-detail">Sophie passe la commande en <em>Expédiée</em> depuis le desktop. Elle télécharge le bon de livraison PDF pour l'inclure dans le colis. Le CA de "Les Petits Plaisirs" est automatiquement mis à jour dans la fiche revendeur.</div>
+</div>
+</div>
+</div>
+<div class="result-box">
+<div class="result-icon">✅</div>
+<div class="result-text">
+<strong>La commande a voyagé de Sophie à Thomas sans un seul échange verbal.</strong>
+          Le CA mensuel du revendeur est mis à jour automatiquement, et l'historique des livraisons est conservé.
+        </div>
+</div>
+<div class="callout callout-warning" style="margin-top:24px">
+<div class="callout-icon">⚠️</div>
+<div class="callout-body">
+<strong>Feature Business</strong>
+          La gestion des commandes B2B revendeurs (création, suivi statut, bon de livraison, tableau de CA) est réservée au plan Business.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ════════════════════════════════════════════════
+         UC 5 — Fin de mois
+    ════════════════════════════════════════════════ -->
+<section class="usecase-section fade-in">
+<a class="usecase-anchor" id="uc5"></a>
+<div class="usecase-header">
+<div class="usecase-eyebrow">
+<span>🖥️</span>
+<span>Scenario 3.5 — Desktop only</span>
+</div>
+<h2 class="usecase-title">End of month — <em>review and decisions</em></h2>
+<p class="usecase-subtitle">First of the month. Sophie takes an hour to analyse the past month, identify the most profitable products and prepare for her meeting with her accountant.</p>
+</div>
+<div class="step-flow">
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Pilotage → Rapports</span>
+</div>
+<div class="step-action">Consulter le rapport de consommation matières</div>
+<div class="step-detail">Elle filtre sur le mois précédent. Le rapport affiche le total des entrées et sorties par matière, le coût total consommé, et la matière la plus utilisée (la cire, sans surprise). Elle identifie une consommation anormale sur l'huile essentielle de lavande.</div>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Production → Runs → export CSV traçabilité</span>
+</div>
+<div class="step-action">Exporter la traçabilité des lots pour un run spécifique</div>
+<div class="step-detail">Elle repère le run du 18 qui a consommé la lavande et télécharge l'export CSV de traçabilité : lot utilisé, quantité exacte, DLC, fournisseur. Elle réalise qu'un lot presque périmé a bien été utilisé en priorité (FIFO correct).</div>
+<span class="step-badge pro">Pro+</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Pilotage → Rapports → Rapport financier</span>
+</div>
+<div class="step-action">Générer le rapport P&amp;L par produit</div>
+<div class="step-detail">Elle génère le rapport financier (méthode coûts complets, valorisation FIFO). Il affiche : CA total, COGS par produit, marge brute, charges fixes imputées, point mort mensuel et projection sur 12 mois. La Bougie Figuier ressort à 62 % de marge brute — son meilleur produit.</div>
+<span class="step-badge pro">Business</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Pilotage → Rapports → XLSX accounting export</span>
+</div>
+<div class="step-action">Télécharger l'export comptable pour son comptable</div>
+<div class="step-detail">Elle télécharge le fichier XLSX structuré : mouvements de stock, valorisation FIFO, COGS détaillés. Elle l'envoie directement à son comptable sans avoir à ressaisir une seule ligne.</div>
+<span class="step-badge pro">Pro+</span>
+</div>
+</div>
+<div class="step-bubble">
+<div class="step-bubble-dot d">D</div>
+<div class="step-bubble-card is-desktop">
+<div class="step-bubble-top">
+<span class="step-who d">Sophie — Admin</span>
+<span class="step-where">Desktop → Production → Recipes</span>
+</div>
+<div class="step-action">Ajuster les recettes et les prix recommandés</div>
+<div class="step-detail">Fort de ces données, Sophie revoit les quantités de deux recettes et consulte le prix de vente recommandé calculé par MakerStock (COGS + marge cible). Elle décide d'augmenter légèrement le prix de la Bougie Lavande.</div>
+<span class="step-badge pro">Pro+</span>
+</div>
+</div>
+</div>
+<div class="result-box">
+<div class="result-icon">✅</div>
+<div class="result-text">
+<strong>Une heure de travail analytique qui remplace une demi-journée de tableur.</strong>
+          Toutes les données sont là, structurées, prêtes à être partagées avec un comptable ou utilisées pour des décisions de gestion.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- Synthèse -->
+<div class="fade-in" style="margin-bottom:60px">
+<h2 style="font-family:var(--font-serif);font-size:26px;font-weight:300;color:var(--navy);margin-bottom:16px;letter-spacing:-.01em">Key takeaways from these five scenarios</h2>
+<p class="doc-p">La frontière entre desktop et mobile n'est pas une frontière de fonctionnalités — c'est une frontière de <strong>moment et de rôle</strong>. L'admin pense en termes de semaine, de coûts et de configuration. L'opérateur pense en termes d'heure, d'action physique et de confirmation.</p>
+<p class="doc-p">MakerStock est conçu pour que les deux mondes soient <strong>toujours synchrones</strong> sans jamais se gêner : Sophie ne se demande jamais si Thomas a bien enregistré la réception. Thomas ne se demande jamais quels runs sont prioritaires. Chacun a la réponse là où il se trouve, sur l'écran qui est dans sa main.</p>
+<div class="callout callout-teal">
+<div class="callout-icon">📖</div>
+<div class="callout-body">
+<strong>Next section</strong>
+          La Partie 4 plonge dans la description fonctionnelle des points critiques : comment fonctionne exactement le cycle de production, la gestion des lots, et la synchronisation BigCommerce.
+        </div>
+</div>
+</div>
+</div><!-- /content -->
+<footer class="doc-footer">
+<div>MakerStock Documentation · v1.0 · April 2025</div>
+<nav class="footer-nav">
+<a href="makerstock_doc_quickstart.html">← Part 2: Quick Start</a>
+<a href="#">Part 4: Critical points →</a>
+</nav>
+</footer>
+</main>
+<script>
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.04) + 's';
+  observer.observe(el);
+});
+const sections = ['uc1','uc2','uc3','uc4','uc5'];
+const links = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    if (!current && l.getAttribute('href') === '#intro') l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

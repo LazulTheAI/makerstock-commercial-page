@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MakerStock — Descripción general</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&amp;family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & tokens ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0F2137;
+  --navy-mid:   #1A3A5C;
+  --blue:       #2563EB;
+  --blue-light: #DBEAFE;
+  --teal:       #0D9488;
+  --teal-light: #CCFBF1;
+  --amber:      #B45309;
+  --amber-light:#FEF3C7;
+  --gray-50:    #F8F9FA;
+  --gray-100:   #F1F3F5;
+  --gray-200:   #E9ECEF;
+  --gray-400:   #ADB5BD;
+  --gray-600:   #6C757D;
+  --gray-800:   #343A40;
+  --white:      #FFFFFF;
+  --text:       #1C1F23;
+  --text-muted: #6C757D;
+  --border:     #E2E8F0;
+
+  --font-body:  'DM Sans', sans-serif;
+  --font-serif: 'Fraunces', serif;
+  --font-mono:  'DM Mono', monospace;
+
+  --sidebar-w: 260px;
+  --content-max: 780px;
+  --radius: 8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--white);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-brand {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+.brand-icon {
+  width: 32px; height: 32px;
+  background: var(--blue);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-icon svg { width: 18px; height: 18px; fill: white; }
+
+.brand-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: .02em;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.sidebar-nav { padding: 16px 12px; flex: 1; }
+
+.nav-section {
+  margin-bottom: 24px;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  padding: 0 12px;
+  margin-bottom: 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,.55);
+  transition: all .15s;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.9);
+}
+
+.nav-link.active {
+  background: rgba(37,99,235,.25);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 18px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+
+.nav-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.nav-link.active .nav-dot { background: var(--blue); }
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,.5);
+}
+
+/* ── Main layout ──────────────────────────────────────────── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Top bar ──────────────────────────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.breadcrumb span { color: var(--text); font-weight: 500; }
+.breadcrumb-sep { color: var(--gray-400); }
+
+.topbar-actions { display: flex; gap: 8px; }
+
+.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all .15s;
+}
+
+.btn-sm:hover {
+  background: var(--gray-50);
+  color: var(--text);
+}
+
+.btn-primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: #1D4ED8;
+  border-color: #1D4ED8;
+  color: var(--white);
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+.content {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 56px 48px 120px;
+  width: 100%;
+}
+
+/* ── Hero section ─────────────────────────────────────────── */
+.doc-hero {
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doc-part-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue-light);
+  color: var(--blue);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.doc-title {
+  font-family: var(--font-serif);
+  font-size: 44px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -.02em;
+}
+
+.doc-title em {
+  font-style: italic;
+  color: var(--blue);
+}
+
+.doc-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+
+.doc-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.doc-meta-item { display: flex; align-items: center; gap: 5px; }
+
+/* ── TOC inline ───────────────────────────────────────────── */
+.toc-card {
+  background: var(--gray-50);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+}
+
+.toc-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  transition: color .12s;
+}
+
+.toc-list a:hover { color: var(--blue); }
+
+.toc-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+/* ── Sections ─────────────────────────────────────────────── */
+.doc-section { margin-bottom: 72px; }
+
+.section-anchor { display: block; height: 80px; margin-top: -80px; }
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.section-num-badge {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+p.doc-p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+/* ── Subsections ──────────────────────────────────────────── */
+.subsection { margin: 36px 0 28px; }
+
+.subsection-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--navy-mid);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-light);
+}
+
+/* ── Callout boxes ────────────────────────────────────────── */
+.callout {
+  display: flex;
+  gap: 14px;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  border: 1px solid transparent;
+}
+
+.callout-info    { background: #EFF6FF; border-color: #BFDBFE; }
+.callout-teal    { background: #F0FDFA; border-color: #99F6E4; }
+.callout-warning { background: #FFFBEB; border-color: #FDE68A; }
+
+.callout-icon {
+  font-size: 17px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.callout-body { font-size: 14px; line-height: 1.65; color: var(--text); }
+.callout-body strong { font-weight: 600; display: block; margin-bottom: 3px; }
+
+/* ── Bullet list ──────────────────────────────────────────── */
+.doc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+
+.doc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.doc-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* ── Role card grid ───────────────────────────────────────── */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.role-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.role-card.admin::before  { background: var(--blue); }
+.role-card.operator::before { background: var(--teal); }
+
+.role-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.role-card.admin .role-icon    { background: var(--blue-light); }
+.role-card.operator .role-icon { background: var(--teal-light); }
+
+.role-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.role-interface {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.role-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.role-list li {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.role-list li::before {
+  content: '→';
+  color: var(--gray-400);
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+/* ── Feature table ────────────────────────────────────────── */
+.feature-table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.feature-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.feature-table thead tr {
+  background: var(--navy);
+}
+
+.feature-table thead th {
+  color: rgba(255,255,255,.7);
+  font-weight: 500;
+  font-size: 11.5px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 12px 14px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.feature-table thead th:first-child { text-align: left; }
+
+.feature-table tbody tr { border-bottom: 1px solid var(--border); }
+.feature-table tbody tr:last-child { border-bottom: none; }
+.feature-table tbody tr:hover { background: var(--gray-50); }
+
+.feature-table tbody td {
+  padding: 10px 14px;
+  color: var(--text);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.feature-table tbody td:first-child { text-align: left; }
+
+.feature-table .group-row td {
+  background: var(--gray-50);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 14px;
+}
+
+.check-yes  { color: #059669; font-size: 15px; }
+.check-no   { color: var(--gray-400); font-size: 15px; }
+.check-part { color: var(--amber); font-size: 14px; }
+
+.iface-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.iface-d   { background: #EFF6FF; color: #2563EB; }
+.iface-m   { background: var(--teal-light); color: var(--teal); }
+.iface-dm  { background: #F5F3FF; color: #7C3AED; }
+
+/* ── Plan cards ───────────────────────────────────────────── */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.plan-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: box-shadow .2s;
+}
+
+.plan-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+
+.plan-card.popular {
+  border-color: #059669;
+  box-shadow: 0 0 0 1px #059669;
+}
+
+.plan-popular-badge {
+  position: absolute;
+  top: -11px; left: 50%;
+  transform: translateX(-50%);
+  background: #059669;
+  color: white;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: .04em;
+}
+
+.plan-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+}
+
+.plan-price {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.plan-price sup { font-size: 14px; font-family: var(--font-body); vertical-align: top; margin-top: 6px; }
+.plan-price sub { font-size: 13px; font-family: var(--font-body); color: var(--text-muted); }
+
+.plan-annual {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: -6px;
+}
+
+.plan-limit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.plan-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.plan-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.plan-features-list .fi { color: #059669; flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+.plan-features-list .fx { color: var(--gray-400); flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+
+.plan-cta {
+  display: block;
+  text-align: center;
+  padding: 9px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  transition: all .15s;
+}
+
+.plan-cta:hover { background: var(--blue); color: var(--white); }
+.plan-card.popular .plan-cta { background: var(--blue); color: var(--white); }
+.plan-card.popular .plan-cta:hover { background: #1D4ED8; }
+
+/* ── Trial callout ────────────────────────────────────────── */
+.trial-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--navy);
+  color: white;
+  border-radius: 12px;
+  padding: 20px 28px;
+  margin: 8px 0 32px;
+}
+
+.trial-text strong { font-size: 15px; display: block; margin-bottom: 2px; }
+.trial-text span { font-size: 13px; color: rgba(255,255,255,.6); }
+
+.trial-badge {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Mobile tab showcase ──────────────────────────────────── */
+.mobile-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.mobile-tab-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.mobile-tab-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.mobile-tab-icon.fab  { background: #EFF6FF; }
+.mobile-tab-icon.appr { background: var(--teal-light); }
+.mobile-tab-icon.rcp  { background: var(--amber-light); }
+.mobile-tab-icon.cmd  { background: #F5F3FF; }
+
+.mobile-tab-title {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.mobile-tab-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Feature legend ───────────────────────────────────────── */
+.feature-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.feature-legend span { display: flex; align-items: center; gap: 6px; }
+
+/* ── Footer ───────────────────────────────────────────────── */
+.doc-footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.footer-nav { display: flex; gap: 24px; }
+
+.footer-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .12s;
+}
+
+.footer-nav a:hover { color: var(--blue); }
+
+/* ── Scroll animations ────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Progress bar ─────────────────────────────────────────── */
+.reading-progress {
+  position: fixed;
+  top: 0; left: var(--sidebar-w);
+  right: 0; height: 2px;
+  background: var(--border);
+  z-index: 200;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  background: var(--blue);
+  width: 0%;
+  transition: width .1s;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .content { padding: 32px 24px 80px; }
+  .topbar { padding: 12px 24px; }
+  .plan-grid { grid-template-columns: 1fr; }
+  .role-grid { grid-template-columns: 1fr; }
+  .mobile-tabs { grid-template-columns: 1fr; }
+  .doc-title { font-size: 32px; }
+}
+</style>
+<link href="https://TODO-domaine.com/fr/" hreflang="fr" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="en" rel="alternate"/><link href="https://TODO-domaine.com/es/" hreflang="es" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<!-- Reading progress -->
+<div class="reading-progress"><div class="reading-progress-bar" id="progress"></div></div>
+<!-- ── Sidebar ──────────────────────────────────────────────── -->
+<aside class="sidebar">
+<div class="sidebar-brand">
+<a class="brand-logo" href="#">
+<div class="brand-icon">
+<svg viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"></path></svg>
+</div>
+<span class="brand-name">MakerStock</span>
+</a>
+<div class="brand-tagline">Documentación</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<div class="nav-section-label">Partie 1</div>
+<a class="nav-link active" href="#intro">
+<div class="nav-dot"></div>
+        Descripción general
+      </a>
+<a class="nav-link" href="#s11">
+<div class="nav-dot"></div>
+        ¿Qué es MakerStock?
+      </a>
+<a class="nav-link" href="#s12">
+<div class="nav-dot"></div>
+        Escritorio / Móvil
+      </a>
+<a class="nav-link" href="#s13">
+<div class="nav-dot"></div>
+        Funcionalidades
+      </a>
+<a class="nav-link" href="#s14">
+<div class="nav-dot"></div>
+        Planes y precios
+      </a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">À venir</div>
+<a class="nav-link" href="#" style="opacity:.4; pointer-events:none">
+<div class="nav-dot"></div>
+        Inicio rápido
+      </a>
+<a class="nav-link" href="#" style="opacity:.4; pointer-events:none">
+<div class="nav-dot"></div>
+        Distribución de tareas
+      </a>
+<a class="nav-link" href="#" style="opacity:.4; pointer-events:none">
+<div class="nav-dot"></div>
+        Puntos críticos
+      </a>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="plan-badge">📄 v1.0 — Abril 2025</div>
+</div>
+</aside>
+<!-- ── Main ─────────────────────────────────────────────────── -->
+<main class="main">
+<!-- Topbar -->
+<div class="topbar">
+<div class="breadcrumb">
+      Documentación
+      <span class="breadcrumb-sep">/</span>
+<span>Descripción general</span>
+</div>
+<div class="topbar-actions">
+<a class="btn-sm" href="#">Partager</a>
+<a class="btn-sm btn-primary" href="#">Empezar prueba →</a>
+</div>
+</div>
+<!-- Content -->
+<div class="content">
+<!-- Hero -->
+<div class="doc-hero fade-in" id="intro">
+<div class="doc-part-label">📘 Parte 1</div>
+<h1 class="doc-title">Descripción general de <em>MakerStock</em></h1>
+<p class="doc-lead">Todo lo que necesitas saber para entender qué hace MakerStock, quién lo usa, en qué dispositivo y qué funcionalidades están disponibles según tu plan.</p>
+<div class="doc-meta">
+<div class="doc-meta-item">🕐 Lectura ~5 min</div>
+<div class="doc-meta-item">·</div>
+<div class="doc-meta-item">Actualizado en abril de 2025</div>
+<div class="doc-meta-item">·</div>
+<div class="doc-meta-item">FR / EN / ES</div>
+</div>
+</div>
+<!-- TOC -->
+<div class="toc-card fade-in">
+<div class="toc-title">En esta página</div>
+<ul class="toc-list">
+<li><a href="#s11"><span class="toc-num">1.1</span> ¿Qué es MakerStock?</a></li>
+<li><a href="#s12"><span class="toc-num">1.2</span> Filosofía escritorio / móvil</a></li>
+<li><a href="#s13"><span class="toc-num">1.3</span> Lista completa de funcionalidades</a></li>
+<li><a href="#s14"><span class="toc-num">1.4</span> Planes y precios</a></li>
+</ul>
+</div>
+<!-- ── Section 1.1 ─────────────────────────────────────── -->
+<section class="doc-section fade-in">
+<a class="section-anchor" id="s11"></a>
+<div class="section-header">
+<div class="section-num-badge">1.1</div>
+<h2 class="section-title">¿Qué es MakerStock?</h2>
+</div>
+<p class="doc-p">MakerStock est une application de gestion de production artisanale conçue pour les créateurs, fabricants et ateliers qui vendent via <strong>BigCommerce</strong>. Elle comble le vide entre la boutique en ligne et l'atelier : là où BigCommerce gère les commandes et la vitrine, MakerStock gère les matières premières, les recettes de fabrication, les runs de production et les stocks de produits finis.</p>
+<p class="doc-p">L'application s'installe directement depuis l'App Store BigCommerce et s'authentifie automatiquement via le compte marchand — pas de compte séparé à créer.</p>
+<div class="subsection">
+<div class="subsection-title">Casos de uso típicos</div>
+<ul class="doc-list">
+<li>Fabricant de cosmétiques ou produits de soin (crèmes, savons, bougies) cherchant à tracer ses matières premières, lots et DLC.</li>
+<li>Atelier alimentaire artisanal (confitures, épices, compléments) devant gérer des recettes précises et justifier ses coûts de revient.</li>
+<li>Producteur de petite série (textile, maroquinerie, papeterie) souhaitant planifier ses runs de production et anticiper les ruptures.</li>
+<li>Équipe avec plusieurs opérateurs terrain qui ont besoin d'accéder à l'outil depuis un téléphone, sans accès aux fonctions d'administration.</li>
+</ul>
+</div>
+<div class="subsection">
+<div class="subsection-title">Integración con BigCommerce</div>
+<p class="doc-p">La synchronisation avec BigCommerce est bidirectionnelle sur le catalogue produits. Voici les flux clés :</p>
+<ul class="doc-list">
+<li>Le catalogue produits (nom, SKU, prix de vente) est importé depuis BigCommerce et maintenu à jour.</li>
+<li>Chaque produit BigCommerce peut être lié à une recette. Lors d'une vente, MakerStock calcule automatiquement les batches consommés et déduit les matières premières correspondantes (<strong>méthode FIFO</strong>).</li>
+<li>Le stock interne MakerStock reste distinct du stock BigCommerce, permettant une vision séparée du stock disponible à la vente et du stock physique en atelier.</li>
+</ul>
+</div>
+<div class="callout callout-warning">
+<div class="callout-icon">⚠️</div>
+<div class="callout-body">
+<strong>Prérequis</strong>
+          MakerStock requiert une boutique BigCommerce active. Il n'est pas disponible comme outil standalone pour le moment.
+        </div>
+</div>
+</section>
+<!-- ── Section 1.2 ─────────────────────────────────────── -->
+<section class="doc-section fade-in">
+<a class="section-anchor" id="s12"></a>
+<div class="section-header">
+<div class="section-num-badge">1.2</div>
+<h2 class="section-title">Filosofía escritorio / móvil</h2>
+</div>
+<p class="doc-p">MakerStock adopte une architecture à <strong>deux interfaces distinctes</strong>, pensées pour deux profils aux besoins très différents. Cette séparation est volontaire : elle garantit que chaque utilisateur ne voit que ce dont il a besoin pour son rôle.</p>
+<div class="role-grid">
+<div class="role-card admin">
+<div class="role-icon">🖥️</div>
+<div class="role-name">Administrador</div>
+<div class="role-interface">Interface desktop · navigateur web</div>
+<ul class="role-list">
+<li>Configuration des matières, recettes, fournisseurs</li>
+<li>Gestion des utilisateurs et ateliers</li>
+<li>Pilotage : rapports, alertes, COGS</li>
+<li>Lancer et planifier des runs de production</li>
+<li>Aprovisionamiento de proveedores</li>
+</ul>
+</div>
+<div class="role-card operator">
+<div class="role-icon">📱</div>
+<div class="role-name">Operario terrain</div>
+<div class="role-interface">Interface mobile · /mobile</div>
+<ul class="role-list">
+<li>Consulter et démarrer les runs planifiés</li>
+<li>Réceptionner des livraisons fournisseur</li>
+<li>Saisir les lots et DLC à la réception</li>
+<li>Consulter et préparer les commandes B2B</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-info">
+<div class="callout-icon">💡</div>
+<div class="callout-body">
+<strong>Un admin peut aussi utiliser le mobile</strong>
+          L'inverse n'est pas possible : un opérateur ne peut pas accéder à l'interface desktop ni aux modules de configuration.
+        </div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Les 4 onglets de l'interface mobile</div>
+<p class="doc-p">Le shell mobile est un environnement technique séparé du desktop, optimisé pour une utilisation tactile. Il regroupe quatre modules accessibles via une barre de navigation inférieure :</p>
+<div class="mobile-tabs">
+<div class="mobile-tab-card">
+<div class="mobile-tab-icon fab">⚙️</div>
+<div>
+<div class="mobile-tab-title">Fabrication</div>
+<div class="mobile-tab-desc">Runs planifiés et en cours. Démarrer, suivre et terminer une production.</div>
+</div>
+</div>
+<div class="mobile-tab-card">
+<div class="mobile-tab-icon appr">🚚</div>
+<div>
+<div class="mobile-tab-title">Approvisionnements</div>
+<div class="mobile-tab-desc">Commandes fournisseurs en attente de réception, avec statut en temps réel.</div>
+</div>
+</div>
+<div class="mobile-tab-card">
+<div class="mobile-tab-icon rcp">📦</div>
+<div>
+<div class="mobile-tab-title">Réception</div>
+<div class="mobile-tab-desc">Saisie des quantités reçues, numéros de lots et DLC lors d'une livraison.</div>
+</div>
+</div>
+<div class="mobile-tab-card">
+<div class="mobile-tab-icon cmd">🤝</div>
+<div>
+<div class="mobile-tab-title">Commandes B2B</div>
+<div class="mobile-tab-desc">Consultation et préparation des commandes revendeurs (plan Business).</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ── Section 1.3 ─────────────────────────────────────── -->
+<section class="doc-section fade-in">
+<a class="section-anchor" id="s13"></a>
+<div class="section-header">
+<div class="section-num-badge">1.3</div>
+<h2 class="section-title">Lista completa de funcionalidades</h2>
+</div>
+<p class="doc-p">Le tableau ci-dessous recense l'ensemble des fonctionnalités avec leur disponibilité par plan et par interface.</p>
+<div class="feature-legend">
+<span><span class="iface-badge iface-d">D</span> Escritorio uniquement</span>
+<span><span class="iface-badge iface-m">M</span> Móvil uniquement</span>
+<span><span class="iface-badge iface-dm">D+M</span> Les deux</span>
+<span><span class="check-yes">✓</span> Inclus</span>
+<span><span class="check-part">◐</span> Limité</span>
+<span><span class="check-no">—</span> Non disponible</span>
+</div>
+<div class="feature-table-wrap">
+<table class="feature-table">
+<thead>
+<tr>
+<th style="width:38%; text-align:left">Funcionalidad</th>
+<th style="width:8%">Interface</th>
+<th>Prueba</th>
+<th>Starter</th>
+<th>Pro</th>
+<th>Business</th>
+</tr>
+</thead>
+<tbody>
+<tr class="group-row"><td colspan="6">Gestión de materias primas</td></tr>
+<tr><td>Catálogo de materias primas</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Coste unitario y valor del stock</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Umbrales de alerta de stock</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Entrées &amp; ajustements de stock</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Historial de movimientos</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Trazabilidad de lotes y caducidad</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Transferencias entre almacenes</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>Alérgenos + ficha INCI</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Import données CSV / Excel</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr class="group-row"><td colspan="6">Recetas y producción</td></tr>
+<tr><td>Recetas ilimitadas (BOM)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Enlace receta ↔ producto BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>COGS materias primas</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>COGS completo (MO + gastos)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Precio de venta recomendado</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Lancer / planifier un run de production</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Planificación de producción (calendario)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>Déduction automatique FIFO (à la vente)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr class="group-row"><td colspan="6">Aprovisionamiento de proveedores</td></tr>
+<tr><td>Gestion des fournisseurs</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Pedidos a proveedores</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Recepción móvil con entrada de lotes</td><td><span class="iface-badge iface-m">M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr class="group-row"><td colspan="6">Productos y ventas</td></tr>
+<tr><td>Sincronización catálogo BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Stock de productos acabados por almacén</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Lotes y caducidad de productos acabados</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Pedidos B2B (distribuidores)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>Límite de productos en el catálogo</td><td><span class="iface-badge iface-d">D</span></td><td class="check-part">25</td><td class="check-part">75</td><td class="check-part">300</td><td class="check-part">2 000</td></tr>
+<tr class="group-row"><td colspan="6">Seguimiento y alertas</td></tr>
+<tr><td>Alertas de stock bajo (materiales y productos)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Alertas previsionales (runs planificados)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Informe de consumo de materiales</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Exportación contable XLSX</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Informe P&amp;G por producto</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr class="group-row"><td colspan="6">Organización y equipo</td></tr>
+<tr><td>Multi-usuario</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Nombre d'utilisateurs inclus</td><td><span class="iface-badge iface-d">D</span></td><td class="check-part">1</td><td class="check-part">1</td><td class="check-part">3</td><td class="check-part">10</td></tr>
+<tr><td>Gestión de talleres</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Multi-almacén</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>App móvil de operarios</td><td><span class="iface-badge iface-m">M</span></td><td class="check-part">1 appareil</td><td class="check-part">1 appareil</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr class="group-row"><td colspan="6">Intégration &amp; autres</td></tr>
+<tr><td>Integración nativa BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>API pública (Zapier / Make)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>Multi-divisa</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+<tr><td>Interfaz multilingüe (FR / EN / ES)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Modo oscuro</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+<tr><td>Soporte prioritario</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- ── Section 1.4 ─────────────────────────────────────── -->
+<section class="doc-section fade-in">
+<a class="section-anchor" id="s14"></a>
+<div class="section-header">
+<div class="section-num-badge">1.4</div>
+<h2 class="section-title">Planes y precios</h2>
+</div>
+<div class="trial-strip">
+<div class="trial-text">
+<strong>14 días de prueba gratuita</strong>
+<span>Acceso completo a las funcionalidades Starter · Sin tarjeta de crédito</span>
+</div>
+<div class="trial-badge">Empezar prueba →</div>
+</div>
+<div class="plan-grid">
+<div class="plan-card">
+<div class="plan-name">Starter</div>
+<div class="plan-price"><sup>€</sup>29<sub>/mois</sub></div>
+<div class="plan-annual">ou 25 €/mois en annuel</div>
+<div class="plan-limit">👤 1 utilisateur · 📦 75 produits</div>
+<ul class="plan-features-list">
+<li><span class="fi">✓</span> Stock &amp; recettes (BOM)</li>
+<li><span class="fi">✓</span> Sync BigCommerce + FIFO auto</li>
+<li><span class="fi">✓</span> COGS materias primas</li>
+<li><span class="fi">✓</span> Runs de production</li>
+<li><span class="fi">✓</span> Alertes de seuil</li>
+<li><span class="fi">✓</span> App mobile (1 appareil)</li>
+<li><span class="fi">✓</span> Exportación de movimientos CSV</li>
+<li><span class="fx">—</span> Approvisionnements</li>
+<li><span class="fx">—</span> Traçabilité lots</li>
+<li><span class="fx">—</span> Multi-usuario</li>
+</ul>
+<a class="plan-cta" href="#">Elegir Starter</a>
+</div>
+<div class="plan-card popular">
+<div class="plan-popular-badge">El más popular</div>
+<div class="plan-name">Pro</div>
+<div class="plan-price"><sup>€</sup>59<sub>/mois</sub></div>
+<div class="plan-annual">ou 49 €/mois en annuel</div>
+<div class="plan-limit">👥 3 utilisateurs · 📦 300 produits</div>
+<ul class="plan-features-list">
+<li><span class="fi">✓</span> Tout Starter inclus</li>
+<li><span class="fi">✓</span> COGS completo (MO + gastos)</li>
+<li><span class="fi">✓</span> Precio de venta recomendado</li>
+<li><span class="fi">✓</span> Aprovisionamiento de proveedores</li>
+<li><span class="fi">✓</span> Trazabilidad de lotes y caducidad</li>
+<li><span class="fi">✓</span> Exportación contable XLSX</li>
+<li><span class="fi">✓</span> Alérgenos + ficha INCI</li>
+<li><span class="fi">✓</span> App mobile illimitée</li>
+<li><span class="fx">—</span> Commandes B2B</li>
+<li><span class="fx">—</span> Multi-almacén</li>
+</ul>
+<a class="plan-cta" href="#">Elegir Pro</a>
+</div>
+<div class="plan-card">
+<div class="plan-name">Business</div>
+<div class="plan-price"><sup>€</sup>99<sub>/mois</sub></div>
+<div class="plan-annual">ou 82 €/mois en annuel</div>
+<div class="plan-limit">👥 10 utilisateurs · 📦 2 000 produits</div>
+<ul class="plan-features-list">
+<li><span class="fi">✓</span> Tout Pro inclus</li>
+<li><span class="fi">✓</span> Commandes B2B revendeurs</li>
+<li><span class="fi">✓</span> Multi-almacén</li>
+<li><span class="fi">✓</span> Planning de production</li>
+<li><span class="fi">✓</span> Informe P&amp;G por producto</li>
+<li><span class="fi">✓</span> API pública (Zapier / Make)</li>
+<li><span class="fi">✓</span> Multi-divisa</li>
+<li><span class="fi">✓</span> Soporte prioritario</li>
+</ul>
+<a class="plan-cta" href="#">Elegir Business</a>
+</div>
+</div>
+<div class="callout callout-teal">
+<div class="callout-icon">💳</div>
+<div class="callout-body">
+          Prix HT, en complément de votre abonnement BigCommerce. Facturation gérée via l'App Store BigCommerce. Modification ou résiliation possible à tout moment, sans engagement.
+        </div>
+</div>
+</section>
+</div><!-- /content -->
+<!-- Footer -->
+<footer class="doc-footer">
+<div>Documentación MakerStock · v1.0 · Abril 2025</div>
+<nav class="footer-nav">
+<a href="#">Parte 2: Inicio rápido →</a>
+</nav>
+</footer>
+</main>
+<script>
+// ── Reading progress ─────────────────────────────────────────
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+});
+
+// ── Scroll-triggered fade-ins ────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.05) + 's';
+  observer.observe(el);
+});
+
+// ── Active nav on scroll ─────────────────────────────────────
+const sections = ['s11','s12','s13','s14'];
+const links = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    if (!current && l.getAttribute('href') === '#intro') l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

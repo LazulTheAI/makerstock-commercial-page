@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MakerStock — Quick Start</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&amp;family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:       #0F2137;
+  --navy-mid:   #1A3A5C;
+  --blue:       #2563EB;
+  --blue-light: #DBEAFE;
+  --blue-pale:  #EFF6FF;
+  --teal:       #0D9488;
+  --teal-light: #CCFBF1;
+  --teal-pale:  #F0FDFA;
+  --amber:      #B45309;
+  --amber-light:#FEF3C7;
+  --green:      #059669;
+  --green-light:#D1FAE5;
+  --purple:     #7C3AED;
+  --purple-light:#EDE9FE;
+  --gray-50:    #F8F9FA;
+  --gray-100:   #F1F3F5;
+  --gray-200:   #E9ECEF;
+  --gray-400:   #ADB5BD;
+  --gray-600:   #6C757D;
+  --gray-800:   #343A40;
+  --white:      #FFFFFF;
+  --text:       #1C1F23;
+  --text-muted: #6C757D;
+  --border:     #E2E8F0;
+  --font-body:  'DM Sans', sans-serif;
+  --font-serif: 'Fraunces', serif;
+  --font-mono:  'DM Mono', monospace;
+  --sidebar-w:  260px;
+  --content-max:800px;
+  --radius:     8px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 15px; line-height: 1.75; color: var(--text); background: var(--white); display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar { position: fixed; top:0; left:0; width:var(--sidebar-w); height:100vh; background:var(--navy); display:flex; flex-direction:column; overflow-y:auto; z-index:100; }
+.sidebar-brand { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,.08); }
+.brand-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:6px; }
+.brand-icon { width:32px; height:32px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.brand-icon svg { width:18px; height:18px; fill:white; }
+.brand-name { font-weight:600; font-size:16px; color:var(--white); letter-spacing:.02em; }
+.brand-tagline { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.04em; text-transform:uppercase; }
+.sidebar-nav { padding:16px 12px; flex:1; }
+.nav-section { margin-bottom:24px; }
+.nav-section-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); padding:0 12px; margin-bottom:6px; }
+.nav-link { display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:6px; text-decoration:none; font-size:13.5px; color:rgba(255,255,255,.55); transition:all .15s; position:relative; }
+.nav-link:hover { background:rgba(255,255,255,.07); color:rgba(255,255,255,.9); }
+.nav-link.active { background:rgba(37,99,235,.25); color:var(--white); font-weight:500; }
+.nav-link.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:18px; background:var(--blue); border-radius:0 2px 2px 0; }
+.nav-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.2); flex-shrink:0; margin-left:4px; }
+.nav-link.active .nav-dot { background:var(--blue); }
+.sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,.08); }
+.plan-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:4px 12px; font-size:11px; color:rgba(255,255,255,.5); }
+
+/* ── Main ── */
+.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; }
+.reading-progress { position:fixed; top:0; left:var(--sidebar-w); right:0; height:2px; background:var(--border); z-index:200; }
+.reading-progress-bar { height:100%; background:var(--blue); width:0%; transition:width .1s; }
+
+/* ── Topbar ── */
+.topbar { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:12px 48px; display:flex; align-items:center; justify-content:space-between; z-index:50; }
+.breadcrumb { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); }
+.breadcrumb a { color:var(--text-muted); text-decoration:none; } .breadcrumb a:hover { color:var(--blue); }
+.breadcrumb span { color:var(--text); font-weight:500; }
+.breadcrumb-sep { color:var(--gray-400); }
+.topbar-actions { display:flex; gap:8px; }
+.btn-sm { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:6px; font-size:12.5px; font-weight:500; cursor:pointer; border:1px solid var(--border); background:var(--white); color:var(--text-muted); text-decoration:none; transition:all .15s; }
+.btn-sm:hover { background:var(--gray-50); color:var(--text); }
+.btn-primary { background:var(--blue); border-color:var(--blue); color:var(--white); }
+.btn-primary:hover { background:#1D4ED8; border-color:#1D4ED8; color:var(--white); }
+
+/* ── Content ── */
+.content { max-width:var(--content-max); margin:0 auto; padding:56px 48px 120px; width:100%; }
+
+/* ── Hero ── */
+.doc-hero { margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid var(--border); }
+.doc-part-label { display:inline-flex; align-items:center; gap:6px; background:var(--teal-light); color:var(--teal); border-radius:20px; padding:4px 14px; font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.doc-title { font-family:var(--font-serif); font-size:44px; font-weight:300; line-height:1.15; color:var(--navy); margin-bottom:16px; letter-spacing:-.02em; }
+.doc-title em { font-style:italic; color:var(--teal); }
+.doc-lead { font-size:17px; line-height:1.7; color:var(--text-muted); max-width:640px; margin-bottom:28px; font-weight:300; }
+.doc-meta { display:flex; align-items:center; gap:20px; font-size:12.5px; color:var(--text-muted); }
+
+/* ── TOC ── */
+.toc-card { background:var(--gray-50); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:56px; }
+.toc-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.toc-list a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-size:14px; padding:4px 0; transition:color .12s; }
+.toc-list a:hover { color:var(--blue); }
+.toc-num { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); width:28px; flex-shrink:0; }
+.toc-step-badge { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; background:var(--teal); color:white; border-radius:50%; font-size:10px; font-weight:700; flex-shrink:0; }
+
+/* ── Step sections ── */
+.step-section { margin-bottom:72px; }
+.step-anchor { display:block; height:80px; margin-top:-80px; }
+
+/* ── Step header ── */
+.step-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:32px; }
+.step-number-wrap { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:0; }
+.step-number { width:44px; height:44px; background:var(--navy); color:white; border-radius:12px; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:16px; font-weight:500; flex-shrink:0; }
+.step-connector { width:2px; background:var(--border); flex:1; min-height:20px; margin-top:4px; }
+.step-title-group { flex:1; padding-top:6px; }
+.step-eyebrow { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+.step-title { font-family:var(--font-serif); font-size:28px; font-weight:300; color:var(--navy); line-height:1.25; letter-spacing:-.02em; }
+.step-title em { font-style:italic; }
+.step-duration { display:inline-flex; align-items:center; gap:5px; background:var(--gray-100); border-radius:20px; padding:3px 10px; font-size:11.5px; color:var(--text-muted); margin-top:8px; }
+
+/* ── Body text ── */
+p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:16px; }
+
+/* ── Subsection ── */
+.subsection { margin:28px 0 20px; }
+.subsection-title { font-size:16px; font-weight:600; color:var(--navy-mid); margin-bottom:10px; }
+
+/* ── Doc lists ── */
+.doc-list { list-style:none; display:flex; flex-direction:column; gap:8px; margin:12px 0 16px; }
+.doc-list li { display:flex; align-items:flex-start; gap:10px; font-size:14.5px; line-height:1.65; color:var(--text); }
+.doc-list li::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); flex-shrink:0; margin-top:8px; }
+
+/* ── Callouts ── */
+.callout { display:flex; gap:14px; border-radius:10px; padding:16px 20px; margin:20px 0; border:1px solid transparent; }
+.callout-info    { background:#EFF6FF; border-color:#BFDBFE; }
+.callout-teal    { background:#F0FDFA; border-color:#99F6E4; }
+.callout-warning { background:#FFFBEB; border-color:#FDE68A; }
+.callout-success { background:#F0FDF4; border-color:#BBF7D0; }
+.callout-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+.callout-body { font-size:14px; line-height:1.65; color:var(--text); }
+.callout-body strong { font-weight:600; display:block; margin-bottom:3px; }
+
+/* ── Step cards (numbered tasks inside a step) ── */
+.task-list { display:flex; flex-direction:column; gap:12px; margin:20px 0; }
+.task-card { display:flex; align-items:flex-start; gap:14px; background:var(--white); border:1px solid var(--border); border-radius:10px; padding:16px 18px; transition:box-shadow .2s; }
+.task-card:hover { box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.task-num { width:26px; height:26px; background:var(--navy); color:white; border-radius:6px; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:12px; flex-shrink:0; margin-top:1px; }
+.task-body { flex:1; }
+.task-title { font-weight:600; font-size:14px; color:var(--navy); margin-bottom:3px; }
+.task-desc { font-size:13.5px; color:var(--text-muted); line-height:1.55; }
+.task-tag { display:inline-block; font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:4px; margin-top:6px; }
+.tag-desktop { background:var(--blue-light); color:var(--blue); }
+.tag-mobile  { background:var(--teal-light); color:var(--teal); }
+.tag-pro     { background:var(--purple-light); color:var(--purple); }
+
+/* ── Import order steps ── */
+.import-flow { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin:24px 0; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.import-step { padding:20px; position:relative; }
+.import-step:not(:last-child) { border-right:1px solid var(--border); }
+.import-step-num { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); margin-bottom:6px; }
+.import-step-icon { font-size:24px; margin-bottom:8px; }
+.import-step-title { font-weight:600; font-size:14px; color:var(--navy); margin-bottom:4px; }
+.import-step-note { font-size:12px; color:var(--text-muted); line-height:1.4; }
+.import-step-badge { font-size:10px; font-weight:600; color:var(--text-muted); border:1px solid var(--border); border-radius:10px; padding:2px 8px; display:inline-block; margin-top:6px; }
+.arrow-sep { display:flex; align-items:center; justify-content:center; padding:0 4px; color:var(--gray-400); font-size:18px; }
+
+/* ── CSV fields table ── */
+.fields-table { width:100%; border-collapse:collapse; font-size:13px; border:1px solid var(--border); border-radius:8px; overflow:hidden; margin:12px 0; }
+.fields-table th { background:var(--gray-50); padding:8px 14px; text-align:left; font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); border-bottom:1px solid var(--border); }
+.fields-table td { padding:9px 14px; border-bottom:1px solid var(--border); color:var(--text); vertical-align:top; }
+.fields-table tr:last-child td { border-bottom:none; }
+.fields-table tr:hover td { background:var(--gray-50); }
+.req-badge { display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px; background:#FEE2E2; color:#DC2626; }
+.opt-badge { display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px; background:var(--gray-100); color:var(--gray-600); }
+code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--gray-100); padding:1px 6px; border-radius:4px; color:var(--navy-mid); }
+
+/* ── Run flow diagram ── */
+.run-flow { display:flex; align-items:stretch; gap:0; margin:24px 0; background:var(--gray-50); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.run-stage { flex:1; padding:18px 16px; display:flex; flex-direction:column; gap:6px; border-right:1px solid var(--border); }
+.run-stage:last-child { border-right:none; }
+.run-stage-icon { font-size:20px; }
+.run-stage-label { font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); }
+.run-stage-title { font-size:13.5px; font-weight:600; color:var(--navy); }
+.run-stage-desc { font-size:12px; color:var(--text-muted); line-height:1.45; }
+.run-stage.active { background:var(--blue-pale); border-color:var(--blue-light); }
+.run-stage.active .run-stage-label { color:var(--blue); }
+.run-stage.active .run-stage-title { color:var(--blue); }
+
+/* ── Team role cards ── */
+.team-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.team-card { border:1px solid var(--border); border-radius:10px; padding:18px; }
+.team-card-icon { font-size:22px; margin-bottom:10px; }
+.team-card-title { font-weight:600; font-size:14px; color:var(--navy); margin-bottom:4px; }
+.team-card-sub { font-size:12.5px; color:var(--text-muted); margin-bottom:10px; line-height:1.4; }
+.team-tag { display:inline-block; font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:4px; }
+
+/* ── Checklist recap ── */
+.recap-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:24px 0; }
+.recap-item { display:flex; align-items:center; gap:10px; background:var(--gray-50); border:1px solid var(--border); border-radius:8px; padding:12px 14px; font-size:13.5px; color:var(--text); }
+.recap-check { width:22px; height:22px; border-radius:50%; background:var(--green-light); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+
+/* ── Mobile install strip ── */
+.mobile-strip { display:flex; align-items:center; gap:20px; background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:12px; padding:18px 22px; margin:20px 0; }
+.mobile-strip-icon { font-size:32px; flex-shrink:0; }
+.mobile-strip-text strong { display:block; font-size:14.5px; font-weight:600; color:var(--navy); margin-bottom:3px; }
+.mobile-strip-text span { font-size:13px; color:var(--text-muted); }
+.mobile-strip-url { font-family:var(--font-mono); font-size:12px; background:var(--white); border:1px solid var(--border); border-radius:6px; padding:4px 10px; color:var(--navy); margin-left:auto; white-space:nowrap; }
+
+/* ── Fade-in ── */
+.fade-in { opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ── Footer ── */
+.doc-footer { border-top:1px solid var(--border); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12.5px; }
+.footer-nav { display:flex; gap:24px; }
+.footer-nav a { color:var(--text-muted); text-decoration:none; transition:color .12s; }
+.footer-nav a:hover { color:var(--blue); }
+
+@media (max-width:900px) {
+  :root { --sidebar-w:0px; }
+  .sidebar { display:none; }
+  .content { padding:32px 24px 80px; }
+  .topbar { padding:12px 24px; }
+  .team-grid, .recap-grid { grid-template-columns:1fr; }
+  .import-flow { grid-template-columns:1fr; }
+  .import-step:not(:last-child) { border-right:none; border-bottom:1px solid var(--border); }
+  .run-flow { flex-direction:column; }
+  .run-stage { border-right:none; border-bottom:1px solid var(--border); }
+  .doc-title { font-size:32px; }
+}
+</style>
+<link href="https://TODO-domaine.com/fr/" hreflang="fr" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="en" rel="alternate"/><link href="https://TODO-domaine.com/es/" hreflang="es" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<div class="reading-progress"><div class="reading-progress-bar" id="progress"></div></div>
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+<div class="sidebar-brand">
+<a class="brand-logo" href="#">
+<div class="brand-icon"><svg viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"></path></svg></div>
+<span class="brand-name">MakerStock</span>
+</a>
+<div class="brand-tagline">Documentation</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<div class="nav-section-label">Partie 1</div>
+<a class="nav-link" href="makerstock_doc_vue_ensemble.html">
+<div class="nav-dot"></div>Overview
+      </a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">Part 2 — Quick Start</div>
+<a class="nav-link active" href="#intro"><div class="nav-dot"></div>Introduction</a>
+<a class="nav-link" href="#s21"><div class="nav-dot"></div>Step 1 · Installation</a>
+<a class="nav-link" href="#s22"><div class="nav-dot"></div>Step 2 · Atelier &amp; entrepôt</a>
+<a class="nav-link" href="#s23"><div class="nav-dot"></div>Step 3 · Import your data</a>
+<a class="nav-link" href="#s24"><div class="nav-dot"></div>Step 4 · Première recette</a>
+<a class="nav-link" href="#s25"><div class="nav-dot"></div>Step 5 · Premier run</a>
+<a class="nav-link" href="#s26"><div class="nav-dot"></div>Step 6 · Inviter l'équipe</a>
+<a class="nav-link" href="#s27"><div class="nav-dot"></div>What's next?</a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">À venir</div>
+<a class="nav-link" href="#" style="opacity:.4;pointer-events:none"><div class="nav-dot"></div>Task distribution</a>
+<a class="nav-link" href="#" style="opacity:.4;pointer-events:none"><div class="nav-dot"></div>Critical points</a>
+</div>
+</nav>
+<div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — April 2025</div></div>
+</aside>
+<!-- ── Main ── -->
+<main class="main">
+<div class="topbar">
+<div class="breadcrumb">
+<a href="makerstock_doc_vue_ensemble.html">Documentation</a>
+<span class="breadcrumb-sep">/</span>
+<span>Quick Start</span>
+</div>
+<div class="topbar-actions">
+<a class="btn-sm" href="makerstock_doc_vue_ensemble.html">← Part 1</a>
+<a class="btn-sm btn-primary" href="#">Start free trial →</a>
+</div>
+</div>
+<div class="content">
+<!-- Hero -->
+<div class="doc-hero fade-in" id="intro">
+<div class="doc-part-label">🚀 Part 2</div>
+<h1 class="doc-title">Quick Start — <em>up and running in 30 min</em></h1>
+<p class="doc-lead">This guide takes you from installation to your first production run, step by step. Follow the order — each step builds on the previous one.</p>
+<div class="doc-meta">
+<div>⏱ Estimated time: 25–35 min</div>
+<div>·</div>
+<div>Prerequisites: active BigCommerce store</div>
+<div>·</div>
+<div>Role: Administrator</div>
+</div>
+</div>
+<!-- TOC -->
+<div class="toc-card fade-in">
+<div class="toc-title">The 6 steps</div>
+<ul class="toc-list">
+<li><a href="#s21"><span class="toc-step-badge">1</span> Installation from the BigCommerce App Store</a></li>
+<li><a href="#s22"><span class="toc-step-badge">2</span> Create your workshop and warehouse</a></li>
+<li><a href="#s23"><span class="toc-step-badge">3</span> Import your materials, suppliers and recipes</a></li>
+<li><a href="#s24"><span class="toc-step-badge">4</span> Create your first recipe and link it to a product</a></li>
+<li><a href="#s25"><span class="toc-step-badge">5</span> Launch your first production run</a></li>
+<li><a href="#s26"><span class="toc-step-badge">6</span> Invite your team</a></li>
+</ul>
+</div>
+<!-- ═══ ÉTAPE 1 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s21"></a>
+<div class="step-header">
+<div class="step-number-wrap">
+<div class="step-number">1</div>
+</div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 1</div>
+<h2 class="step-title">Installation from the App Store <em>BigCommerce</em></h2>
+<div class="step-duration">⏱ ~3 min</div>
+</div>
+</div>
+<p class="doc-p">MakerStock s'installe directement depuis votre panneau d'administration BigCommerce. Il n'y a pas de compte séparé à créer : l'application hérite de l'identité de votre boutique.</p>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Access the BigCommerce App Store</div>
+<div class="task-desc">Dans votre admin BC, allez dans <strong>Apps → App Marketplace</strong> et recherchez "MakerStock".</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Click "Install"</div>
+<div class="task-desc">BigCommerce vous demandera de confirmer les permissions d'accès. MakerStock accède en lecture/écriture au catalogue produits et aux informations de la boutique.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Choose your plan</div>
+<div class="task-desc">Après installation, vous êtes redirigé vers la page de sélection du plan. Choisissez votre plan ou démarrez l'essai gratuit de 14 jours (aucune carte bancaire requise). La facturation passe par BigCommerce.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">4</div>
+<div class="task-body">
+<div class="task-title">Access MakerStock</div>
+<div class="task-desc">Une fois le plan activé, MakerStock apparaît dans votre menu Apps BigCommerce. L'application s'ouvre dans un nouvel onglet — vous êtes connecté automatiquement. La page d'accueil est le tableau de bord <strong>Alertes</strong>.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+</div>
+<div class="callout callout-info">
+<div class="callout-icon">💡</div>
+<div class="callout-body">
+<strong>Reconnexion ultérieure</strong>
+          Pour revenir dans MakerStock, passez toujours par <strong>Apps → MakerStock</strong> dans votre admin BigCommerce. L'authentification est automatique via votre session BC.
+        </div>
+</div>
+</section>
+<!-- ═══ ÉTAPE 2 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s22"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">2</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 2</div>
+<h2 class="step-title">Create your <em>atelier</em> et votre entrepôt</h2>
+<div class="step-duration">⏱ ~5 min</div>
+</div>
+</div>
+<p class="doc-p">Dans MakerStock, un <strong>atelier</strong> (ou lieu de production) représente un espace physique où vous stockez et transformez vos matières premières. Il doit être créé avant de pouvoir enregistrer du stock, lancer un run ou recevoir une commande.</p>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Go to Configuration → Workshops</div>
+<div class="task-desc">Dans le menu latéral, sous la section <strong>Configuration</strong>, cliquez sur <strong>Ateliers</strong>.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Create a first production location</div>
+<div class="task-desc">Cliquez sur <strong>"Nouveau lieu"</strong>. Renseignez un nom (ex. : <em>Atelier Principal</em>, <em>Stock Nord</em>, <em>Cuisine</em>) et une adresse optionnelle. Validez.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Configure financial parameters (optional)</div>
+<div class="task-desc">Dans le détail de l'atelier, vous pouvez renseigner des <strong>charges fixes</strong> (loyer, amortissement, assurance) et des <strong>taux horaires</strong> main-d'œuvre. Ces données sont utilisées pour le calcul du COGS complet (plan Pro+).</div>
+<span class="task-tag tag-desktop">Desktop</span>
+<span class="task-tag tag-pro" style="margin-left:6px">Pro+</span>
+</div>
+</div>
+</div>
+<div class="callout callout-teal">
+<div class="callout-icon">ℹ️</div>
+<div class="callout-body">
+<strong>Plan Starter : 1 entrepôt</strong>
+          Avec le plan Starter, vous disposez d'un seul lieu de production. Le plan Business vous permet de créer plusieurs entrepôts et d'effectuer des transferts de stock entre eux.
+        </div>
+</div>
+</section>
+<!-- ═══ ÉTAPE 3 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s23"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">3</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 3</div>
+<h2 class="step-title">Import your <em>données</em></h2>
+<div class="step-duration">⏱ ~10 min</div>
+</div>
+</div>
+<p class="doc-p">Si vous avez déjà un catalogue de matières premières, de fournisseurs ou de recettes dans un fichier Excel ou CSV, MakerStock propose un outil d'import avec mapping automatique des colonnes. Sinon, vous pouvez tout créer manuellement.</p>
+<div class="subsection">
+<div class="subsection-title">Recommended import order</div>
+<p class="doc-p">Les données ont des dépendances entre elles : respectez cet ordre pour éviter les erreurs de référencement.</p>
+</div>
+<div class="import-flow">
+<div class="import-step">
+<div class="import-step-num">Order 1</div>
+<div class="import-step-icon">🚚</div>
+<div class="import-step-title">Suppliers</div>
+<div class="import-step-note">Noms, emails, téléphones. Utilisés dans les matières et les approvisionnements.</div>
+<div class="import-step-badge">Optional</div>
+</div>
+<div class="import-step">
+<div class="import-step-num">Order 2</div>
+<div class="import-step-icon">📦</div>
+<div class="import-step-title">Raw materials</div>
+<div class="import-step-note">Nom, unité, coût, quantité initiale, numéro de lot, DLC, fournisseur associé.</div>
+<div class="import-step-badge">Recommended first</div>
+</div>
+<div class="import-step">
+<div class="import-step-num">Order 3</div>
+<div class="import-step-icon">📋</div>
+<div class="import-step-title">Recipes</div>
+<div class="import-step-note">Les matières inconnues sont auto-créées, mais sans coût ni seuil — à compléter ensuite.</div>
+<div class="import-step-badge">After materials</div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">How to import</div>
+</div>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Go to Configuration → Data import</div>
+<div class="task-desc">Sélectionnez le type de données à importer (Suppliers, Raw materials ou Recipes).</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Upload your CSV or Excel file</div>
+<div class="task-desc">Glissez votre fichier dans la zone de dépôt (max 10 Mo). MakerStock analyse automatiquement les colonnes et propose un mapping pré-rempli.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Check the mapping and launch the import</div>
+<div class="task-desc">Associez manuellement les colonnes non reconnues, vérifiez l'aperçu des premières lignes, puis cliquez sur <strong>"Lancer l'import"</strong>.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+</div>
+<div class="subsection">
+<div class="subsection-title">Raw materials columns (CSV)</div>
+<p class="doc-p">Votre fichier peut avoir les colonnes dans n'importe quel ordre et avec n'importe quel nom — le mapping s'adapte.</p>
+</div>
+<table class="fields-table">
+<thead>
+<tr><th>System field</th><th>Required</th><th>Example</th><th>Note</th></tr>
+</thead>
+<tbody>
+<tr><td><code class="inline">nom</code></td><td><span class="req-badge">Required</span></td><td>Farine de blé T55</td><td>Si une matière du même nom existe, elle est mise à jour.</td></tr>
+<tr><td><code class="inline">unite</code></td><td><span class="req-badge">Required</span></td><td>kg</td><td>kg, L, g, pièce, etc.</td></tr>
+<tr><td><code class="inline">sku</code></td><td><span class="opt-badge">Optional</span></td><td>FAR-001</td><td>Référence interne</td></tr>
+<tr><td><code class="inline">quantite</code></td><td><span class="opt-badge">Optional</span></td><td>50</td><td>Initial warehouse stock</td></tr>
+<tr><td><code class="inline">cout_unitaire</code></td><td><span class="opt-badge">Optional</span></td><td>1.20</td><td>Purchase price per unit</td></tr>
+<tr><td><code class="inline">numero_lot</code></td><td><span class="opt-badge">Optional</span></td><td>LOT-2024-001</td><td>Lot traceability (Pro+)</td></tr>
+<tr><td><code class="inline">dlc</code></td><td><span class="opt-badge">Optional</span></td><td>31/12/2025</td><td>Format DD/MM/YYYY</td></tr>
+<tr><td><code class="inline">fournisseur</code></td><td><span class="opt-badge">Optional</span></td><td>Moulin du Sud</td><td>Must exist in MakerStock</td></tr>
+<tr><td><code class="inline">entrepot</code></td><td><span class="opt-badge">Optional</span></td><td>Entrepôt principal</td><td>Must match a workshop created in step 2</td></tr>
+</tbody>
+</table>
+<div class="callout callout-warning">
+<div class="callout-icon">⚠️</div>
+<div class="callout-body">
+<strong>Import de recettes : attention aux matières inconnues</strong>
+          Si votre fichier de recettes référence des matières non encore créées, elles sont auto-créées sans coût ni seuil d'alerte. Pensez à les compléter depuis <strong>Stock matières</strong> après l'import.
+        </div>
+</div>
+</section>
+<!-- ═══ ÉTAPE 4 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s24"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">4</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 4</div>
+<h2 class="step-title">Create a <em>recette</em> et la lier à un produit</h2>
+<div class="step-duration">⏱ ~5 min</div>
+</div>
+</div>
+<p class="doc-p">Une <strong>recette</strong> (BOM — Bill of Materials) décrit les matières premières nécessaires pour produire un <strong>batch</strong> (lot de fabrication). Chaque recette doit ensuite être liée à un produit BigCommerce pour activer la déduction automatique de stock matières à la vente.</p>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Go to Production → Recipes, then "New recipe"</div>
+<div class="task-desc">Le formulaire se déroule en 4 étapes : informations générales, sélection des ingrédients, quantités par batch, récapitulatif.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Fill in general information</div>
+<div class="task-desc">Nom de la recette, <strong>quantité produite par batch</strong> (ex. : 12 pièces), unité (pièce, kg, L…), durée de fabrication, et éventuellement un coût variable par batch (énergie, emballage).</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Select ingredients and their quantities</div>
+<div class="task-desc">Choisissez les matières premières dans la liste, puis renseignez la quantité nécessaire par batch pour chaque ingrédient. Le coût théorique se calcule automatiquement.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">4</div>
+<div class="task-body">
+<div class="task-title">Link the recipe to a BigCommerce product</div>
+<div class="task-desc">Depuis la liste des recettes, cliquez sur l'icône <strong>"Lier à un produit"</strong>. Sélectionnez le produit BC correspondant et indiquez le ratio <strong>batches par unité vendue</strong> (ex. : 0,5 batch si 1 batch produit 2 unités). Cochez <strong>"Recette principale"</strong> pour activer la déduction automatique.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+</div>
+<div class="callout callout-success">
+<div class="callout-icon">✅</div>
+<div class="callout-body">
+<strong>La déduction automatique est maintenant active</strong>
+          À chaque vente enregistrée dans BigCommerce, MakerStock calcule automatiquement les matières consommées et les déduit du stock selon la méthode FIFO.
+        </div>
+</div>
+</section>
+<!-- ═══ ÉTAPE 5 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s25"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">5</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 5</div>
+<h2 class="step-title">Launch your first <em>production run</em></h2>
+<div class="step-duration">⏱ ~5 min</div>
+</div>
+</div>
+<p class="doc-p">Un <strong>run de production</strong> déclenche la fabrication d'un ou plusieurs batches d'une recette. Il déduit automatiquement les matières premières consommées et crédite le stock de produits finis. Il peut être lancé immédiatement ou planifié pour plus tard.</p>
+<div class="subsection"><div class="subsection-title">Production run lifecycle</div></div>
+<div class="run-flow">
+<div class="run-stage">
+<div class="run-stage-icon">📋</div>
+<div class="run-stage-label">Initial status</div>
+<div class="run-stage-title">Planned</div>
+<div class="run-stage-desc">Run in queue, stock not yet deducted.</div>
+</div>
+<div class="run-stage active">
+<div class="run-stage-icon">⚙️</div>
+<div class="run-stage-label">Execution</div>
+<div class="run-stage-title">In progress</div>
+<div class="run-stage-desc">Started by an operator in the workshop (mobile or desktop).</div>
+</div>
+<div class="run-stage">
+<div class="run-stage-icon">✅</div>
+<div class="run-stage-label">End</div>
+<div class="run-stage-title">Completed</div>
+<div class="run-stage-desc">Materials deducted, product stock credited, COGS calculated.</div>
+</div>
+<div class="run-stage">
+<div class="run-stage-icon">🚫</div>
+<div class="run-stage-label">Abandoned</div>
+<div class="run-stage-title">Cancelled</div>
+<div class="run-stage-desc">Irreversible. Stock is not automatically restored.</div>
+</div>
+</div>
+<div class="subsection"><div class="subsection-title">Launch a run from desktop</div></div>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Go to Production → Production runs</div>
+<div class="task-desc">Cliquez sur <strong>"Lancer un run"</strong> pour une exécution immédiate, ou <strong>"Planifier"</strong> pour une mise en file d'attente.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Choose the product, recipe and number of batches</div>
+<div class="task-desc">Sélectionnez le produit fini à produire. La recette principale est pré-sélectionnée. Indiquez le nombre de batches souhaités et l'entrepôt source des matières.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Confirm and read the result</div>
+<div class="task-desc">Après exécution, MakerStock affiche le nombre d'unités produites, le COGS total, le détail des matières consommées et — si le plan le permet — les lots traçabilité utilisés.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+</div>
+<div class="callout callout-warning">
+<div class="callout-icon">⚠️</div>
+<div class="callout-body">
+<strong>Stock insuffisant</strong>
+          Si les matières sont insuffisantes pour lancer le run immédiatement, MakerStock propose de le <strong>planifier</strong> : il sera mis en file d'attente et pourra être exécuté dès que le stock sera suffisant. L'alerte prévisionnelle correspondante apparaît dans le tableau de bord.
+        </div>
+</div>
+<div class="mobile-strip">
+<div class="mobile-strip-icon">📱</div>
+<div class="mobile-strip-text">
+<strong>Les opérateurs lancent et terminent les runs depuis le mobile</strong>
+<span>Accès à l'interface mobile via le navigateur du téléphone, section Fabrication.</span>
+</div>
+<div class="mobile-strip-url">/mobile/fabrication</div>
+</div>
+</section>
+<!-- ═══ ÉTAPE 6 ═══════════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s26"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">6</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">Step 6</div>
+<h2 class="step-title">Inviter votre <em>équipe</em></h2>
+<div class="step-duration">⏱ ~3 min — Pro+ plan</div>
+</div>
+</div>
+<p class="doc-p">Le plan Starter inclut un seul compte administrateur. À partir du <strong>plan Pro</strong>, vous pouvez inviter des membres supplémentaires et leur attribuer un rôle.</p>
+<div class="team-grid">
+<div class="team-card">
+<div class="team-card-icon">🖥️</div>
+<div class="team-card-title">Administrator</div>
+<div class="team-card-sub">Accès complet à l'interface desktop : configuration, recettes, rapports, gestion des utilisateurs.</div>
+<span class="team-tag tag-desktop">Desktop</span>
+</div>
+<div class="team-card">
+<div class="team-card-icon">📱</div>
+<div class="team-card-title">Operator</div>
+<div class="team-card-sub">Accès à l'interface mobile uniquement : fabrication, réception, approvisionnements, commandes B2B.</div>
+<span class="team-tag tag-mobile">Mobile</span>
+</div>
+</div>
+<div class="task-list">
+<div class="task-card">
+<div class="task-num">1</div>
+<div class="task-body">
+<div class="task-title">Go to Configuration → Users</div>
+<div class="task-desc">La page affiche les membres actifs, séparés en administrateurs et opérateurs.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+<span class="task-tag tag-pro" style="margin-left:6px">Pro+</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">2</div>
+<div class="task-body">
+<div class="task-title">Click "Invite a member"</div>
+<div class="task-desc">Renseignez le nom complet, l'email et le rôle (Administrator ou Operator). Un mot de passe temporaire est généré. L'utilisateur peut le modifier à sa première connexion.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">3</div>
+<div class="task-body">
+<div class="task-title">Assign operators to workshops</div>
+<div class="task-desc">Dans <strong>Configuration → Ateliers</strong>, ouvrez un lieu de production et assignez-y vos opérateurs. Cette assignation détermine quels runs et commandes sont visibles depuis leur interface mobile.</div>
+<span class="task-tag tag-desktop">Desktop</span>
+</div>
+</div>
+<div class="task-card">
+<div class="task-num">4</div>
+<div class="task-body">
+<div class="task-title">The operator logs in from their phone</div>
+<div class="task-desc">L'opérateur ouvre le navigateur de son téléphone et accède à l'URL de l'interface mobile. Il se connecte avec ses identifiants. L'interface mobile est responsive et optimisée pour une utilisation tactile.</div>
+<span class="task-tag tag-mobile">Mobile</span>
+</div>
+</div>
+</div>
+<div class="mobile-strip">
+<div class="mobile-strip-icon">🔗</div>
+<div class="mobile-strip-text">
+<strong>URL de connexion mobile pour vos opérateurs</strong>
+<span>Partagez ce lien à vos opérateurs terrain pour accéder à l'interface mobile.</span>
+</div>
+<div class="mobile-strip-url">/mobile</div>
+</div>
+</section>
+<!-- ═══ ET MAINTENANT ? ════════════════════════════════════ -->
+<section class="step-section fade-in">
+<a class="step-anchor" id="s27"></a>
+<div class="step-header">
+<div class="step-number-wrap"><div class="step-number">✓</div></div>
+<div class="step-title-group">
+<div class="step-eyebrow">You're ready</div>
+<h2 class="step-title">Récapitulatif et <em>prochaines étapes</em></h2>
+</div>
+</div>
+<p class="doc-p">Félicitations — votre atelier est opérationnel dans MakerStock. Voici ce que vous avez mis en place :</p>
+<div class="recap-grid">
+<div class="recap-item"><div class="recap-check">✓</div>Application installée et connectée à BigCommerce</div>
+<div class="recap-item"><div class="recap-check">✓</div>Atelier et entrepôt créés</div>
+<div class="recap-item"><div class="recap-check">✓</div>Stock de matières premières importé</div>
+<div class="recap-item"><div class="recap-check">✓</div>Recette créée et liée à un produit BC</div>
+<div class="recap-item"><div class="recap-check">✓</div>Premier run de production exécuté</div>
+<div class="recap-item"><div class="recap-check">✓</div>Équipe invitée et accès mobile configuré</div>
+</div>
+<div class="subsection"><div class="subsection-title">Going further</div></div>
+<ul class="doc-list">
+<li><strong>Configurer les alertes de stock</strong> — Définissez des seuils d'alerte sur vos matières pour recevoir une notification dès que le stock descend trop bas (tableau de bord Alertes, rafraîchissement toutes les 30 secondes).</li>
+<li><strong>Mettre en place les approvisionnements</strong> — Créez des bons de commande fournisseurs et laissez vos opérateurs réceptionner les livraisons depuis le mobile avec saisie des lots et DLC (plan Pro+).</li>
+<li><strong>Analyser vos coûts</strong> — Consultez les rapports de consommation matières et, sur le plan Pro+, téléchargez l'export comptable XLSX. Sur le plan Business, accédez au rapport P&amp;L par produit.</li>
+<li><strong>Gérer les ventes B2B</strong> — Créez des revendeurs et gérez leurs commandes depuis l'interface desktop et mobile (plan Business).</li>
+</ul>
+<div class="callout callout-teal" style="margin-top:32px">
+<div class="callout-icon">📖</div>
+<div class="callout-body">
+<strong>Next section</strong>
+          La Partie 3 détaille la répartition complète des tâches entre l'interface desktop et l'interface mobile — who does what, sur quel appareil, avec quelles contraintes.
+        </div>
+</div>
+</section>
+</div><!-- /content -->
+<footer class="doc-footer">
+<div>MakerStock Documentation · v1.0 · April 2025</div>
+<nav class="footer-nav">
+<a href="makerstock_doc_vue_ensemble.html">← Part 1 : Overview</a>
+<a href="#">Partie 3 : Task distribution →</a>
+</nav>
+</footer>
+</main>
+<script>
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.04) + 's';
+  observer.observe(el);
+});
+
+const sections = ['s21','s22','s23','s24','s25','s26','s27'];
+const links = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    if (!current && l.getAttribute('href') === '#intro') l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

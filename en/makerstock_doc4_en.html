@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MakerStock — Critical points</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&amp;family=DM+Mono:wght@400;500&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #0F2137;
+  --navy-mid:    #1A3A5C;
+  --blue:        #2563EB;
+  --blue-light:  #DBEAFE;
+  --blue-pale:   #EFF6FF;
+  --teal:        #0D9488;
+  --teal-light:  #CCFBF1;
+  --teal-pale:   #F0FDFA;
+  --amber:       #B45309;
+  --amber-light: #FEF3C7;
+  --amber-pale:  #FFFBEB;
+  --purple:      #7C3AED;
+  --purple-light:#EDE9FE;
+  --green:       #059669;
+  --green-light: #D1FAE5;
+  --green-pale:  #F0FDF4;
+  --coral:       #DC2626;
+  --coral-light: #FEE2E2;
+  --gray-50:     #F8F9FA;
+  --gray-100:    #F1F3F5;
+  --gray-200:    #E9ECEF;
+  --gray-400:    #ADB5BD;
+  --gray-600:    #6C757D;
+  --white:       #FFFFFF;
+  --text:        #1C1F23;
+  --text-muted:  #6C757D;
+  --border:      #E2E8F0;
+  --font-body:   'DM Sans', sans-serif;
+  --font-serif:  'Fraunces', serif;
+  --font-mono:   'DM Mono', monospace;
+  --sidebar-w:   260px;
+  --content-max: 820px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 15px; line-height: 1.75; color: var(--text); background: var(--white); display: flex; min-height: 100vh; }
+
+/* ── Sidebar ── */
+.sidebar { position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh; background:var(--navy); display:flex; flex-direction:column; overflow-y:auto; z-index:100; }
+.sidebar-brand { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,.08); }
+.brand-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:6px; }
+.brand-icon { width:32px; height:32px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.brand-icon svg { width:18px; height:18px; fill:white; }
+.brand-name { font-weight:600; font-size:16px; color:var(--white); letter-spacing:.02em; }
+.brand-tagline { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.04em; text-transform:uppercase; }
+.sidebar-nav { padding:16px 12px; flex:1; }
+.nav-section { margin-bottom:24px; }
+.nav-section-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); padding:0 12px; margin-bottom:6px; }
+.nav-link { display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:6px; text-decoration:none; font-size:13.5px; color:rgba(255,255,255,.55); transition:all .15s; position:relative; }
+.nav-link:hover { background:rgba(255,255,255,.07); color:rgba(255,255,255,.9); }
+.nav-link.active { background:rgba(37,99,235,.25); color:var(--white); font-weight:500; }
+.nav-link.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:18px; background:var(--blue); border-radius:0 2px 2px 0; }
+.nav-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.2); flex-shrink:0; margin-left:4px; }
+.nav-link.active .nav-dot { background:var(--blue); }
+.sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,.08); }
+.plan-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:4px 12px; font-size:11px; color:rgba(255,255,255,.5); }
+
+/* ── Main layout ── */
+.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; }
+.reading-progress { position:fixed; top:0; left:var(--sidebar-w); right:0; height:2px; background:var(--border); z-index:200; }
+.reading-progress-bar { height:100%; background:var(--teal); width:0%; transition:width .1s; }
+
+/* ── Topbar ── */
+.topbar { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:12px 48px; display:flex; align-items:center; justify-content:space-between; z-index:50; }
+.breadcrumb { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); }
+.breadcrumb a { color:var(--text-muted); text-decoration:none; } .breadcrumb a:hover { color:var(--blue); }
+.breadcrumb span { color:var(--text); font-weight:500; }
+.breadcrumb-sep { color:var(--gray-400); }
+.topbar-actions { display:flex; gap:8px; }
+.btn-sm { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:6px; font-size:12.5px; font-weight:500; border:1px solid var(--border); background:var(--white); color:var(--text-muted); text-decoration:none; transition:all .15s; }
+.btn-sm:hover { background:var(--gray-50); color:var(--text); }
+.btn-primary { background:var(--blue); border-color:var(--blue); color:var(--white); }
+.btn-primary:hover { background:#1D4ED8; color:var(--white); }
+
+/* ── Content ── */
+.content { max-width:var(--content-max); margin:0 auto; padding:56px 48px 120px; width:100%; }
+
+/* ── Hero ── */
+.doc-hero { margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid var(--border); }
+.doc-part-label { display:inline-flex; align-items:center; gap:6px; background:var(--teal-light); color:var(--teal); border-radius:20px; padding:4px 14px; font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.doc-title { font-family:var(--font-serif); font-size:44px; font-weight:300; line-height:1.15; color:var(--navy); margin-bottom:16px; letter-spacing:-.02em; }
+.doc-title em { font-style:italic; color:var(--teal); }
+.doc-lead { font-size:17px; line-height:1.7; color:var(--text-muted); max-width:660px; margin-bottom:28px; font-weight:300; }
+.doc-meta { display:flex; align-items:center; gap:20px; font-size:12.5px; color:var(--text-muted); }
+
+/* ── TOC ── */
+.toc-card { background:var(--gray-50); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:56px; }
+.toc-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.toc-list a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-size:14px; padding:4px 0; transition:color .12s; }
+.toc-list a:hover { color:var(--teal); }
+.toc-num { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); width:28px; flex-shrink:0; }
+
+/* ── Critical sections ── */
+.critical-section { margin-bottom:80px; }
+.critical-anchor { display:block; height:80px; margin-top:-80px; }
+.critical-header { margin-bottom:32px; }
+.critical-eyebrow { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
+.critical-title { font-family:var(--font-serif); font-size:30px; font-weight:300; color:var(--navy); line-height:1.25; letter-spacing:-.02em; }
+.critical-title em { font-style:italic; }
+.critical-lead { font-size:15px; color:var(--text-muted); line-height:1.7; max-width:680px; margin-top:10px; }
+
+p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:16px; }
+.subsection-title { font-size:16px; font-weight:600; color:var(--navy-mid); margin:28px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--teal-light); }
+
+/* ── State machine ── */
+.state-machine { display:flex; align-items:center; gap:0; margin:24px 0 32px; flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; }
+.state-node { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:6px; }
+.state-pill { padding:6px 14px; border-radius:20px; font-size:12.5px; font-weight:600; white-space:nowrap; }
+.state-pill.planifie  { background:var(--amber-light); color:var(--amber); border:1px solid #FDE68A; }
+.state-pill.en-cours  { background:var(--blue-light);  color:var(--blue);  border:1px solid #BFDBFE; }
+.state-pill.termine   { background:var(--green-light); color:var(--green); border:1px solid #6EE7B7; }
+.state-pill.annule    { background:var(--coral-light); color:var(--coral); border:1px solid #FCA5A5; }
+.state-pill.brouillon { background:var(--gray-100);    color:var(--gray-600); border:1px solid var(--border); }
+.state-pill.envoye    { background:var(--blue-light);  color:var(--blue);  border:1px solid #BFDBFE; }
+.state-pill.partiel   { background:var(--amber-light); color:var(--amber); border:1px solid #FDE68A; }
+.state-pill.recu      { background:var(--green-light); color:var(--green); border:1px solid #6EE7B7; }
+.state-sub { font-size:11px; color:var(--text-muted); text-align:center; max-width:90px; line-height:1.3; }
+.state-arrow { padding:0 8px; color:var(--gray-400); font-size:18px; flex-shrink:0; align-self:center; margin-bottom:18px; }
+
+/* ── Info grid (key-value) ── */
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0 24px; }
+.info-card { background:var(--gray-50); border:1px solid var(--border); border-radius:10px; padding:16px 18px; }
+.info-card-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+.info-card-value { font-size:14px; color:var(--text); line-height:1.55; }
+.info-card-value code { font-family:var(--font-mono); font-size:12.5px; background:var(--gray-200); padding:1px 5px; border-radius:3px; }
+
+/* ── Mechanics list ── */
+.mechanic-list { display:flex; flex-direction:column; gap:0; margin:16px 0; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.mechanic-item { display:flex; align-items:flex-start; gap:14px; padding:14px 18px; border-bottom:1px solid var(--border); }
+.mechanic-item:last-child { border-bottom:none; }
+.mechanic-item:hover { background:var(--gray-50); }
+.mechanic-icon { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; margin-top:1px; }
+.mechanic-icon.blue   { background:var(--blue-pale); }
+.mechanic-icon.teal   { background:var(--teal-pale); }
+.mechanic-icon.green  { background:var(--green-pale); }
+.mechanic-icon.amber  { background:var(--amber-pale); }
+.mechanic-icon.purple { background:var(--purple-light); }
+.mechanic-body { flex:1; }
+.mechanic-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:3px; }
+.mechanic-desc { font-size:13.5px; color:var(--text-muted); line-height:1.55; }
+.mechanic-badge { display:inline-flex; font-size:10px; font-weight:600; padding:1px 7px; border-radius:4px; margin-top:5px; }
+.mb-pro    { background:var(--purple-light); color:var(--purple); }
+.mb-info   { background:var(--blue-light);   color:var(--blue); }
+.mb-warn   { background:var(--amber-light);  color:var(--amber); }
+.mb-danger { background:var(--coral-light);  color:var(--coral); }
+
+/* ── FIFO diagram ── */
+.fifo-diagram { margin:20px 0 28px; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.fifo-header { background:var(--navy); color:white; padding:10px 18px; font-size:12px; font-weight:600; letter-spacing:.04em; }
+.fifo-body { padding:16px 18px; }
+.fifo-row { display:flex; gap:8px; align-items:center; margin-bottom:10px; }
+.fifo-row:last-child { margin-bottom:0; }
+.fifo-lot { flex:1; border-radius:6px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+.fifo-lot.lot1 { background:#DBEAFE; border:1px solid #93C5FD; }
+.fifo-lot.lot2 { background:#D1FAE5; border:1px solid #6EE7B7; }
+.fifo-lot.lot3 { background:#FEF3C7; border:1px solid #FDE68A; }
+.fifo-lot.depleted { background:var(--gray-100); border:1px solid var(--border); opacity:.55; }
+.fifo-lot-name { font-weight:600; color:var(--navy); }
+.fifo-lot-detail { font-size:12px; color:var(--text-muted); }
+.fifo-lot-qty { font-family:var(--font-mono); font-size:13px; font-weight:600; }
+.fifo-label { width:70px; font-size:11.5px; color:var(--text-muted); text-align:right; flex-shrink:0; }
+.fifo-arrow { color:var(--gray-400); font-size:14px; flex-shrink:0; }
+.fifo-consumed { background:var(--coral-light); border-radius:6px; padding:8px 12px; font-size:12.5px; color:var(--coral); font-weight:600; border:1px solid #FCA5A5; }
+
+/* ── Alert type cards ── */
+.alert-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0; }
+.alert-card { border-radius:10px; padding:16px 18px; border:1px solid transparent; }
+.alert-card.urgent   { background:var(--coral-light);  border-color:#FCA5A5; }
+.alert-card.forecast { background:var(--amber-light);  border-color:#FDE68A; }
+.alert-card.product  { background:var(--blue-light);   border-color:#BFDBFE; }
+.alert-card.cancel   { background:var(--gray-100);     border-color:var(--border); }
+.alert-card-icon { font-size:22px; margin-bottom:8px; }
+.alert-card-title { font-size:13.5px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.alert-card-desc { font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+.alert-card-trigger { margin-top:8px; font-size:11.5px; font-weight:600; }
+.alert-card.urgent .alert-card-trigger   { color:var(--coral); }
+.alert-card.forecast .alert-card-trigger { color:var(--amber); }
+.alert-card.product .alert-card-trigger  { color:var(--blue); }
+.alert-card.cancel .alert-card-trigger   { color:var(--gray-600); }
+
+/* ── COGS formula ── */
+.formula-box { background:var(--navy); border-radius:12px; padding:20px 24px; margin:20px 0; }
+.formula-title { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:12px; }
+.formula-eq { font-family:var(--font-mono); font-size:14px; color:var(--white); line-height:2; }
+.formula-eq .var { color:#93C5FD; }
+.formula-eq .op  { color:rgba(255,255,255,.4); margin:0 8px; }
+.formula-eq .comment { font-size:11.5px; color:rgba(255,255,255,.35); margin-left:12px; font-family:var(--font-body); font-style:italic; }
+.formula-eq .line { display:block; padding-left:0; }
+.formula-eq .line.indent { padding-left:24px; }
+.formula-eq .separator { display:block; border-top:1px solid rgba(255,255,255,.1); margin:10px 0; }
+
+/* ── Sync BC diagram ── */
+.sync-flow { display:grid; grid-template-columns:1fr 40px 1fr; gap:0; margin:24px 0; align-items:center; }
+.sync-box { border:1px solid var(--border); border-radius:10px; padding:16px; }
+.sync-box.bc { border-color:var(--blue-light); background:var(--blue-pale); }
+.sync-box.ms { border-color:var(--teal-light); background:var(--teal-pale); }
+.sync-box-title { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; margin-bottom:10px; }
+.sync-box.bc .sync-box-title { color:var(--blue); }
+.sync-box.ms .sync-box-title { color:var(--teal); }
+.sync-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text); padding:4px 0; }
+.sync-item::before { content:''; width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.sync-box.bc .sync-item::before { background:var(--blue); }
+.sync-box.ms .sync-item::before { background:var(--teal); }
+.sync-arrows { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
+.sync-arrow-up   { font-size:20px; color:var(--blue); }
+.sync-arrow-down { font-size:20px; color:var(--teal); }
+.sync-arrow-label { font-size:9px; color:var(--text-muted); text-align:center; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+
+/* ── Callouts ── */
+.callout { display:flex; gap:14px; border-radius:10px; padding:16px 20px; margin:20px 0; border:1px solid transparent; }
+.callout-info    { background:var(--blue-pale); border-color:var(--blue-light); }
+.callout-teal    { background:var(--teal-pale); border-color:var(--teal-light); }
+.callout-warning { background:var(--amber-pale); border-color:var(--amber-light); }
+.callout-danger  { background:var(--coral-light); border-color:#FCA5A5; }
+.callout-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+.callout-body { font-size:14px; line-height:1.65; color:var(--text); }
+.callout-body strong { font-weight:600; display:block; margin-bottom:3px; }
+
+/* ── Section divider ── */
+.section-divider { border:none; border-top:1px solid var(--border); margin:64px 0; }
+
+/* ── Fade ── */
+.fade-in { opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* ── Footer ── */
+.doc-footer { border-top:1px solid var(--border); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12.5px; }
+.footer-nav { display:flex; gap:24px; }
+.footer-nav a { color:var(--text-muted); text-decoration:none; transition:color .12s; }
+.footer-nav a:hover { color:var(--blue); }
+
+code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--gray-100); padding:1px 6px; border-radius:4px; color:var(--navy-mid); }
+
+@media (max-width:900px) {
+  :root { --sidebar-w:0px; }
+  .sidebar { display:none; }
+  .content { padding:32px 24px 80px; }
+  .topbar { padding:12px 24px; }
+  .info-grid, .alert-grid { grid-template-columns:1fr; }
+  .sync-flow { grid-template-columns:1fr; }
+  .sync-arrows { display:none; }
+  .doc-title { font-size:30px; }
+  .state-machine { gap:0; }
+}
+</style>
+<link href="https://TODO-domaine.com/fr/" hreflang="fr" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="en" rel="alternate"/><link href="https://TODO-domaine.com/es/" hreflang="es" rel="alternate"/><link href="https://TODO-domaine.com/en/" hreflang="x-default" rel="alternate"/></head>
+<body>
+<div class="reading-progress"><div class="reading-progress-bar" id="progress"></div></div>
+<aside class="sidebar">
+<div class="sidebar-brand">
+<a class="brand-logo" href="#">
+<div class="brand-icon"><svg viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"></path></svg></div>
+<span class="brand-name">MakerStock</span>
+</a>
+<div class="brand-tagline">Documentation</div>
+</div>
+<nav class="sidebar-nav">
+<div class="nav-section">
+<div class="nav-section-label">Navigation</div>
+<a class="nav-link" href="makerstock_doc_vue_ensemble.html"><div class="nav-dot"></div>Part 1 — Overview</a>
+<a class="nav-link" href="makerstock_doc_quickstart.html"><div class="nav-dot"></div>Part 2 — Quick Start</a>
+<a class="nav-link" href="makerstock_doc_partie3.html"><div class="nav-dot"></div>Part 3 — Desktop &amp; Mobile</a>
+</div>
+<div class="nav-section">
+<div class="nav-section-label">Part 4 — Critical points</div>
+<a class="nav-link active" href="#intro"><div class="nav-dot"></div>Introduction</a>
+<a class="nav-link" href="#p41"><div class="nav-dot"></div>4.1 Cycle de production</a>
+<a class="nav-link" href="#p42"><div class="nav-dot"></div>4.2 Gestion du stock &amp; FIFO</a>
+<a class="nav-link" href="#p43"><div class="nav-dot"></div>4.3 Approvisionnements</a>
+<a class="nav-link" href="#p44"><div class="nav-dot"></div>4.4 Alertes</a>
+<a class="nav-link" href="#p45"><div class="nav-dot"></div>4.5 COGS calculation</a>
+<a class="nav-link" href="#p46"><div class="nav-dot"></div>4.6 Sync BigCommerce</a>
+</div>
+</nav>
+<div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — April 2025</div></div>
+</aside>
+<main class="main">
+<div class="topbar">
+<div class="breadcrumb">
+<a href="makerstock_doc_vue_ensemble.html">Documentation</a>
+<span class="breadcrumb-sep">/</span>
+<a href="makerstock_doc_partie3.html">Desktop &amp; Mobile</a>
+<span class="breadcrumb-sep">/</span>
+<span>Critical points</span>
+</div>
+<div class="topbar-actions">
+<a class="btn-sm" href="makerstock_doc_partie3.html">← Part 3</a>
+<a class="btn-sm btn-primary" href="#">Start free trial →</a>
+</div>
+</div>
+<div class="content">
+<!-- Hero -->
+<div class="doc-hero fade-in" id="intro">
+<div class="doc-part-label">⚙️ Part 4</div>
+<h1 class="doc-title">Description fonctionnelle — <em>points critiques</em></h1>
+<p class="doc-lead">This section documents the internal workings of the six key mechanics of MakerStock: what happens under the hood when you execute a run, receive a delivery, or when a sale is recorded in BigCommerce.</p>
+<div class="doc-meta">
+<div>⏱ Reading ~12 min</div>
+<div>·</div>
+<div>6 documented mechanics</div>
+<div>·</div>
+<div>For admins &amp; integrators</div>
+</div>
+</div>
+<!-- TOC -->
+<div class="toc-card fade-in">
+<div class="toc-title">Sommaire</div>
+<ul class="toc-list">
+<li><a href="#p41"><span class="toc-num">4.1</span> Production run lifecycle</a></li>
+<li><a href="#p42"><span class="toc-num">4.2</span> Raw material stock management — lots, FIFO and movements</a></li>
+<li><a href="#p43"><span class="toc-num">4.3</span> Supplier procurement cycle</a></li>
+<li><a href="#p44"><span class="toc-num">4.4</span> Alert system — types and triggers</a></li>
+<li><a href="#p45"><span class="toc-num">4.5</span> COGS calculation — method and components</a></li>
+<li><a href="#p46"><span class="toc-num">4.6</span> BigCommerce synchronisation</a></li>
+</ul>
+</div>
+<!-- ══════════════════════════════════════════
+         4.1 — Cycle de production
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p41"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.1</div>
+<h2 class="critical-title">Production run <em>lifecycle</em></h2>
+<p class="critical-lead">Un run est l'unité atomique de production dans MakerStock. Il représente l'exécution d'un nombre défini de batches d'une recette donnée. Comprendre son cycle de vie est essentiel pour piloter la production correctement.</p>
+</div>
+<div class="subsection-title">The four statuses</div>
+<div class="state-machine">
+<div class="state-node">
+<div class="state-pill planifie">Planned</div>
+<div class="state-sub">In queue, stock not deducted</div>
+</div>
+<div class="state-arrow">→</div>
+<div class="state-node">
+<div class="state-pill en-cours">In progress</div>
+<div class="state-sub">Started by an operator</div>
+</div>
+<div class="state-arrow">→</div>
+<div class="state-node">
+<div class="state-pill termine">Completed</div>
+<div class="state-sub">Stock deducted, COGS calculated</div>
+</div>
+<div class="state-arrow" style="color:#FCA5A5">↘</div>
+<div class="state-node">
+<div class="state-pill annule">Cancelled</div>
+<div class="state-sub">Irreversible, no restoration</div>
+</div>
+</div>
+<div class="mechanic-list">
+<div class="mechanic-item">
+<div class="mechanic-icon amber">📋</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Planned → mise en file d'attente sans déduction de stock</div>
+<div class="mechanic-desc">Quand un run est planifié (depuis desktop ou mobile), il est enregistré mais le stock n'est pas encore touché. Si le stock est insuffisant au moment de la planification, MakerStock le signale mais laisse passer le run en file — une alerte prévisionnelle est générée. Un run planifié peut être annulé sans conséquence sur le stock.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon blue">⚙️</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Planned → In progress : démarrage par l'opérateur</div>
+<div class="mechanic-desc">Un opérateur (depuis le mobile, onglet Fabrication) ou un admin (depuis le desktop) appuie sur "Démarrer". Le statut passe à <code class="inline">EN_COURS</code>. À ce moment, MakerStock vérifie à nouveau la disponibilité du stock. Le run est visible en temps réel sur le desktop.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon green">✅</div>
+<div class="mechanic-body">
+<div class="mechanic-title">In progress → Completed : déduction, crédit stock, COGS</div>
+<div class="mechanic-desc">À la terminaison, trois actions atomiques sont déclenchées simultanément : (1) les matières premières sont déduites du stock selon la méthode FIFO, lot par lot, avec enregistrement de la traçabilité ; (2) le stock de produits finis est crédité du nombre d'unités produites ; (3) le COGS réel du run est calculé à partir des coûts unitaires des lots consommés. Ces trois opérations sont réversibles uniquement via un ajustement manuel ultérieur.</div>
+<span class="mechanic-badge mb-pro">Traçabilité lots — Pro+</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon amber">⚠️</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Run terminé avec stock insuffisant</div>
+<div class="mechanic-desc">Si le stock d'une ou plusieurs matières est insuffisant au moment de l'exécution, MakerStock l'indique dans le détail du run (onglet "Manques") mais laisse le run se terminer. Le stock descend à zéro pour les matières concernées — il ne devient pas négatif. Une alerte de rupture est générée.</div>
+<span class="mechanic-badge mb-warn">Alerte de rupture</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon" style="background:var(--coral-light)">🚫</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Annulation — irréversible, aucune restitution automatique</div>
+<div class="mechanic-desc">Un run en statut <code class="inline">PLANIFIE</code> ou <code class="inline">EN_COURS</code> peut être annulé. L'annulation est définitive. Si le run était <code class="inline">EN_COURS</code> et que des matières avaient déjà été physiquement consommées, le stock ne sera pas restitué automatiquement — une correction manuelle via ajustement de stock est nécessaire.</div>
+<span class="mechanic-badge mb-danger">Irreversible</span>
+</div>
+</div>
+</div>
+<div class="info-grid">
+<div class="info-card">
+<div class="info-card-label">From desktop</div>
+<div class="info-card-value">Planifier, lancer directement, voir le détail, exporter le CSV de traçabilité, annuler.</div>
+</div>
+<div class="info-card">
+<div class="info-card-label">From mobile</div>
+<div class="info-card-value">Planifier, démarrer un run planifié, terminer un run en cours. Pas d'accès au détail financier.</div>
+</div>
+<div class="info-card">
+<div class="info-card-label">CSV traceability export</div>
+<div class="info-card-value">Disponible après terminaison : matière, lot, quantité consommée, DLC, fournisseur, coût. Format compatible comptabilité.</div>
+</div>
+<div class="info-card">
+<div class="info-card-label">Launch without scheduling</div>
+<div class="info-card-value">Possible depuis le desktop uniquement. Le run passe directement de "nouveau" à <code>TERMINE</code> si le stock est suffisant, sans étape intermédiaire.</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ══════════════════════════════════════════
+         4.2 — Stock & FIFO
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p42"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.2</div>
+<h2 class="critical-title">Raw material stock management — <em>lots, FIFO and movements</em></h2>
+<p class="critical-lead">Raw material stock is managed lot by lot. Each stock entry creates a distinct lot with its own unit cost, lot number and expiry date. Consumption follows the FIFO rule (first in, first out).</p>
+</div>
+<div class="subsection-title">Illustrated FIFO operation</div>
+<div class="fifo-diagram">
+<div class="fifo-header">Example — Farine de blé · 3 lots en stock · Run de production consommant 8 kg</div>
+<div class="fifo-body">
+<div class="fifo-row">
+<div class="fifo-label">Before run</div>
+<div class="fifo-lot lot1">
+<div><div class="fifo-lot-name">LOT-A · 12/03/2025</div><div class="fifo-lot-detail">DLC 31/08/2025 · 1,20 €/kg</div></div>
+<div class="fifo-lot-qty">3 kg</div>
+</div>
+</div>
+<div class="fifo-row">
+<div class="fifo-label"></div>
+<div class="fifo-lot lot2">
+<div><div class="fifo-lot-name">LOT-B · 28/03/2025</div><div class="fifo-lot-detail">DLC 28/02/2026 · 1,15 €/kg</div></div>
+<div class="fifo-lot-qty">7 kg</div>
+</div>
+</div>
+<div class="fifo-row">
+<div class="fifo-label"></div>
+<div class="fifo-lot lot3">
+<div><div class="fifo-lot-name">LOT-C · 10/04/2025</div><div class="fifo-lot-detail">DLC 30/06/2026 · 1,18 €/kg</div></div>
+<div class="fifo-lot-qty">10 kg</div>
+</div>
+</div>
+<div style="border-top:1px dashed var(--border);margin:12px 0"></div>
+<div class="fifo-row">
+<div class="fifo-label">After run<br/>(8 kg deducted)</div>
+<div class="fifo-lot depleted">
+<div><div class="fifo-lot-name">LOT-A · épuisé</div><div class="fifo-lot-detail">3 kg consommés en totalité</div></div>
+<div class="fifo-lot-qty" style="color:var(--gray-400)">0 kg</div>
+</div>
+</div>
+<div class="fifo-row">
+<div class="fifo-label"></div>
+<div class="fifo-lot lot2">
+<div><div class="fifo-lot-name">LOT-B · partiel</div><div class="fifo-lot-detail">5 kg consommés sur 7</div></div>
+<div class="fifo-lot-qty">2 kg</div>
+</div>
+</div>
+<div class="fifo-row">
+<div class="fifo-label"></div>
+<div class="fifo-lot lot3">
+<div><div class="fifo-lot-name">LOT-C · intact</div><div class="fifo-lot-detail">Non touché</div></div>
+<div class="fifo-lot-qty">10 kg</div>
+</div>
+</div>
+<div class="fifo-consumed" style="margin-top:10px">
+            COGS matière = (3 kg × 1,20 €) + (5 kg × 1,15 €) = 3,60 € + 5,75 € = 9,35 €
+          </div>
+</div>
+</div>
+<div class="mechanic-list">
+<div class="mechanic-item">
+<div class="mechanic-icon blue">📥</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Entrée en stock — création d'un lot</div>
+<div class="mechanic-desc">Chaque entrée de stock (manuelle, réception fournisseur ou import) crée un nouveau lot horodaté avec : quantité, coût unitaire au moment de l'entrée (snapshot), numéro de lot optionnel, DLC optionnelle. Si le matériau est configuré avec "DLC obligatoire", la date d'expiration est requise à chaque entrée.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon amber">⚡</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Ajustement de stock — pas de création de lot</div>
+<div class="mechanic-desc">Un ajustement (+ ou −) modifie directement le lot sélectionné ou le lot le plus ancien (FIFO). L'ajustement nécessite une raison obligatoire (inventaire physique, perte, casse, correction…). Le mouvement est tracé dans l'historique avec le type <code class="inline">AJUSTEMENT</code>.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon" style="background:var(--coral-light)">⚠️</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Dégrèvement de lot — retrait ciblé</div>
+<div class="mechanic-desc">Depuis la vue des lots d'un matériau, il est possible de "dégrever" un lot spécifique (perte, casse, contrôle qualité) en indiquant la quantité et une raison. Le dégrèvement cible précisément ce lot, indépendamment de l'ordre FIFO. Cette opération est irréversible.</div>
+<span class="mechanic-badge mb-danger">Irreversible</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon purple">🔁</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Transfert inter-entrepôts</div>
+<div class="mechanic-desc">Disponible depuis le desktop uniquement (plan Business). Un lot peut être transféré d'un entrepôt source vers un entrepôt destination. Le lot conserve son numéro, sa DLC et son coût unitaire d'origine. Le stock de l'entrepôt source diminue, celui de la destination augmente.</div>
+<span class="mechanic-badge mb-pro">Business</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon teal">📊</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Valorisation du stock</div>
+<div class="mechanic-desc">La valeur totale du stock d'un matériau est calculée en temps réel : somme des (quantité restante × coût unitaire) pour chaque lot actif. Cette valeur est visible dans la colonne "Valeur stock" du tableau des matières et utilisée dans le rapport financier.</div>
+</div>
+</div>
+</div>
+<div class="callout callout-warning">
+<div class="callout-icon">⚠️</div>
+<div class="callout-body">
+<strong>Le coût unitaire d'une matière ≠ le coût d'un lot</strong>
+          Le champ "coût unitaire" dans la fiche d'une matière première est le coût de référence par défaut. Chaque lot a son propre coût unitaire, enregistré au moment de l'entrée en stock (snapshot). C'est le coût du lot — pas le coût de référence — qui est utilisé dans le calcul du COGS lors d'un run.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ══════════════════════════════════════════
+         4.3 — Approvisionnements
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p43"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.3</div>
+<h2 class="critical-title">Cycle d'<em>approvisionnement fournisseur</em></h2>
+<p class="critical-lead">Les bons de commande fournisseurs permettent de tracer le cycle complet d'une commande matières : de la création en bureau à la réception physique en atelier. Ce module est disponible à partir du plan Pro.</p>
+</div>
+<div class="subsection-title">The five statuses of a purchase order</div>
+<div class="state-machine">
+<div class="state-node">
+<div class="state-pill brouillon">Draft</div>
+<div class="state-sub">Created, not sent</div>
+</div>
+<div class="state-arrow">→</div>
+<div class="state-node">
+<div class="state-pill envoye">Sent</div>
+<div class="state-sub">Sent to supplier</div>
+</div>
+<div class="state-arrow">→</div>
+<div class="state-node">
+<div class="state-pill partiel">Part. received</div>
+<div class="state-sub">Partial reception</div>
+</div>
+<div class="state-arrow">→</div>
+<div class="state-node">
+<div class="state-pill recu">Received</div>
+<div class="state-sub">All lines received</div>
+</div>
+<div class="state-arrow" style="color:#FCA5A5">↘</div>
+<div class="state-node">
+<div class="state-pill annule">Cancelled</div>
+<div class="state-sub">From Draft or Sent</div>
+</div>
+</div>
+<div class="mechanic-list">
+<div class="mechanic-item">
+<div class="mechanic-icon blue">📝</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Création du bon (Draft) — desktop uniquement</div>
+<div class="mechanic-desc">L'admin crée un bon de commande en sélectionnant un fournisseur, en ajoutant des lignes (matériau, quantité, prix unitaire), et en renseignant une date de livraison prévue. Le bon en statut Draft peut être modifié et supprimé librement.</div>
+<span class="mechanic-badge mb-pro">Pro+</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon teal">📤</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Envoi au fournisseur — passage en statut Sent</div>
+<div class="mechanic-desc">En cliquant "Marquer comme envoyé", le bon bascule en <code class="inline">ENVOYE</code>. Il n'est plus modifiable. Il devient visible dans l'onglet "Approvisionnements" du mobile, pour que les opérateurs puissent le réceptionner à la livraison. En retard si la date de livraison prévue est dépassée.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon green">📦</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Réception — mise à jour du stock par ligne</div>
+<div class="mechanic-desc">Depuis le mobile (ou le desktop), l'opérateur saisit pour chaque ligne : la quantité effectivement reçue, le numéro de lot fournisseur (optionnel), la DLC (obligatoire si le matériau l'exige) et l'entrepôt de destination. La quantité est immédiatement créditée en stock à la validation. Si toutes les lignes ne sont pas complètement reçues, le bon passe en <code class="inline">PARTIELLEMENT_RECU</code>.</div>
+<span class="mechanic-badge mb-pro">Traçabilité lots — Pro+</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon amber">🔄</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Réceptions partielles successives</div>
+<div class="mechanic-desc">Un bon peut être réceptionné en plusieurs fois. À chaque réception partielle, le stock est crédité de la quantité saisie. La progression de réception est visible en pourcentage par ligne. Le bon passe en <code class="inline">RECU</code> uniquement quand toutes les lignes ont atteint leur quantité commandée.</div>
+</div>
+</div>
+</div>
+<div class="callout callout-info">
+<div class="callout-icon">💡</div>
+<div class="callout-body">
+<strong>Sur-réception possible</strong>
+          Il est possible de réceptionner plus que la quantité commandée sur une ligne (livraison excédentaire). MakerStock l'indique visuellement mais l'autorise. Le stock est crédité de la quantité réellement saisie.
+        </div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ══════════════════════════════════════════
+         4.4 — Alertes
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p44"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.4</div>
+<h2 class="critical-title">Alert system — <em>types and triggers</em></h2>
+<p class="critical-lead">Le tableau de bord Alertes est la page d'accueil de MakerStock. Il affiche en temps réel les situations nécessitant une attention, regroupées par niveau d'urgence. Les alertes sont rafraîchies automatiquement toutes les 30 secondes.</p>
+</div>
+<div class="alert-grid">
+<div class="alert-card urgent">
+<div class="alert-card-icon">🔴</div>
+<div class="alert-card-title">Stock bas — matière première</div>
+<div class="alert-card-desc">Le stock total d'une matière première est descendu sous le seuil d'alerte configuré dans la fiche matériau.</div>
+<div class="alert-card-trigger">Déclencheur : stock total &lt; seuil d'alerte</div>
+</div>
+<div class="alert-card forecast">
+<div class="alert-card-icon">🟡</div>
+<div class="alert-card-title">Alerte prévisionnelle — run à risque</div>
+<div class="alert-card-desc">Un run planifié ne pourra pas être exécuté faute de stock suffisant au moment où il est prévu. Affiché dans le bandeau "Prévisionnelles".</div>
+<div class="alert-card-trigger">Déclencheur : stock insuffisant pour un run planifié</div>
+</div>
+<div class="alert-card product">
+<div class="alert-card-icon">🔵</div>
+<div class="alert-card-title">Stock bas — produit fini</div>
+<div class="alert-card-desc">Le stock total d'un produit fini est descendu sous le seuil d'alerte configuré dans la fiche produit.</div>
+<div class="alert-card-trigger">Déclencheur : stock produit &lt; seuil d'alerte</div>
+</div>
+<div class="alert-card cancel">
+<div class="alert-card-icon">⚫</div>
+<div class="alert-card-title">Rupture produit / Annulation</div>
+<div class="alert-card-desc">Rupture totale (stock = 0) ou annulation d'une commande fournisseur impactant un approvisionnement attendu.</div>
+<div class="alert-card-trigger">Déclencheur : stock = 0 ou annulation de commande</div>
+</div>
+</div>
+<div class="mechanic-list">
+<div class="mechanic-item">
+<div class="mechanic-icon blue">🔔</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Acquittement d'une alerte</div>
+<div class="mechanic-desc">Toute alerte peut être acquittée manuellement depuis le desktop (bouton "Acquitter"). L'alerte acquittée est archivée et disparaît des alertes actives. Elle reste visible dans l'historique des 30 derniers jours. Une alerte acquittée peut réapparaître si la condition qui la déclenchait n'est toujours pas résolue (par exemple, le stock est toujours bas).</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon amber">📊</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Bandeau d'alerte en haut du mobile</div>
+<div class="mechanic-desc">L'interface mobile affiche un bandeau rouge persistant en haut de chaque écran quand il existe au moins une alerte de stock bas non acquittée. Ce bandeau est visible depuis tous les onglets, pas seulement depuis le dashboard. Il disparaît dès que toutes les alertes urgentes sont résolues ou acquittées.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon green">🔄</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Rafraîchissement automatique — 30 secondes</div>
+<div class="mechanic-desc">Le tableau de bord Alertes se rafraîchit automatiquement toutes les 30 secondes sans rechargement de page. Le dashboard mobile se rafraîchit toutes les 60 secondes. Un bouton "Actualiser" permet un rafraîchissement manuel immédiat depuis le desktop.</div>
+</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ══════════════════════════════════════════
+         4.5 — COGS calculation
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p45"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.5</div>
+<h2 class="critical-title">COGS calculation — <em>method and components</em></h2>
+<p class="critical-lead">Le COGS (Cost of Goods Sold — coût de revient) est calculé automatiquement à chaque run terminé. Sa précision dépend du plan souscrit : le plan Starter ne couvre que les matières premières, le plan Pro ajoute la main-d'œuvre et les charges, le plan Business permet le rapport P&amp;L complet.</p>
+</div>
+<div class="subsection-title">Formula by plan</div>
+<div class="formula-box">
+<div class="formula-title">COGS — Starter (raw materials only)</div>
+<div class="formula-eq">
+<span class="line"><span class="var">COGS</span> <span class="op">=</span> Σ ( <span class="var">qté_lot</span> <span class="op">×</span> <span class="var">coût_unit_lot</span> ) <span class="comment">par lot FIFO consommé</span></span>
+</div>
+</div>
+<div class="formula-box" style="margin-top:12px">
+<div class="formula-title">COGS complet — Pro+ (materials + labor + variable costs)</div>
+<div class="formula-eq">
+<span class="line"><span class="var">COGS</span> <span class="op">=</span></span>
+<span class="line indent">Σ ( <span class="var">qté_lot</span> <span class="op">×</span> <span class="var">coût_unit_lot</span> ) <span class="comment">matières premières FIFO</span></span>
+<span class="line indent"><span class="op">+</span> ( <span class="var">taux_horaire</span> <span class="op">×</span> <span class="var">nb_opérateurs</span> <span class="op">×</span> <span class="var">durée_recette</span> ) <span class="comment">coût MO par batch</span></span>
+<span class="line indent"><span class="op">+</span> <span class="var">coût_variable_batch</span> <span class="comment">énergie, emballage (saisi sur la recette)</span></span>
+</div>
+</div>
+<div class="formula-box" style="margin-top:12px">
+<div class="formula-title">COGS + charges fixes imputées — Business (rapport P&amp;L)</div>
+<div class="formula-eq">
+<span class="line"><span class="var">Coût complet / unité</span> <span class="op">=</span></span>
+<span class="line indent"><span class="var">COGS Pro</span> / <span class="var">unités_produites</span></span>
+<span class="line indent"><span class="op">+</span> Σ ( <span class="var">charge_fixe_mensuelle</span> / <span class="var">volume_cible_mensuel</span> ) <span class="comment">loyer, amortissement…</span></span>
+</div>
+</div>
+<div class="mechanic-list" style="margin-top:24px">
+<div class="mechanic-item">
+<div class="mechanic-icon teal">💡</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Recommended selling price — calcul automatique (Pro+)</div>
+<div class="mechanic-desc">À partir du COGS complet, MakerStock peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce — il est consultatif.</div>
+<span class="mechanic-badge mb-pro">Pro+</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon blue">📤</div>
+<div class="mechanic-body">
+<div class="mechanic-title">XLSX accounting export (Pro+)</div>
+<div class="mechanic-desc">Disponible depuis Pilotage → Rapports. Exporte sur la période choisie : mouvements de stock, valorisation FIFO, COGS détaillé par run et par produit, récapitulatif des charges. Format structuré, compatible avec les logiciels comptables courants. Méthode des coûts complets, valorisation FIFO, mention légale incluse.</div>
+<span class="mechanic-badge mb-pro">Pro+</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon purple">📊</div>
+<div class="mechanic-body">
+<div class="mechanic-title">P&amp;L report per product (Business)</div>
+<div class="mechanic-desc">Génère un document complet : synthèse exécutive (CA, COGS, marge brute), détail des coûts par produit, structure des charges fixes, calcul du seuil de rentabilité (point mort) et projection CA / marge sur 12 mois. Requiert au minimum un run terminé, un taux horaire et des charges fixes configurés.</div>
+<span class="mechanic-badge mb-pro">Business</span>
+</div>
+</div>
+</div>
+</section>
+<hr class="section-divider"/>
+<!-- ══════════════════════════════════════════
+         4.6 — Sync BigCommerce
+    ══════════════════════════════════════════ -->
+<section class="critical-section fade-in">
+<a class="critical-anchor" id="p46"></a>
+<div class="critical-header">
+<div class="critical-eyebrow">Critical point 4.6</div>
+<h2 class="critical-title"><em>BigCommerce</em> synchronisation</h2>
+<p class="critical-lead">La relation entre MakerStock et BigCommerce est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
+</div>
+<div class="sync-flow">
+<div class="sync-box bc">
+<div class="sync-box-title">BigCommerce</div>
+<div class="sync-item">Catalogue produits (nom, SKU, prix)</div>
+<div class="sync-item">Commandes clients</div>
+<div class="sync-item">Stock BC (géré par BC)</div>
+<div class="sync-item">Identité marchand (auth)</div>
+</div>
+<div class="sync-arrows">
+<div class="sync-arrow-down">↓</div>
+<div class="sync-arrow-label">vers MS</div>
+<div style="height:16px"></div>
+<div class="sync-arrow-up">↑</div>
+<div class="sync-arrow-label">depuis MS</div>
+</div>
+<div class="sync-box ms">
+<div class="sync-box-title">MakerStock</div>
+<div class="sync-item">Stock interne (géré par MS)</div>
+<div class="sync-item">Recipes &amp; COGS liés aux SKU</div>
+<div class="sync-item">Raw materials consommées</div>
+<div class="sync-item">Lot &amp; expiry traceability</div>
+</div>
+</div>
+<div class="mechanic-list" style="margin-top:24px">
+<div class="mechanic-item">
+<div class="mechanic-icon blue">🔄</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Synchronisation du catalogue produits (BC → MS)</div>
+<div class="mechanic-desc">MakerStock importe le catalogue produits depuis BigCommerce : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits &amp; stock. Les produits créés dans BigCommerce après l'installation doivent être synchronisés pour apparaître dans MakerStock.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon teal">⚡</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Déduction automatique à la vente (BC → MS)</div>
+<div class="mechanic-desc">Quand une vente est enregistrée dans BigCommerce pour un produit lié à une recette principale dans MakerStock, la déduction de matières premières est déclenchée automatiquement. MakerStock calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon amber">🧮</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Two independent stocks — BC stock ≠ MS stock</div>
+<div class="mechanic-desc">MakerStock maintient son propre stock de produits finis, indépendant du stock BigCommerce. Le stock BC est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
+<span class="mechanic-badge mb-warn">Important</span>
+</div>
+</div>
+<div class="mechanic-item">
+<div class="mechanic-icon green">🔗</div>
+<div class="mechanic-body">
+<div class="mechanic-title">Batches per sold unit ratio — key to the link</div>
+<div class="mechanic-desc">Lors de la liaison recette ↔ produit, l'admin renseigne le ratio "batches par unité vendue". Example : si 1 batch produit 12 bougies, et qu'une bougie est vendue à l'unité, le ratio est 1/12 = 0,0833 batch par unité. Ce ratio est utilisé pour calculer la consommation matières à chaque vente. Un ratio mal configuré entraîne une déduction incorrecte.</div>
+<span class="mechanic-badge mb-warn">Configure carefully</span>
+</div>
+</div>
+</div>
+<div class="callout callout-danger">
+<div class="callout-icon">🚨</div>
+<div class="callout-body">
+<strong>Le ratio batches/unité est critique</strong>
+          Une erreur dans ce ratio entraîne une déduction de stock incorrecte à chaque vente. Vérifiez-le attentivement lors de la liaison et après tout changement de taille de batch dans une recette. Il est modifiable à tout moment dans la fiche produit, onglet "Recipes liées".
+        </div>
+</div>
+<div class="callout callout-teal" style="margin-top:16px">
+<div class="callout-icon">📖</div>
+<div class="callout-body">
+<strong>End of documentation</strong>
+          Vous avez parcouru les quatre parties de la documentation MakerStock. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis votre admin BigCommerce (plan Business : support prioritaire).
+        </div>
+</div>
+</section>
+</div><!-- /content -->
+<footer class="doc-footer">
+<div>MakerStock Documentation · v1.0 · April 2025</div>
+<nav class="footer-nav">
+<a href="makerstock_doc_partie3.html">← Part 3 : Desktop &amp; Mobile</a>
+</nav>
+</footer>
+</main>
+<script>
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.04) + 's';
+  observer.observe(el);
+});
+const sections = ['p41','p42','p43','p44','p45','p46'];
+const links = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    if (!current && l.getAttribute('href') === '#intro') l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

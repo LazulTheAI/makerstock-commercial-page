@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakerStock — Référence & Administration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:        #0F2137;
+  --navy-mid:    #1A3A5C;
+  --blue:        #2563EB;
+  --blue-light:  #DBEAFE;
+  --blue-pale:   #EFF6FF;
+  --teal:        #0D9488;
+  --teal-light:  #CCFBF1;
+  --teal-pale:   #F0FDFA;
+  --amber:       #B45309;
+  --amber-light: #FEF3C7;
+  --amber-pale:  #FFFBEB;
+  --purple:      #7C3AED;
+  --purple-light:#EDE9FE;
+  --purple-pale: #F5F3FF;
+  --green:       #059669;
+  --green-light: #D1FAE5;
+  --green-pale:  #F0FDF4;
+  --coral:       #DC2626;
+  --coral-light: #FEE2E2;
+  --gray-50:     #F8F9FA;
+  --gray-100:    #F1F3F5;
+  --gray-200:    #E9ECEF;
+  --gray-400:    #ADB5BD;
+  --gray-600:    #6C757D;
+  --white:       #FFFFFF;
+  --text:        #1C1F23;
+  --text-muted:  #6C757D;
+  --border:      #E2E8F0;
+  --font-body:   'DM Sans', sans-serif;
+  --font-serif:  'Fraunces', serif;
+  --font-mono:   'DM Mono', monospace;
+  --sidebar-w:   260px;
+  --content-max: 820px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: 15px; line-height: 1.75; color: var(--text); background: var(--white); display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar { position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh; background:var(--navy); display:flex; flex-direction:column; overflow-y:auto; z-index:100; }
+.sidebar-brand { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,.08); }
+.brand-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-bottom:6px; }
+.brand-icon { width:32px; height:32px; background:var(--blue); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.brand-icon svg { width:18px; height:18px; fill:white; }
+.brand-name { font-weight:600; font-size:16px; color:var(--white); letter-spacing:.02em; }
+.brand-tagline { font-size:11px; color:rgba(255,255,255,.4); letter-spacing:.04em; text-transform:uppercase; }
+.sidebar-nav { padding:16px 12px; flex:1; }
+.nav-section { margin-bottom:24px; }
+.nav-section-label { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); padding:0 12px; margin-bottom:6px; }
+.nav-link { display:flex; align-items:center; gap:8px; padding:7px 12px; border-radius:6px; text-decoration:none; font-size:13.5px; color:rgba(255,255,255,.55); transition:all .15s; position:relative; }
+.nav-link:hover { background:rgba(255,255,255,.07); color:rgba(255,255,255,.9); }
+.nav-link.active { background:rgba(37,99,235,.25); color:var(--white); font-weight:500; }
+.nav-link.active::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:3px; height:18px; background:var(--blue); border-radius:0 2px 2px 0; }
+.nav-dot { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,.2); flex-shrink:0; margin-left:4px; }
+.nav-link.active .nav-dot { background:var(--blue); }
+.sidebar-footer { padding:16px 20px; border-top:1px solid rgba(255,255,255,.08); }
+.plan-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; padding:4px 12px; font-size:11px; color:rgba(255,255,255,.5); }
+
+/* Main */
+.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; }
+.reading-progress { position:fixed; top:0; left:var(--sidebar-w); right:0; height:2px; background:var(--border); z-index:200; }
+.reading-progress-bar { height:100%; background:var(--amber); width:0%; transition:width .1s; }
+
+/* Topbar */
+.topbar { position:sticky; top:0; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:12px 48px; display:flex; align-items:center; justify-content:space-between; z-index:50; }
+.breadcrumb { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-muted); }
+.breadcrumb a { color:var(--text-muted); text-decoration:none; } .breadcrumb a:hover { color:var(--blue); }
+.breadcrumb span { color:var(--text); font-weight:500; }
+.breadcrumb-sep { color:var(--gray-400); }
+.topbar-actions { display:flex; gap:8px; }
+.btn-sm { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:6px; font-size:12.5px; font-weight:500; border:1px solid var(--border); background:var(--white); color:var(--text-muted); text-decoration:none; transition:all .15s; }
+.btn-sm:hover { background:var(--gray-50); color:var(--text); }
+.btn-primary { background:var(--blue); border-color:var(--blue); color:var(--white); }
+.btn-primary:hover { background:#1D4ED8; color:var(--white); }
+
+/* Content */
+.content { max-width:var(--content-max); margin:0 auto; padding:56px 48px 120px; width:100%; }
+
+/* Hero */
+.doc-hero { margin-bottom:48px; padding-bottom:40px; border-bottom:1px solid var(--border); }
+.doc-part-label { display:inline-flex; align-items:center; gap:6px; background:var(--amber-light); color:var(--amber); border-radius:20px; padding:4px 14px; font-size:11.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.doc-title { font-family:var(--font-serif); font-size:44px; font-weight:300; line-height:1.15; color:var(--navy); margin-bottom:16px; letter-spacing:-.02em; }
+.doc-title em { font-style:italic; color:var(--amber); }
+.doc-lead { font-size:17px; line-height:1.7; color:var(--text-muted); max-width:660px; margin-bottom:28px; font-weight:300; }
+.doc-meta { display:flex; align-items:center; gap:20px; font-size:12.5px; color:var(--text-muted); }
+
+/* TOC */
+.toc-card { background:var(--gray-50); border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:56px; }
+.toc-title { font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.toc-list a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-size:14px; padding:4px 0; transition:color .12s; }
+.toc-list a:hover { color:var(--amber); }
+.toc-num { font-family:var(--font-mono); font-size:11px; color:var(--text-muted); width:28px; flex-shrink:0; }
+
+/* Sections */
+.ref-section { margin-bottom:80px; }
+.ref-anchor { display:block; height:80px; margin-top:-80px; }
+.ref-header { margin-bottom:32px; }
+.ref-eyebrow { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
+.ref-title { font-family:var(--font-serif); font-size:30px; font-weight:300; color:var(--navy); line-height:1.25; letter-spacing:-.02em; }
+.ref-title em { font-style:italic; }
+.ref-lead { font-size:15px; color:var(--text-muted); line-height:1.7; max-width:680px; margin-top:10px; }
+
+p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:16px; }
+.subsection-title { font-size:16px; font-weight:600; color:var(--navy-mid); margin:28px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--amber-light); }
+
+/* Plan comparison big table */
+.plan-compare { width:100%; border-collapse:collapse; font-size:13.5px; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:24px 0; }
+.plan-compare thead tr { background:var(--navy); }
+.plan-compare thead th { color:rgba(255,255,255,.75); font-weight:500; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; padding:13px 16px; text-align:center; white-space:nowrap; }
+.plan-compare thead th:first-child { text-align:left; width:40%; }
+.plan-compare thead th.col-starter { color:#93C5FD; }
+.plan-compare thead th.col-pro { color:#6EE7B7; }
+.plan-compare thead th.col-business { color:#C4B5FD; }
+.plan-compare tbody tr { border-bottom:1px solid var(--border); transition:background .1s; }
+.plan-compare tbody tr:last-child { border-bottom:none; }
+.plan-compare tbody tr:hover { background:var(--gray-50); }
+.plan-compare tbody td { padding:10px 16px; vertical-align:middle; text-align:center; }
+.plan-compare tbody td:first-child { text-align:left; color:var(--text); }
+.plan-compare .group-row td { background:var(--gray-50); font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:7px 16px; }
+.check-yes  { color:#059669; font-size:16px; font-weight:700; }
+.check-no   { color:var(--gray-400); font-size:16px; }
+.check-val  { font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:var(--navy); }
+.check-val.starter { color:#185FA5; }
+.check-val.pro     { color:#0F6E56; }
+.check-val.business{ color:var(--purple); }
+
+/* Feature flag list */
+.flag-table { width:100%; border-collapse:collapse; font-size:13.5px; border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:20px 0; }
+.flag-table thead tr { background:var(--gray-50); }
+.flag-table thead th { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); padding:10px 16px; text-align:left; border-bottom:1px solid var(--border); }
+.flag-table tbody tr { border-bottom:1px solid var(--border); }
+.flag-table tbody tr:last-child { border-bottom:none; }
+.flag-table tbody tr:hover { background:var(--gray-50); }
+.flag-table td { padding:10px 16px; vertical-align:middle; color:var(--text); font-size:13.5px; }
+.flag-key { font-family:var(--font-mono); font-size:12px; background:var(--gray-100); padding:2px 7px; border-radius:4px; color:var(--navy-mid); }
+.plan-pill { display:inline-flex; align-items:center; padding:2px 10px; border-radius:12px; font-size:11px; font-weight:700; white-space:nowrap; }
+.pill-pro      { background:#E1F5EE; color:#0F6E56; }
+.pill-business { background:var(--purple-light); color:var(--purple); }
+.pill-all      { background:var(--gray-100); color:var(--gray-600); }
+
+/* Export reference */
+.export-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.export-card { border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+.export-card-header { padding:12px 16px; display:flex; align-items:center; gap:10px; }
+.export-card-header.csv     { background:var(--teal-pale); border-bottom:1px solid var(--teal-light); }
+.export-card-header.xlsx    { background:var(--green-pale); border-bottom:1px solid var(--green-light); }
+.export-card-header.pdf     { background:var(--coral-light); border-bottom:1px solid #FCA5A5; }
+.export-card-header.pl      { background:var(--purple-pale); border-bottom:1px solid #DDD6FE; }
+.export-card-icon { font-size:20px; }
+.export-card-title { font-size:13.5px; font-weight:600; color:var(--navy); }
+.export-card-body { padding:14px 16px; }
+.export-card-desc { font-size:13px; color:var(--text-muted); line-height:1.55; margin-bottom:8px; }
+.export-card-fields { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.export-card-fields li { font-size:12.5px; color:var(--text); display:flex; align-items:center; gap:7px; }
+.export-card-fields li::before { content:'·'; color:var(--gray-400); }
+.export-card-tag { display:inline-block; font-size:10px; font-weight:700; padding:1px 7px; border-radius:10px; margin-top:4px; }
+.tag-pro  { background:var(--green-light); color:var(--green); }
+.tag-biz  { background:var(--purple-light); color:var(--purple); }
+.tag-all  { background:var(--gray-100); color:var(--gray-600); }
+
+/* Upgrade path diagram */
+.upgrade-path { display:flex; align-items:stretch; gap:0; margin:28px 0; border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.upgrade-tier { flex:1; display:flex; flex-direction:column; border-right:1px solid var(--border); }
+.upgrade-tier:last-child { border-right:none; }
+.upgrade-tier-header { padding:14px 16px 10px; }
+.upgrade-tier-header.trial   { background:#F1EFE8; }
+.upgrade-tier-header.starter { background:var(--blue-pale); }
+.upgrade-tier-header.pro     { background:var(--teal-pale); }
+.upgrade-tier-header.business{ background:var(--purple-pale); }
+.upgrade-tier-name { font-size:13px; font-weight:700; }
+.upgrade-tier-header.trial   .upgrade-tier-name { color:#5F5E5A; }
+.upgrade-tier-header.starter .upgrade-tier-name { color:#185FA5; }
+.upgrade-tier-header.pro     .upgrade-tier-name { color:#0F6E56; }
+.upgrade-tier-header.business .upgrade-tier-name { color:var(--purple); }
+.upgrade-tier-price { font-family:var(--font-mono); font-size:11.5px; color:var(--text-muted); margin-top:2px; }
+.upgrade-tier-body { padding:12px 16px; flex:1; background:var(--white); }
+.upgrade-new-feature { display:flex; align-items:flex-start; gap:7px; font-size:12px; color:var(--text); margin-bottom:6px; line-height:1.4; }
+.upgrade-new-feature::before { content:'+'; font-weight:700; flex-shrink:0; font-size:11px; margin-top:1px; }
+.upgrade-tier-header.trial   .upgrade-tier-name + .upgrade-tier-price { margin-top:4px; }
+.upgrade-tier.starter .upgrade-new-feature::before { color:#185FA5; }
+.upgrade-tier.pro .upgrade-new-feature::before { color:#0F6E56; }
+.upgrade-tier.business .upgrade-new-feature::before { color:var(--purple); }
+.upgrade-tier.trial .upgrade-new-feature { color:var(--text-muted); }
+.upgrade-tier.trial .upgrade-new-feature::before { color:var(--gray-400); }
+
+/* Billing section */
+.billing-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.billing-card { border:1px solid var(--border); border-radius:10px; padding:18px; }
+.billing-card-title { font-size:13.5px; font-weight:600; color:var(--navy); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.billing-card-icon { font-size:18px; }
+.billing-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.billing-list li { font-size:13px; color:var(--text-muted); display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.billing-list li::before { content:'→'; color:var(--gray-400); flex-shrink:0; font-size:12px; margin-top:1px; }
+
+/* Callouts */
+.callout { display:flex; gap:14px; border-radius:10px; padding:16px 20px; margin:20px 0; border:1px solid transparent; }
+.callout-info    { background:var(--blue-pale); border-color:var(--blue-light); }
+.callout-teal    { background:var(--teal-pale); border-color:var(--teal-light); }
+.callout-warning { background:var(--amber-pale); border-color:var(--amber-light); }
+.callout-success { background:var(--green-pale); border-color:var(--green-light); }
+.callout-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+.callout-body { font-size:14px; line-height:1.65; color:var(--text); }
+.callout-body strong { font-weight:600; display:block; margin-bottom:3px; }
+
+/* Closing cards */
+.closing-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:28px 0; }
+.closing-card { border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+.closing-card-icon { font-size:28px; margin-bottom:10px; }
+.closing-card-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:6px; }
+.closing-card-desc { font-size:12.5px; color:var(--text-muted); line-height:1.5; }
+
+/* Section divider */
+.section-divider { border:none; border-top:1px solid var(--border); margin:64px 0; }
+
+/* Fade */
+.fade-in { opacity:0; transform:translateY(14px); transition:opacity .45s ease, transform .45s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* Footer */
+.doc-footer { border-top:1px solid var(--border); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:12.5px; }
+.footer-nav { display:flex; gap:24px; }
+.footer-nav a { color:var(--text-muted); text-decoration:none; transition:color .12s; }
+.footer-nav a:hover { color:var(--blue); }
+
+code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--gray-100); padding:1px 6px; border-radius:4px; color:var(--navy-mid); }
+
+@media (max-width:900px) {
+  :root { --sidebar-w:0px; }
+  .sidebar { display:none; }
+  .content { padding:32px 24px 80px; }
+  .topbar { padding:12px 24px; }
+  .export-grid, .billing-grid, .closing-grid { grid-template-columns:1fr; }
+  .upgrade-path { flex-direction:column; }
+  .upgrade-tier { border-right:none; border-bottom:1px solid var(--border); }
+  .upgrade-tier:last-child { border-bottom:none; }
+  .doc-title { font-size:30px; }
+}
+</style>
+</head>
+<body>
+
+<div class="reading-progress"><div class="reading-progress-bar" id="progress"></div></div>
+
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <a class="brand-logo" href="#">
+      <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"/></svg></div>
+      <span class="brand-name">MakerStock</span>
+    </a>
+    <div class="brand-tagline">Documentation</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-label">Documentation complète</div>
+      <a class="nav-link" href="makerstock_doc_vue_ensemble.html"><div class="nav-dot"></div>Partie 1 — Vue d'ensemble</a>
+      <a class="nav-link" href="makerstock_doc_quickstart.html"><div class="nav-dot"></div>Partie 2 — Quick Start</a>
+      <a class="nav-link" href="makerstock_doc_partie3.html"><div class="nav-dot"></div>Partie 3 — Desktop & Mobile</a>
+      <a class="nav-link" href="makerstock_doc_partie4.html"><div class="nav-dot"></div>Partie 4 — Points critiques</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 5 — Référence</div>
+      <a class="nav-link active" href="#intro"><div class="nav-dot"></div>Introduction</a>
+      <a class="nav-link" href="#p51"><div class="nav-dot"></div>5.1 Plans & feature flags</a>
+      <a class="nav-link" href="#p52"><div class="nav-dot"></div>5.2 Exports & comptabilité</a>
+      <a class="nav-link" href="#p53"><div class="nav-dot"></div>5.3 Gestion de l'abonnement</a>
+      <a class="nav-link" href="#p54"><div class="nav-dot"></div>5.4 Choisir le bon plan</a>
+      <a class="nav-link" href="#p55"><div class="nav-dot"></div>5.5 Fin de documentation</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — Avril 2025</div></div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="makerstock_doc_vue_ensemble.html">Documentation</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="makerstock_doc_partie4.html">Points critiques</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Référence & Administration</span>
+    </div>
+    <div class="topbar-actions">
+      <a href="makerstock_doc_partie4.html" class="btn-sm">← Partie 4</a>
+      <a href="#" class="btn-sm btn-primary">Démarrer l'essai →</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- Hero -->
+    <div class="doc-hero fade-in" id="intro">
+      <div class="doc-part-label">📋 Partie 5</div>
+      <h1 class="doc-title">Référence & <em>administration</em></h1>
+      <p class="doc-lead">La section de référence pour les admins et intégrateurs : détail exhaustif des feature flags par plan, guide des exports, gestion de l'abonnement BigCommerce, et aide au choix du bon plan selon votre situation.</p>
+      <div class="doc-meta">
+        <div>⏱ Lecture ~8 min</div>
+        <div>·</div>
+        <div>Pour admins & intégrateurs</div>
+        <div>·</div>
+        <div>Dernière partie de la documentation</div>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc-card fade-in">
+      <div class="toc-title">Sommaire</div>
+      <ul class="toc-list">
+        <li><a href="#p51"><span class="toc-num">5.1</span> Plans & feature flags — référence complète</a></li>
+        <li><a href="#p52"><span class="toc-num">5.2</span> Exports & comptabilité — contenu et format</a></li>
+        <li><a href="#p53"><span class="toc-num">5.3</span> Gestion de l'abonnement BigCommerce</a></li>
+        <li><a href="#p54"><span class="toc-num">5.4</span> Quel plan pour quelle situation ?</a></li>
+        <li><a href="#p55"><span class="toc-num">5.5</span> Fin de documentation & ressources</a></li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         5.1 — Plans & feature flags
+    ═══════════════════════════════════════ -->
+    <section class="ref-section fade-in">
+      <a class="ref-anchor" id="p51"></a>
+      <div class="ref-header">
+        <div class="ref-eyebrow">Référence 5.1</div>
+        <h2 class="ref-title">Plans & feature flags — <em>référence complète</em></h2>
+        <p class="ref-lead">Chaque fonctionnalité de MakerStock est associée à un plan minimum. Ce tableau est la source de vérité pour savoir exactement ce qui est débloqué selon le plan souscrit.</p>
+      </div>
+
+      <div class="subsection-title">Comparaison détaillée par plan</div>
+
+      <table class="plan-compare">
+        <thead>
+          <tr>
+            <th>Fonctionnalité</th>
+            <th>Trial</th>
+            <th class="col-starter">Starter</th>
+            <th class="col-pro">Pro</th>
+            <th class="col-business">Business</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="5">Limites & utilisateurs</td></tr>
+          <tr><td>Produits dans le catalogue</td><td><span class="check-val">25</span></td><td><span class="check-val starter">75</span></td><td><span class="check-val pro">300</span></td><td><span class="check-val business">2 000</span></td></tr>
+          <tr><td>Utilisateurs inclus</td><td><span class="check-val">1</span></td><td><span class="check-val starter">1</span></td><td><span class="check-val pro">3</span></td><td><span class="check-val business">10</span></td></tr>
+          <tr><td>Entrepôts</td><td><span class="check-val">1</span></td><td><span class="check-val starter">1</span></td><td><span class="check-val pro">1</span></td><td><span class="check-val business">Illimités</span></td></tr>
+          <tr><td>App mobile</td><td><span class="check-val">1 appareil</span></td><td><span class="check-val starter">1 appareil</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Durée de la période d'essai</td><td><span class="check-val">14 jours</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td></tr>
+
+          <tr class="group-row"><td colspan="5">Stock & matières premières</td></tr>
+          <tr><td>Catalogue matières premières</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Seuils d'alerte de stock</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Entrées, ajustements, historique</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Traçabilité lots & DLC</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Allergènes + fiche INCI</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Transferts inter-entrepôts</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+          <tr><td>Export mouvements CSV</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Import données CSV / Excel</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Recettes & production</td></tr>
+          <tr><td>Recettes illimitées (BOM)</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>COGS matières premières</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>COGS complet (MO + charges variables)</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Prix de vente recommandé</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Runs de production (planifier & lancer)</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Export CSV traçabilité run</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Planning de production (calendrier)</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Approvisionnements fournisseurs</td></tr>
+          <tr><td>Gestion des fournisseurs</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Bons de commande fournisseurs</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Réception mobile avec lots & DLC</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Ventes & B2B</td></tr>
+          <tr><td>Sync catalogue BigCommerce</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Déduction automatique FIFO à la vente</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Stock produits finis</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Commandes B2B & revendeurs</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+          <tr><td>Multi-devises</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Pilotage & rapports</td></tr>
+          <tr><td>Alertes (toutes, rafraîchissement 30s)</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Rapport consommation matières</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Export comptable XLSX</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Rapport P&L par produit</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Intégration & organisation</td></tr>
+          <tr><td>Multi-utilisateurs (admin + opérateurs)</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Ateliers & lieux de production</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>API publique (Zapier / Make)</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+          <tr><td>Interface multilingue (FR / EN / ES)</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Mode sombre</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+          <tr><td>Support prioritaire</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+        </tbody>
+      </table>
+
+      <div class="subsection-title">Feature flags — clés techniques</div>
+      <p class="doc-p">Dans le code de l'application, chaque feature verrouillée est identifiée par une clé interne. Si vous intégrez MakerStock via l'API ou construisez des automatisations, ces clés sont utilisées dans les réponses d'abonnement.</p>
+
+      <table class="flag-table">
+        <thead>
+          <tr><th>Clé feature</th><th>Fonctionnalité</th><th>Plan minimum</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code class="flag-key">multi-users</code></td><td>Gestion multi-utilisateurs</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">cogs-complet</code></td><td>COGS complet (MO + charges)</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">prix-recommande</code></td><td>Prix de vente recommandé</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">commandes-fournisseurs</code></td><td>Approvisionnements fournisseurs</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">tracabilite-lots</code></td><td>Traçabilité lots & DLC</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">export-comptable</code></td><td>Export comptable XLSX</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">allergenes-inci</code></td><td>Allergènes + fiche INCI</td><td><span class="plan-pill pill-pro">Pro</span></td></tr>
+          <tr><td><code class="flag-key">planning-production</code></td><td>Planning de production (calendrier)</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">rapport-pl</code></td><td>Rapport P&L par produit</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">multi-entrepots</code></td><td>Multi-entrepôts & transferts</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">api-publique</code></td><td>API publique (Zapier / Make)</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">multi-devises</code></td><td>Multi-devises</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">support-prioritaire</code></td><td>Support prioritaire</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+          <tr><td><code class="flag-key">vente</code></td><td>Commandes B2B & revendeurs</td><td><span class="plan-pill pill-business">Business</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Comportement dans l'interface</strong>
+          Quand un utilisateur tente d'accéder à une feature non débloquée, MakerStock affiche une bannière de verrouillage avec le plan requis et un lien direct vers la page de mise à niveau BigCommerce. La page de contenu n'est pas chargée — seule la bannière est visible.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════════════
+         5.2 — Exports & comptabilité
+    ═══════════════════════════════════════ -->
+    <section class="ref-section fade-in">
+      <a class="ref-anchor" id="p52"></a>
+      <div class="ref-header">
+        <div class="ref-eyebrow">Référence 5.2</div>
+        <h2 class="ref-title">Exports & comptabilité — <em>contenu et format</em></h2>
+        <p class="ref-lead">MakerStock propose plusieurs types d'exports selon le plan. Voici le contenu précis de chacun et les prérequis pour les générer.</p>
+      </div>
+
+      <div class="export-grid">
+        <div class="export-card">
+          <div class="export-card-header csv">
+            <div class="export-card-icon">📄</div>
+            <div class="export-card-title">CSV — Mouvements de stock</div>
+          </div>
+          <div class="export-card-body">
+            <div class="export-card-desc">Historique complet des entrées et sorties d'une matière première sur une période choisie.</div>
+            <ul class="export-card-fields">
+              <li>Date & heure du mouvement</li>
+              <li>Type (entrée achat, sortie production, ajustement, perte)</li>
+              <li>Quantité & unité</li>
+              <li>Stock restant après mouvement</li>
+              <li>Coût unitaire au moment du mouvement</li>
+              <li>Numéro de lot & DLC si applicable</li>
+              <li>Entrepôt source / destination</li>
+            </ul>
+            <span class="export-card-tag tag-all">Tous plans</span>
+          </div>
+        </div>
+
+        <div class="export-card">
+          <div class="export-card-header csv">
+            <div class="export-card-icon">📋</div>
+            <div class="export-card-title">CSV — Traçabilité run</div>
+          </div>
+          <div class="export-card-body">
+            <div class="export-card-desc">Détail complet des lots consommés pour un run de production spécifique. Accessible depuis le détail du run (statut Terminé uniquement).</div>
+            <ul class="export-card-fields">
+              <li>Matière première & unité</li>
+              <li>Numéro de lot fournisseur</li>
+              <li>Quantité consommée</li>
+              <li>DLC du lot</li>
+              <li>Fournisseur d'origine</li>
+              <li>Coût unitaire & coût total ligne</li>
+              <li>Entrepôt source</li>
+            </ul>
+            <span class="export-card-tag tag-all">Tous plans</span>
+          </div>
+        </div>
+
+        <div class="export-card">
+          <div class="export-card-header xlsx">
+            <div class="export-card-icon">📊</div>
+            <div class="export-card-title">XLSX — Export comptable</div>
+          </div>
+          <div class="export-card-body">
+            <div class="export-card-desc">Document structuré pour la comptabilité, sur une période personnalisable. Méthode des coûts complets, valorisation FIFO, mention légale incluse.</div>
+            <ul class="export-card-fields">
+              <li>Synthèse : CA, COGS total, marge brute</li>
+              <li>Détail des coûts par produit & par run</li>
+              <li>Valorisation FIFO du stock matières</li>
+              <li>Structure des charges fixes par atelier</li>
+              <li>Récapitulatif des mouvements de stock</li>
+            </ul>
+            <span class="export-card-tag tag-pro">Pro+</span>
+          </div>
+        </div>
+
+        <div class="export-card">
+          <div class="export-card-header pl">
+            <div class="export-card-icon">📈</div>
+            <div class="export-card-title">Rapport P&L par produit</div>
+          </div>
+          <div class="export-card-body">
+            <div class="export-card-desc">Document financier complet, style "document banquier", téléchargeable en PDF. Prérequis : au moins 1 run terminé, taux horaire configuré, charges fixes renseignées.</div>
+            <ul class="export-card-fields">
+              <li>Synthèse exécutive (CA, COGS, marge brute)</li>
+              <li>Détail des coûts par produit</li>
+              <li>Structure des charges fixes atelier</li>
+              <li>Seuil de rentabilité (point mort)</li>
+              <li>Projection CA et marge sur 12 mois</li>
+            </ul>
+            <span class="export-card-tag tag-biz">Business</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-teal">
+        <div class="callout-icon">🧾</div>
+        <div class="callout-body">
+          <strong>Conformité comptable de l'export XLSX</strong>
+          L'export comptable MakerStock applique la méthode des coûts complets avec valorisation FIFO, conformément aux pratiques comptables standard. Chaque ligne de mouvement est horodatée et tracée. Le document peut être transmis directement à un comptable ou importé dans un logiciel de comptabilité.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════════════
+         5.3 — Gestion abonnement
+    ═══════════════════════════════════════ -->
+    <section class="ref-section fade-in">
+      <a class="ref-anchor" id="p53"></a>
+      <div class="ref-header">
+        <div class="ref-eyebrow">Référence 5.3</div>
+        <h2 class="ref-title">Gestion de l'<em>abonnement BigCommerce</em></h2>
+        <p class="ref-lead">MakerStock est facturé directement via l'App Store BigCommerce. La gestion de l'abonnement se fait entièrement depuis l'interface BigCommerce — pas depuis MakerStock lui-même.</p>
+      </div>
+
+      <div class="billing-grid">
+        <div class="billing-card">
+          <div class="billing-card-title"><div class="billing-card-icon">🚀</div>Démarrer l'essai</div>
+          <ul class="billing-list">
+            <li>14 jours d'accès complet aux fonctionnalités Starter</li>
+            <li>Aucune carte bancaire requise au démarrage</li>
+            <li>Choix du plan définitif à la fin de la période d'essai</li>
+            <li>L'essai expire automatiquement sans débit si aucun plan n'est choisi</li>
+          </ul>
+        </div>
+        <div class="billing-card">
+          <div class="billing-card-title"><div class="billing-card-icon">💳</div>Facturation</div>
+          <ul class="billing-list">
+            <li>Facturation mensuelle ou annuelle (2 mois offerts en annuel)</li>
+            <li>Débit automatique via le mode de paiement enregistré dans BigCommerce</li>
+            <li>Factures accessibles depuis l'admin BC → Apps → MakerStock</li>
+            <li>Prix HT, en supplément de l'abonnement BigCommerce</li>
+          </ul>
+        </div>
+        <div class="billing-card">
+          <div class="billing-card-title"><div class="billing-card-icon">⬆️</div>Mise à niveau</div>
+          <ul class="billing-list">
+            <li>Depuis MakerStock : cliquer sur une feature verrouillée → bannière de mise à niveau</li>
+            <li>Redirection vers la page de checkout BigCommerce</li>
+            <li>Prise d'effet immédiate après confirmation du paiement</li>
+            <li>Au prorata pour le mois en cours</li>
+          </ul>
+        </div>
+        <div class="billing-card">
+          <div class="billing-card-title"><div class="billing-card-icon">↩️</div>Résiliation & rétrogradation</div>
+          <ul class="billing-list">
+            <li>Modification ou résiliation depuis l'admin BigCommerce → Apps → Gérer</li>
+            <li>Sans engagement — résiliation possible à tout moment</li>
+            <li>En cas de rétrogradation : données conservées mais accès aux features restreint</li>
+            <li>En cas de dépassement de limite produits : lecture seule jusqu'à régularisation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Dépassement de la limite produits</strong>
+          Si votre catalogue BigCommerce dépasse la limite de produits de votre plan (ex. : 80 produits sur Starter limité à 75), MakerStock passe en mode lecture seule pour les nouveaux produits. Les données existantes sont conservées. Pour retrouver un accès complet, synchronisez après avoir archivé des produits ou passez au plan supérieur.
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════════════
+         5.4 — Quel plan choisir ?
+    ═══════════════════════════════════════ -->
+    <section class="ref-section fade-in">
+      <a class="ref-anchor" id="p54"></a>
+      <div class="ref-header">
+        <div class="ref-eyebrow">Référence 5.4</div>
+        <h2 class="ref-title">Quel plan pour <em>quelle situation ?</em></h2>
+        <p class="ref-lead">Voici un guide concret pour choisir le plan adapté à votre situation actuelle, en vous posant les bonnes questions dans le bon ordre.</p>
+      </div>
+
+      <!-- Upgrade path visual -->
+      <div class="upgrade-path">
+        <div class="upgrade-tier trial">
+          <div class="upgrade-tier-header trial">
+            <div class="upgrade-tier-name">Trial — 14 jours</div>
+            <div class="upgrade-tier-price">Gratuit · Fonctionnalités Starter</div>
+          </div>
+          <div class="upgrade-tier-body">
+            <div class="upgrade-new-feature">Pour démarrer sans engagement</div>
+            <div class="upgrade-new-feature">Accès complet aux features Starter</div>
+            <div class="upgrade-new-feature">Aucune carte requise</div>
+            <div class="upgrade-new-feature">Données conservées au passage au plan payant</div>
+          </div>
+        </div>
+        <div class="upgrade-tier starter">
+          <div class="upgrade-tier-header starter">
+            <div class="upgrade-tier-name">Starter</div>
+            <div class="upgrade-tier-price">29 € / mois · 75 produits · 1 utilisateur</div>
+          </div>
+          <div class="upgrade-tier-body">
+            <div class="upgrade-new-feature">Catalogue matières + recettes illimitées</div>
+            <div class="upgrade-new-feature">Runs de production + alertes</div>
+            <div class="upgrade-new-feature">Sync BigCommerce + FIFO auto</div>
+            <div class="upgrade-new-feature">COGS matières premières</div>
+            <div class="upgrade-new-feature">App mobile (1 appareil)</div>
+            <div class="upgrade-new-feature">Export mouvements CSV</div>
+          </div>
+        </div>
+        <div class="upgrade-tier pro">
+          <div class="upgrade-tier-header pro">
+            <div class="upgrade-tier-name">Pro</div>
+            <div class="upgrade-tier-price">59 € / mois · 300 produits · 3 utilisateurs</div>
+          </div>
+          <div class="upgrade-tier-body">
+            <div class="upgrade-new-feature">Tout Starter +</div>
+            <div class="upgrade-new-feature">Approvisionnements fournisseurs</div>
+            <div class="upgrade-new-feature">Traçabilité lots & DLC</div>
+            <div class="upgrade-new-feature">COGS complet (MO + charges)</div>
+            <div class="upgrade-new-feature">Prix de vente recommandé</div>
+            <div class="upgrade-new-feature">Export comptable XLSX</div>
+            <div class="upgrade-new-feature">Allergènes + fiche INCI</div>
+            <div class="upgrade-new-feature">App mobile illimitée</div>
+          </div>
+        </div>
+        <div class="upgrade-tier business">
+          <div class="upgrade-tier-header business">
+            <div class="upgrade-tier-name">Business</div>
+            <div class="upgrade-tier-price">99 € / mois · 2 000 produits · 10 utilisateurs</div>
+          </div>
+          <div class="upgrade-tier-body">
+            <div class="upgrade-new-feature">Tout Pro +</div>
+            <div class="upgrade-new-feature">Commandes B2B & revendeurs</div>
+            <div class="upgrade-new-feature">Multi-entrepôts & transferts</div>
+            <div class="upgrade-new-feature">Planning de production</div>
+            <div class="upgrade-new-feature">Rapport P&L par produit</div>
+            <div class="upgrade-new-feature">API publique (Zapier / Make)</div>
+            <div class="upgrade-new-feature">Multi-devises</div>
+            <div class="upgrade-new-feature">Support prioritaire</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-title">Questions pour guider votre choix</div>
+
+      <div style="display:flex; flex-direction:column; gap:14px; margin:16px 0 28px;">
+        <div style="background:var(--blue-pale); border:1px solid var(--blue-light); border-radius:10px; padding:16px 20px;">
+          <div style="font-size:13px; font-weight:700; color:var(--blue); margin-bottom:6px;">→ Vous débutez, vous travaillez seul, vous avez moins de 75 produits ?</div>
+          <div style="font-size:13.5px; color:var(--text);">Commencez par le <strong>Starter</strong>. Il couvre le cœur du système : stock, recettes, runs, alertes et sync BigCommerce. Vous pouvez passer au Pro à tout moment sans perdre vos données.</div>
+        </div>
+        <div style="background:var(--teal-pale); border:1px solid var(--teal-light); border-radius:10px; padding:16px 20px;">
+          <div style="font-size:13px; font-weight:700; color:var(--teal); margin-bottom:6px;">→ Vous avez des fournisseurs à gérer, des lots à tracer, ou plusieurs opérateurs en atelier ?</div>
+          <div style="font-size:13.5px; color:var(--text);">Choisissez le <strong>Pro</strong>. La traçabilité lots & DLC, les bons de commande fournisseurs et le COGS complet sont les raisons principales de passer au Pro. L'app mobile illimitée pour vos opérateurs est un bonus immédiat.</div>
+        </div>
+        <div style="background:var(--purple-pale); border:1px solid #DDD6FE; border-radius:10px; padding:16px 20px;">
+          <div style="font-size:13px; font-weight:700; color:var(--purple); margin-bottom:6px;">→ Vous vendez en B2B, avez plusieurs entrepôts, ou avez besoin d'un rapport financier pour votre banque ?</div>
+          <div style="font-size:13.5px; color:var(--text);">Le <strong>Business</strong> est fait pour vous. Les commandes revendeurs, le multi-entrepôts, le rapport P&L et l'API publique pour connecter MakerStock à vos autres outils (Zapier, Make, etc.) sont exclusifs à ce plan.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ═══════════════════════════════════════
+         5.5 — Clôture
+    ═══════════════════════════════════════ -->
+    <section class="ref-section fade-in">
+      <a class="ref-anchor" id="p55"></a>
+      <div class="ref-header">
+        <div class="ref-eyebrow">Fin de documentation</div>
+        <h2 class="ref-title">Documentation <em>complète</em></h2>
+        <p class="ref-lead">Vous avez parcouru l'intégralité de la documentation MakerStock. Voici un récapitulatif de ce qui a été couvert et des ressources disponibles.</p>
+      </div>
+
+      <div class="closing-grid">
+        <div class="closing-card">
+          <div class="closing-card-icon">📘</div>
+          <div class="closing-card-title">Partie 1 — Vue d'ensemble</div>
+          <div class="closing-card-desc">Positionnement, cas d'usage, philosophie desktop/mobile, liste des fonctionnalités, plans & tarifs.</div>
+        </div>
+        <div class="closing-card">
+          <div class="closing-card-icon">🚀</div>
+          <div class="closing-card-title">Partie 2 — Quick Start</div>
+          <div class="closing-card-desc">Installation, premier atelier, import des données, première recette, premier run, invitation de l'équipe.</div>
+        </div>
+        <div class="closing-card">
+          <div class="closing-card-icon">🖥️📱</div>
+          <div class="closing-card-title">Partie 3 — Desktop & Mobile</div>
+          <div class="closing-card-desc">5 scénarios du quotidien illustrant la répartition naturelle des tâches entre admin et opérateurs.</div>
+        </div>
+        <div class="closing-card">
+          <div class="closing-card-icon">⚙️</div>
+          <div class="closing-card-title">Partie 4 — Points critiques</div>
+          <div class="closing-card-desc">Fonctionnement interne du cycle de production, FIFO, approvisionnements, alertes, COGS et sync BC.</div>
+        </div>
+        <div class="closing-card">
+          <div class="closing-card-icon">📋</div>
+          <div class="closing-card-title">Partie 5 — Référence</div>
+          <div class="closing-card-desc">Feature flags, exports comptables, gestion de l'abonnement et guide de choix du plan.</div>
+        </div>
+        <div class="closing-card" style="background:var(--navy); border-color:var(--navy);">
+          <div class="closing-card-icon">💬</div>
+          <div class="closing-card-title" style="color:white;">Besoin d'aide ?</div>
+          <div class="closing-card-desc" style="color:rgba(255,255,255,.6);">Support depuis votre admin BigCommerce → Apps → MakerStock → Support. Prioritaire pour le plan Business.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-success" style="margin-top:32px">
+        <div class="callout-icon">✅</div>
+        <div class="callout-body">
+          <strong>Prêt à produire</strong>
+          MakerStock est conçu pour s'effacer derrière votre production — pas pour l'encombrer. Si quelque chose n'est pas clair dans cette documentation, votre feedback est bienvenu via le support BigCommerce.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="doc-footer">
+    <div>MakerStock Documentation · v1.0 · Avril 2025 · Documentation complète ✓</div>
+    <nav class="footer-nav">
+      <a href="makerstock_doc_partie4.html">← Partie 4 : Points critiques</a>
+      <a href="makerstock_doc_vue_ensemble.html">↑ Retour au début</a>
+    </nav>
+  </footer>
+</main>
+
+<script>
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.body.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+});
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.04) + 's';
+  observer.observe(el);
+});
+const sections = ['p51','p52','p53','p54','p55'];
+const links = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    if (!current && l.getAttribute('href') === '#intro') l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
