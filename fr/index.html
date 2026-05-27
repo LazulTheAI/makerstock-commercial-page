@@ -884,7 +884,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- PRICING --><!-- PRICING -->
 <section class="pricing-section" id="pricing">
   <div class="inner">
     <div class="pricing-header reveal">
@@ -896,19 +896,25 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       </div>
     </div>
     <div class="pricing-cards">
+
       <div class="pcard card reveal">
         <div class="pname">Starter</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/mois</span></div><div class="pannual" id="pa-s">ou 25 €/mois en annuel</div></div>
-        <div class="pdesc">Pour démarrer et gérer votre production en solo.</div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/mois</span></div>
+          <div class="pannual" id="pa-s">ou 24 €/mois en annuel</div>
+        </div>
+        <div class="pdesc">Pour démarrer et gérer sa production en solo.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Jusqu'à 75 produits</li>
-          <li class="pf"><span class="c">✓</span>Stock + recettes illimitées</li>
-          <li class="pf"><span class="c">✓</span>Sync BigCommerce + FIFO auto</li>
+          <li class="pf"><span class="c">✓</span>20 recettes actives</li>
+          <li class="pf"><span class="c">✓</span>1 utilisateur · 2 entrepôts</li>
+          <li class="pf"><span class="c">✓</span>Tous vos produits BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>Stock matières + alertes</li>
+          <li class="pf"><span class="c">✓</span>Runs de production + FIFO auto</li>
+          <li class="pf"><span class="c">✓</span>Traçabilité lots & DLC</li>
           <li class="pf"><span class="c">✓</span>COGS matières premières</li>
-          <li class="pf"><span class="c">✓</span>Alertes de stock</li>
-          <li class="pf"><span class="c">✓</span>App mobile (1 appareil)</li>
-          <li class="pf off"><span class="x">—</span>Traçabilité lots & DLC</li>
+          <li class="pf off"><span class="x">—</span>App mobile</li>
+          <li class="pf off"><span class="x">—</span>Commandes fournisseurs</li>
           <li class="pf off"><span class="x">—</span>Multi-utilisateurs</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Commencer l'essai</a></div>
@@ -917,38 +923,50 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       <div class="pcard card pop reveal" style="transition-delay:.1s">
         <div class="pop-badge">Le plus populaire</div>
         <div class="pname">Pro</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/mois</span></div><div class="pannual" id="pa-p">ou 49 €/mois en annuel</div></div>
-        <div class="pdesc">Pour les ateliers avec fournisseurs, lots et opérateurs.</div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/mois</span></div>
+          <div class="pannual" id="pa-p">ou 49 €/mois en annuel</div>
+        </div>
+        <div class="pdesc">Pour les ateliers avec fournisseurs et opérateurs terrain.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Jusqu'à 300 produits · 3 utilisateurs</li>
-          <li class="pf"><span class="c">✓</span>Traçabilité lots & DLC</li>
-          <li class="pf"><span class="c">✓</span>Approvisionnements fournisseurs</li>
+          <li class="pf"><span class="c">✓</span>75 recettes actives</li>
+          <li class="pf"><span class="c">✓</span>3 utilisateurs · entrepôts illimités</li>
+          <li class="pf"><span class="c">✓</span>Tous vos produits BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>App mobile incluse</li>
+          <li class="pf"><span class="c">✓</span>Commandes fournisseurs</li>
           <li class="pf"><span class="c">✓</span>COGS complet (MO + charges)</li>
           <li class="pf"><span class="c">✓</span>Prix de vente recommandé</li>
-          <li class="pf"><span class="c">✓</span>Export comptable XLSX</li>
-          <li class="pf"><span class="c">✓</span>Allergènes + fiche INCI</li>
-          <li class="pf"><span class="c">✓</span>App mobile illimitée</li>
+          <li class="pf off"><span class="x">—</span>Allergènes + fiche INCI</li>
+          <li class="pf off"><span class="x">—</span>Export comptable XLSX</li>
+          <li class="pf off"><span class="x">—</span>Rapport P&L · B2B revendeurs</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary" style="width:100%">Commencer l'essai</a></div>
       </div>
 
       <div class="pcard card reveal" style="transition-delay:.2s">
         <div class="pname">Business</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/mois</span></div><div class="pannual" id="pa-b">ou 82 €/mois en annuel</div></div>
-        <div class="pdesc">Pour les ateliers multi-sites avec revendeurs B2B.</div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/mois</span></div>
+          <div class="pannual" id="pa-b">ou 82 €/mois en annuel</div>
+        </div>
+        <div class="pdesc">Pour les ateliers structurés avec reporting et revendeurs B2B.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Jusqu'à 2 000 produits · 10 utilisateurs</li>
-          <li class="pf"><span class="c">✓</span>Multi-entrepôts & transferts</li>
-          <li class="pf"><span class="c">✓</span>Commandes B2B revendeurs</li>
-          <li class="pf"><span class="c">✓</span>Planning de production</li>
+          <li class="pf"><span class="c">✓</span>Recettes actives illimitées</li>
+          <li class="pf"><span class="c">✓</span>10 utilisateurs · entrepôts illimités</li>
+          <li class="pf"><span class="c">✓</span>Tous vos produits BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>App mobile incluse</li>
+          <li class="pf"><span class="c">✓</span>Commandes fournisseurs</li>
+          <li class="pf"><span class="c">✓</span>COGS complet (MO + charges)</li>
+          <li class="pf"><span class="c">✓</span>Allergènes + fiche INCI</li>
+          <li class="pf"><span class="c">✓</span>Export comptable XLSX</li>
           <li class="pf"><span class="c">✓</span>Rapport P&L par produit</li>
-          <li class="pf"><span class="c">✓</span>API publique (Zapier / Make)</li>
-          <li class="pf"><span class="c">✓</span>Support prioritaire</li>
+          <li class="pf"><span class="c">✓</span>Commandes B2B revendeurs</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Commencer l'essai</a></div>
       </div>
+
     </div>
     <p style="text-align:center; margin-top:1.5rem; font-size:.8125rem; color:var(--text-dim)">14 jours gratuits sur tous les plans · Sans engagement · Facturation via BigCommerce App Store</p>
   </div>
