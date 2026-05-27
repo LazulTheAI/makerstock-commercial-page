@@ -888,27 +888,33 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
 <section class="pricing-section" id="pricing">
   <div class="inner">
     <div class="pricing-header reveal">
-      <div class="section-tag">Tarification</div>
+      <div class="section-tag">Precios</div>
       <h2 class="section-title">Simple. Transparente.<br><span class="em">Adaptado a tu tamaño.</span></h2>
       <div class="pricing-toggle">
         <button class="tgl on" onclick="setBilling('monthly',this)">Mensual</button>
-        <button class="tgl" onclick="setBilling('annual',this)">Anual <span class="save-badge">−2 mois</span></button>
+        <button class="tgl" onclick="setBilling('annual',this)">Anual <span class="save-badge">−2 meses</span></button>
       </div>
     </div>
     <div class="pricing-cards">
+
       <div class="pcard card reveal">
         <div class="pname">Starter</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/mois</span></div><div class="pannual" id="pa-s">o 25 €/mes facturado anualmente</div></div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/mes</span></div>
+          <div class="pannual" id="pa-s">o 24 €/mes facturado anualmente</div>
+        </div>
         <div class="pdesc">Para empezar y gestionar tu producción en solitario.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Hasta 75 productos</li>
-          <li class="pf"><span class="c">✓</span>Stock + recetas ilimitadas</li>
-          <li class="pf"><span class="c">✓</span>Sync BigCommerce + FIFO auto</li>
+          <li class="pf"><span class="c">✓</span>20 recetas activas</li>
+          <li class="pf"><span class="c">✓</span>1 usuario · 2 almacenes</li>
+          <li class="pf"><span class="c">✓</span>Todos tus productos BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>Stock de materias primas + alertas</li>
+          <li class="pf"><span class="c">✓</span>Runs de producción + FIFO automático</li>
+          <li class="pf"><span class="c">✓</span>Trazabilidad de lotes y caducidades</li>
           <li class="pf"><span class="c">✓</span>COGS materias primas</li>
-          <li class="pf"><span class="c">✓</span>Alertas de stock</li>
-          <li class="pf"><span class="c">✓</span>App móvil (1 dispositivo)</li>
-          <li class="pf off"><span class="x">—</span>Traçabilité lots & DLC</li>
+          <li class="pf off"><span class="x">—</span>App móvil</li>
+          <li class="pf off"><span class="x">—</span>Pedidos a proveedores</li>
           <li class="pf off"><span class="x">—</span>Multi-usuario</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Empezar prueba gratuita</a></div>
@@ -917,40 +923,52 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       <div class="pcard card pop reveal" style="transition-delay:.1s">
         <div class="pop-badge">El más popular</div>
         <div class="pname">Pro</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/mois</span></div><div class="pannual" id="pa-p">o 49 €/mes facturado anualmente</div></div>
-        <div class="pdesc">Para talleres con proveedores, lotes y operarios.</div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/mes</span></div>
+          <div class="pannual" id="pa-p">o 49 €/mes facturado anualmente</div>
+        </div>
+        <div class="pdesc">Para talleres con proveedores y operarios en planta.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Hasta 300 productos · 3 usuarios</li>
-          <li class="pf"><span class="c">✓</span>Traçabilité lots & DLC</li>
-          <li class="pf"><span class="c">✓</span>Aprovisionamientos fournisseurs</li>
-          <li class="pf"><span class="c">✓</span>COGS completo (MO + gastos)</li>
+          <li class="pf"><span class="c">✓</span>75 recetas activas</li>
+          <li class="pf"><span class="c">✓</span>3 usuarios · almacenes ilimitados</li>
+          <li class="pf"><span class="c">✓</span>Todos tus productos BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>App móvil incluida</li>
+          <li class="pf"><span class="c">✓</span>Pedidos a proveedores</li>
+          <li class="pf"><span class="c">✓</span>COGS completo (MO + cargas)</li>
           <li class="pf"><span class="c">✓</span>Precio de venta recomendado</li>
-          <li class="pf"><span class="c">✓</span>Exportación contable XLSX</li>
-          <li class="pf"><span class="c">✓</span>Alérgenos + ficha INCI</li>
-          <li class="pf"><span class="c">✓</span>App móvil ilimitada</li>
+          <li class="pf off"><span class="x">—</span>Alérgenos + ficha INCI</li>
+          <li class="pf off"><span class="x">—</span>Exportación contable XLSX</li>
+          <li class="pf off"><span class="x">—</span>Informe P&amp;L · Distribuidores B2B</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary" style="width:100%">Empezar prueba gratuita</a></div>
       </div>
 
       <div class="pcard card reveal" style="transition-delay:.2s">
         <div class="pname">Business</div>
-        <div><div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/mois</span></div><div class="pannual" id="pa-b">o 82 €/mes facturado anualmente</div></div>
-        <div class="pdesc">Para talleres multisede con distribuidores B2B.</div>
+        <div>
+          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/mes</span></div>
+          <div class="pannual" id="pa-b">o 82 €/mes facturado anualmente</div>
+        </div>
+        <div class="pdesc">Para talleres estructurados con reporting y distribuidores B2B.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
-          <li class="pf"><span class="c">✓</span>Hasta 2.000 productos · 10 usuarios</li>
-          <li class="pf"><span class="c">✓</span>Multi-entrepôts & transferts</li>
+          <li class="pf"><span class="c">✓</span>Recetas activas ilimitadas</li>
+          <li class="pf"><span class="c">✓</span>10 usuarios · almacenes ilimitados</li>
+          <li class="pf"><span class="c">✓</span>Todos tus productos BigCommerce</li>
+          <li class="pf"><span class="c">✓</span>App móvil incluida</li>
+          <li class="pf"><span class="c">✓</span>Pedidos a proveedores</li>
+          <li class="pf"><span class="c">✓</span>COGS completo (MO + cargas)</li>
+          <li class="pf"><span class="c">✓</span>Alérgenos + ficha INCI</li>
+          <li class="pf"><span class="c">✓</span>Exportación contable XLSX</li>
+          <li class="pf"><span class="c">✓</span>Informe P&amp;L por producto</li>
           <li class="pf"><span class="c">✓</span>Pedidos B2B distribuidores</li>
-          <li class="pf"><span class="c">✓</span>Planificación de producción</li>
-          <li class="pf"><span class="c">✓</span>Rapport P&L par produit</li>
-          <li class="pf"><span class="c">✓</span>API pública (Zapier / Make)</li>
-          <li class="pf"><span class="c">✓</span>Soporte prioritario</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Empezar prueba gratuita</a></div>
       </div>
+
     </div>
-    <p style="text-align:center; margin-top:1.5rem; font-size:.8125rem; color:var(--text-dim)">14 días gratis sur tous les plans · Sans engagement · Facturation via BigCommerce App Store</p>
+    <p style="text-align:center; margin-top:1.5rem; font-size:.8125rem; color:var(--text-dim)">14 días gratis en todos los planes · Sin compromiso · Facturación mediante BigCommerce App Store</p>
   </div>
 </section>
 
@@ -976,8 +994,8 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   </div>
   <div class="footer-links">
     <a href="docs/overview.html">Documentation</a>
-    <a href="#">Privacidad</a>
-    <a href="#">CGU</a>
+    <a href="../fr/legal/privacy.html">Privacidad</a>
+    <a href="../fr/legal/tos.html">Términos</a>
     <a href="#">Support</a>
   </div>
 </footer>
@@ -1074,7 +1092,7 @@ function submitEmail() {
 }
 
 /* Pricing toggle */
-const prices = {monthly:{s:29,p:59,b:99},annual:{s:25,p:49,b:82}};
+const prices = {monthly:{s:29,p:59,b:99},annual:{s:24,p:49,b:82}};
 function setBilling(mode, btn) {
   document.querySelectorAll('.tgl').forEach(t=>t.classList.remove('on'));
   btn.classList.add('on');

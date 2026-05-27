@@ -868,7 +868,7 @@ p.doc-p {
 <!-- ── Sidebar ──────────────────────────────────────────────── -->
 <aside class="sidebar">
 <div class="sidebar-brand">
-<a class="brand-logo" href="#">
+<a class="brand-logo" href="../index.html">
 <div class="brand-icon">
 <svg viewbox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"></path></svg>
 </div>
@@ -923,7 +923,7 @@ p.doc-p {
 </div>
 <div class="topbar-actions">
 <a class="btn-sm" href="quickstart.html">Part 2 →</a>
-<a class="btn-sm btn-primary" href="#">Start free trial →</a>
+<a class="btn-sm btn-primary" href="../index.html#pricing">Start free trial →</a>
 </div>
 </div>
 <!-- Content -->
@@ -974,7 +974,7 @@ p.doc-p {
 <p class="doc-p">La synchronisation avec BigCommerce est bidirectionnelle sur le catalogue produits. Voici les flux clés :</p>
 <ul class="doc-list">
 <li>Le catalogue produits (nom, SKU, prix de vente) est importé depuis BigCommerce et maintenu à jour.</li>
-<li>Chaque produit BigCommerce peut être lié à une recette. Lors d'une vente, MakerStock calcule automatiquement les batches consommés et déduit les matières premières correspondantes (<strong>méthode FIFO</strong>).</li>
+<li>Chaque produit BigCommerce peut être lié à une recette. Lors d'une vente, MakerStock calcule automatiquement les batches consommés et déduit les matières premières correspondantes <span style="white-space:nowrap">(<strong>méthode FIFO</strong>)</span>.</li>
 <li>Le stock interne MakerStock reste distinct du stock BigCommerce, permettant une vision séparée du stock disponible à la vente et du stock physique en atelier.</li>
 </ul>
 </div>
@@ -1142,7 +1142,8 @@ p.doc-p {
 </table>
 </div>
 </section>
-<!-- ── Section 1.4 ─────────────────────────────────────── -->
+
+<!-- ── Section 1.4 ─────────────────────────────────────────── -->
 <section class="doc-section fade-in">
 <a class="section-anchor" id="s14"></a>
 <div class="section-header">
@@ -1154,71 +1155,75 @@ p.doc-p {
 <strong>14-day free trial</strong>
 <span>Full access to Starter features · No credit card required</span>
 </div>
-<div class="trial-badge">Start free trial →</div>
+<a href="../index.html#pricing" class="trial-badge">Start trial →</a>
 </div>
 <div class="plan-grid">
+
 <div class="plan-card">
 <div class="plan-name">Starter</div>
-<div class="plan-price"><sup>€</sup>29<sub>/mois</sub></div>
-<div class="plan-annual">ou 25 €/mois en annuel</div>
-<div class="plan-limit">👤 1 utilisateur · 📦 75 produits</div>
+<div class="plan-price"><sup>€</sup>29<sub>/month</sub></div>
+<div class="plan-annual">or €24/month billed annually</div>
+<div class="plan-limit">👤 1 user · 📦 75 products</div>
 <ul class="plan-features-list">
-<li><span class="fi">✓</span> Stock &amp; recettes (BOM)</li>
-<li><span class="fi">✓</span> Sync BigCommerce + FIFO auto</li>
+<li><span class="fi">✓</span> Stock &amp; recipes (BOM)</li>
+<li><span class="fi">✓</span> BigCommerce sync + auto FIFO</li>
 <li><span class="fi">✓</span> Raw material COGS</li>
-<li><span class="fi">✓</span> Runs de production</li>
-<li><span class="fi">✓</span> Alertes de seuil</li>
-<li><span class="fi">✓</span> App mobile (1 appareil)</li>
-<li><span class="fi">✓</span> CSV movements export</li>
-<li><span class="fx">—</span> Approvisionnements</li>
-<li><span class="fx">—</span> Traçabilité lots</li>
+<li><span class="fi">✓</span> Production runs</li>
+<li><span class="fi">✓</span> Threshold alerts</li>
+<li><span class="fi">✓</span> Mobile app (1 device)</li>
+<li><span class="fi">✓</span> CSV movement export</li>
+<li><span class="fx">—</span> Purchase orders</li>
+<li><span class="fx">—</span> Lot traceability</li>
 <li><span class="fx">—</span> Multi-user</li>
 </ul>
-<a class="plan-cta" href="#">Choose Starter</a>
+<a href="../index.html#pricing" class="plan-cta">Choose Starter</a>
 </div>
+
 <div class="plan-card popular">
 <div class="plan-popular-badge">Most popular</div>
 <div class="plan-name">Pro</div>
-<div class="plan-price"><sup>€</sup>59<sub>/mois</sub></div>
-<div class="plan-annual">ou 49 €/mois en annuel</div>
-<div class="plan-limit">👥 3 utilisateurs · 📦 300 produits</div>
+<div class="plan-price"><sup>€</sup>59<sub>/month</sub></div>
+<div class="plan-annual">or €49/month billed annually</div>
+<div class="plan-limit">👥 3 users · 📦 300 products</div>
 <ul class="plan-features-list">
-<li><span class="fi">✓</span> Tout Starter inclus</li>
-<li><span class="fi">✓</span> Full COGS (labor + overhead)</li>
+<li><span class="fi">✓</span> Everything in Starter</li>
+<li><span class="fi">✓</span> Full COGS (labour + overhead)</li>
 <li><span class="fi">✓</span> Recommended selling price</li>
-<li><span class="fi">✓</span> Supplier procurement</li>
+<li><span class="fi">✓</span> Supplier purchase orders</li>
 <li><span class="fi">✓</span> Lot &amp; expiry traceability</li>
-<li><span class="fi">✓</span> XLSX accounting export</li>
+<li><span class="fi">✓</span> Accounting export XLSX</li>
 <li><span class="fi">✓</span> Allergens + INCI sheet</li>
-<li><span class="fi">✓</span> App mobile illimitée</li>
-<li><span class="fx">—</span> Commandes B2B</li>
+<li><span class="fi">✓</span> Unlimited mobile app</li>
+<li><span class="fx">—</span> B2B orders</li>
 <li><span class="fx">—</span> Multi-warehouse</li>
 </ul>
-<a class="plan-cta" href="#">Choose Pro</a>
+<a href="../index.html#pricing" class="plan-cta">Choose Pro</a>
 </div>
+
 <div class="plan-card">
 <div class="plan-name">Business</div>
-<div class="plan-price"><sup>€</sup>99<sub>/mois</sub></div>
-<div class="plan-annual">ou 82 €/mois en annuel</div>
-<div class="plan-limit">👥 10 utilisateurs · 📦 2 000 produits</div>
+<div class="plan-price"><sup>€</sup>99<sub>/month</sub></div>
+<div class="plan-annual">or €82/month billed annually</div>
+<div class="plan-limit">👥 10 users · 📦 2,000 products</div>
 <ul class="plan-features-list">
-<li><span class="fi">✓</span> Tout Pro inclus</li>
-<li><span class="fi">✓</span> Commandes B2B revendeurs</li>
+<li><span class="fi">✓</span> Everything in Pro</li>
+<li><span class="fi">✓</span> B2B reseller orders</li>
 <li><span class="fi">✓</span> Multi-warehouse</li>
-<li><span class="fi">✓</span> Planning de production</li>
+<li><span class="fi">✓</span> Production planning</li>
 <li><span class="fi">✓</span> P&amp;L report per product</li>
 <li><span class="fi">✓</span> Public API (Zapier / Make)</li>
 <li><span class="fi">✓</span> Multi-currency</li>
 <li><span class="fi">✓</span> Priority support</li>
 </ul>
-<a class="plan-cta" href="#">Choose Business</a>
+<a href="../index.html#pricing" class="plan-cta">Choose Business</a>
 </div>
+
 </div>
 <div class="callout callout-teal">
 <div class="callout-icon">💳</div>
 <div class="callout-body">
-          Prix HT, en complément de votre abonnement BigCommerce. Facturation gérée via l'App Store BigCommerce. Modification ou résiliation possible à tout moment, sans engagement.
-        </div>
+Prices excl. VAT, in addition to your BigCommerce subscription. Billing managed through the BigCommerce App Store. Change or cancel at any time, no commitment.
+</div>
 </div>
 </section>
 </div><!-- /content -->
@@ -1226,7 +1231,7 @@ p.doc-p {
 <footer class="doc-footer">
 <div>MakerStock Documentation · v1.0 · April 2025</div>
 <nav class="footer-nav">
-<a href="#">Part 2: Quick Start →</a>
+<a href="quickstart.html">Part 2: Quick Start →</a>
 </nav>
 </footer>
 </main>

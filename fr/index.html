@@ -994,8 +994,8 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   </div>
   <div class="footer-links">
     <a href="docs/vue-ensemble.html">Documentation</a>
-    <a href="#">Confidentialité</a>
-    <a href="#">CGU</a>
+    <a href="legal/privacy.html">Confidentialité</a>
+    <a href="legal/tos.html">CGU</a>
     <a href="#">Support</a>
   </div>
 </footer>
@@ -1092,7 +1092,7 @@ function submitEmail() {
 }
 
 /* Pricing toggle */
-const prices = {monthly:{s:29,p:59,b:99},annual:{s:25,p:49,b:82}};
+const prices = {monthly:{s:29,p:59,b:99},annual:{s:24,p:49,b:82}};
 function setBilling(mode, btn) {
   document.querySelectorAll('.tgl').forEach(t=>t.classList.remove('on'));
   btn.classList.add('on');
