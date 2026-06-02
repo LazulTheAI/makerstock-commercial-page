@@ -713,11 +713,11 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
 
           <div class="cfg-q active" id="q1">
             <div class="cfg-q-step">Question 1 / 4</div>
-            <div class="cfg-q-label">How many finished products do you sell on BigCommerce?</div>
+            <div class="cfg-q-label">How many active recipes do you have (or plan to have)?</div>
             <div class="cfg-options">
-              <div class="cfg-option" onclick="pick(this,1,'starter')"><div class="cfg-radio"></div>Fewer than 75 products</div>
-              <div class="cfg-option" onclick="pick(this,1,'pro')"><div class="cfg-radio"></div>Between 75 and 300 products</div>
-              <div class="cfg-option" onclick="pick(this,1,'business')"><div class="cfg-radio"></div>More than 300 products</div>
+              <div class="cfg-option" onclick="pick(this,1,'starter')"><div class="cfg-radio"></div>Fewer than 20 recipes</div>
+              <div class="cfg-option" onclick="pick(this,1,'pro')"><div class="cfg-radio"></div>Between 20 and 100 recipes</div>
+              <div class="cfg-option" onclick="pick(this,1,'business')"><div class="cfg-radio"></div>More than 100 recipes</div>
             </div>
           </div>
 
@@ -812,7 +812,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph"><div class="sshot-ph-inner"><div class="sshot-ph-icon">⚙️</div><div class="sshot-ph-label">Screenshot to add<br>Production → Runs de production</div></div></div>
+          <img src="../img/overview.png" alt="MakerStock — Dashboard overview" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -830,7 +830,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph"><div class="sshot-ph-inner"><div class="sshot-ph-icon">📦</div><div class="sshot-ph-label">Screenshot to add<br>Raw materials → Lots & DLC</div></div></div>
+          <img src="../img/screencapture-localhost-4200-recettes-2026-05-27-21_08_40.png" alt="MakerStock — Recipes" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -848,7 +848,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph" style="aspect-ratio:9/16; max-width:240px; margin:0 auto;"><div class="sshot-ph-inner"><div class="sshot-ph-icon">📱</div><div class="sshot-ph-label">Screenshot to add<br>Interface mobile → Fabrication</div></div></div>
+          <img src="../img/creation-recipe.PNG" alt="MakerStock — Recipe creation" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -1007,16 +1007,16 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 /* Configurator */
 const PLANS = {
   starter: { name:'Starter', price:'29 € / mois', annualNote:'(or €25/month billed annually)', cls:'starter',
-    why:'Your profile matches the Starter plan. You\'ll immediately benefit from stock management, recipes and automatic BigCommerce sync.',
-    features:['Unlimited raw materials catalog','Recipes BOM et déduction FIFO automatique','Real-time BigCommerce synchronization','Alerts de stock bas configurables','App mobile pour gérer depuis l\'atelier']
+    why:'Your profile matches the Starter plan. Manage up to 20 active recipes, your raw materials and production runs, synced with your BigCommerce store.',
+    features:['Up to 20 active recipes','1 warehouse · Raw material management','BigCommerce sync · Production runs','CSV / Excel import','14-day free trial']
   },
   pro: { name:'Pro', price:'59 € / mois', annualNote:'(or €49/month billed annually)', cls:'pro',
-    why:'Your profile matches the Pro plan. Lot & expiry traceability, supplier procurement and 3 included users directly meet your needs.',
-    features:['Lot & expiry traceability (required in cosmetics / food)','Procurements fournisseurs avec réception mobile','COGS complet — main-d\'œuvre + charges variables','XLSX accounting export','3 included users + unlimited mobile app']
+    why:'Your profile matches the Pro plan. Up to 100 active recipes, stock alerts, multi-warehouse management, mobile app and supplier purchase orders.',
+    features:['Up to 100 active recipes','Stock alerts · Multi-warehouse management','Mobile app for operators','Supplier purchase orders','Unlimited warehouses']
   },
   business: { name:'Business', price:'99 € / mois', annualNote:'(or €82/month billed annually)', cls:'business',
-    why:'Your profile matches the Business plan. Multi-warehouse, B2B reseller orders and 10 included users are the key features for your situation.',
-    features:['Multi-warehouse with stock transfers','B2B orders and reseller management','Production planning (calendrier hebdo)','P&L report per product — banker document','10 included users + public API Zapier / Make']
+    why:'Your profile matches the Business plan. Unlimited recipes, B2B orders & resellers, P&L report and accounting export — the complete solution for professional workshops.',
+    features:['Unlimited active recipes','B2B orders & resellers','P&L report · Accounting export','Mobile app included','Unlimited warehouses · Production planning']
   }
 };
 const hierarchy = {starter:1,pro:2,business:3};

@@ -713,11 +713,11 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
 
           <div class="cfg-q active" id="q1">
             <div class="cfg-q-step">Question 1 / 4</div>
-            <div class="cfg-q-label">¿Cuántos productos acabados vendes en BigCommerce?</div>
+            <div class="cfg-q-label">¿Cuántas recetas activas tienes (o prevés tener)?</div>
             <div class="cfg-options">
-              <div class="cfg-option" onclick="pick(this,1,'starter')"><div class="cfg-radio"></div>Menos de 75 productos</div>
-              <div class="cfg-option" onclick="pick(this,1,'pro')"><div class="cfg-radio"></div>Entre 75 y 300 productos</div>
-              <div class="cfg-option" onclick="pick(this,1,'business')"><div class="cfg-radio"></div>Más de 300 productos</div>
+              <div class="cfg-option" onclick="pick(this,1,'starter')"><div class="cfg-radio"></div>Menos de 20 recetas</div>
+              <div class="cfg-option" onclick="pick(this,1,'pro')"><div class="cfg-radio"></div>Entre 20 y 100 recetas</div>
+              <div class="cfg-option" onclick="pick(this,1,'business')"><div class="cfg-radio"></div>Más de 100 recetas</div>
             </div>
           </div>
 
@@ -812,7 +812,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph"><div class="sshot-ph-inner"><div class="sshot-ph-icon">⚙️</div><div class="sshot-ph-label">Captura a añadir<br>Production → Runs de production</div></div></div>
+          <img src="../img/overview.png" alt="MakerStock — Vista general" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -830,7 +830,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph"><div class="sshot-ph-inner"><div class="sshot-ph-icon">📦</div><div class="sshot-ph-label">Captura a añadir<br>Materias primas → Lots & DLC</div></div></div>
+          <img src="../img/screencapture-localhost-4200-recettes-2026-05-27-21_08_40.png" alt="MakerStock — Recetas" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -848,7 +848,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
         <div class="sshot">
           <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <div class="sshot-ph" style="aspect-ratio:9/16; max-width:240px; margin:0 auto;"><div class="sshot-ph-inner"><div class="sshot-ph-icon">📱</div><div class="sshot-ph-label">Captura a añadir<br>Interface mobile → Fabrication</div></div></div>
+          <img src="../img/creation-recipe.PNG" alt="MakerStock — Creación de receta" style="width:100%;display:block;">
         </div>
       </div>
 
@@ -1007,16 +1007,16 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 /* Configurator */
 const PLANS = {
   starter: { name:'Starter', price:'29 € / mois', annualNote:'(o 25 €/mes facturado anualmente)', cls:'starter',
-    why:'Votre profil correspond au plan Starter. Vous bénéficierez immédiatement de la gestion de stock, des recettes et de la synchronisation automatique avec BigCommerce.',
-    features:['Catalogue matières premières illimité','Recetas BOM et déduction FIFO automatique','Synchronisation BigCommerce en temps réel','Alertas de stock bas configurables','App mobile pour gérer depuis l\'atelier']
+    why:'Tu perfil se corresponde con el plan Starter. Gestiona hasta 20 recetas activas, tus materias primas y runs de producción, sincronizados con tu tienda BigCommerce.',
+    features:['Hasta 20 recetas activas','1 almacén · Gestión de materias primas','Sync BigCommerce · Ejecuciones de producción','Importación CSV / Excel','14 días de prueba gratuita']
   },
   pro: { name:'Pro', price:'59 € / mois', annualNote:'(o 49 €/mes facturado anualmente)', cls:'pro',
-    why:'Votre profil correspond au plan Pro. La traçabilité lots & DLC, les approvisionnements fournisseurs et les 3 utilisateurs inclus répondent directement à vos besoins.',
-    features:['Traçabilité lots & DLC (obligatoire en cosmétique / alimentaire)','Aprovisionamientos fournisseurs avec réception mobile','COGS complet — main-d\'œuvre + charges variables','Exportación contable XLSX','3 utilisateurs inclus + app mobile illimitée']
+    why:'Tu perfil se corresponde con el plan Pro. Hasta 100 recetas activas, alertas de stock, gestión multi-almacén, app móvil y pedidos a proveedores.',
+    features:['Hasta 100 recetas activas','Alertas de stock · Gestión multi-almacén','App móvil para operarios','Pedidos a proveedores','Almacenes ilimitados']
   },
   business: { name:'Business', price:'99 € / mois', annualNote:'(o 82 €/mes facturado anualmente)', cls:'business',
-    why:'Votre profil correspond au plan Business. Multi-entrepôts, commandes B2B revendeurs et les 10 utilisateurs inclus sont les fonctionnalités clés pour votre situation.',
-    features:['Multi-entrepôts avec transferts de stock','Commandes B2B et gestion des revendeurs','Planificación de producción (calendrier hebdo)','Rapport P&L par produit — document banquier','10 utilisateurs inclus + API publique Zapier / Make']
+    why:'Tu perfil se corresponde con el plan Business. Recetas ilimitadas, pedidos B2B y revendedores, informe P&G y exportación contable — la solución completa para talleres profesionales.',
+    features:['Recetas activas ilimitadas','Pedidos B2B y revendedores','Informe P&G · Exportación contable','App móvil incluida','Almacenes ilimitados · Planificación de producción']
   }
 };
 const hierarchy = {starter:1,pro:2,business:3};
