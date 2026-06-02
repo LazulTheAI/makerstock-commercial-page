@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakerStock — Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --s0:#fff; --s50:#f9fafb; --s100:#f3f4f6; --s200:#e5e7eb; --s300:#d1d5db;
+  --s400:#9ca3af; --s500:#6b7280; --s600:#4b5563; --s700:#374151; --s900:#111827;
+  --e50:#ecfdf5; --e100:#d1fae5; --e200:#a7f3d0; --e500:#10b981; --e600:#059669; --e700:#047857;
+  --amber:#fef3c7; --amber-text:#92400e;
+  --border:#e5e7eb; --text:#111827; --muted:#6b7280; --dim:#9ca3af;
+  --radius:8px; --radius-lg:12px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --font:'Inter',-apple-system,sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family:var(--font); font-size:15px; background:var(--s50); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
+nav { position:sticky; top:0; z-index:100; background:var(--s0); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm); }
+.nav-logo { display:flex; align-items:center; gap:.625rem; text-decoration:none; }
+.nav-back { font-size:.875rem; color:var(--muted); text-decoration:none; transition:color .15s; }
+.nav-back:hover { color:var(--text); }
+.page { max-width:820px; margin:0 auto; padding:3rem 2rem 6rem; }
+.doc-header { margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--border); }
+.doc-tag { display:inline-flex; align-items:center; gap:.375rem; background:var(--e50); color:var(--e700); border:1px solid var(--e200); border-radius:20px; padding:.25rem .875rem; font-size:.75rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:1rem; }
+.doc-title { font-size:2rem; font-weight:800; letter-spacing:-.025em; color:var(--text); margin-bottom:.75rem; }
+.doc-meta { display:flex; gap:2rem; flex-wrap:wrap; }
+.doc-meta-item { display:flex; align-items:center; gap:.375rem; font-size:.8125rem; color:var(--muted); }
+.toc { background:var(--s0); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:3rem; box-shadow:var(--shadow-sm); }
+.toc-title { font-size:.75rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:.875rem; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:.375rem; }
+.toc-list a { display:flex; align-items:baseline; gap:.5rem; text-decoration:none; font-size:.875rem; color:var(--muted); transition:color .12s; }
+.toc-list a:hover { color:var(--e600); }
+.toc-num { font-size:.75rem; font-weight:600; color:var(--dim); width:1.25rem; flex-shrink:0; }
+.doc-section { margin-bottom:2.5rem; }
+.section-anchor { display:block; height:80px; margin-top:-80px; }
+.section-num { font-size:.6875rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--e600); margin-bottom:.375rem; }
+h2.section-title { font-size:1.1875rem; font-weight:700; color:var(--text); margin-bottom:1rem; padding-bottom:.75rem; border-bottom:2px solid var(--e100); }
+h3.subsection-title { font-size:1rem; font-weight:600; color:var(--text); margin:1.25rem 0 .625rem; }
+p.legal-p { font-size:.9375rem; color:var(--s600); line-height:1.75; margin-bottom:.875rem; }
+p.legal-p:last-child { margin-bottom:0; }
+.legal-list { list-style:none; display:flex; flex-direction:column; gap:.5rem; margin:.75rem 0 .875rem; }
+.legal-list li { display:flex; align-items:flex-start; gap:.625rem; font-size:.9375rem; color:var(--s600); line-height:1.6; }
+.legal-list li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--e500); flex-shrink:0; margin-top:.55rem; }
+.data-table { width:100%; border-collapse:collapse; font-size:.875rem; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; margin:.875rem 0; }
+.data-table thead tr { background:var(--s50); }
+.data-table thead th { padding:.625rem 1rem; text-align:left; font-size:.75rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
+.data-table tbody tr { border-bottom:1px solid var(--border); }
+.data-table tbody tr:last-child { border-bottom:none; }
+.data-table tbody tr:hover { background:var(--s50); }
+.data-table td { padding:.625rem 1rem; color:var(--s600); vertical-align:top; }
+.data-table td:first-child { font-weight:500; color:var(--text); }
+.info-box { background:var(--e50); border:1px solid var(--e200); border-radius:var(--radius-lg); padding:1rem 1.25rem; margin:.875rem 0; display:flex; gap:.75rem; }
+.info-box-icon { font-size:1rem; flex-shrink:0; margin-top:1px; }
+.info-box-text { font-size:.875rem; color:var(--e700); line-height:1.65; }
+.info-box-text strong { font-weight:600; }
+hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 0; }
+.doc-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border); text-align:center; font-size:.8125rem; color:var(--dim); }
+.doc-footer a { color:var(--muted); text-decoration:none; }
+.doc-footer a:hover { color:var(--text); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../en/">
+    <img src="../../img/logo.png" alt="MakerStock" style="height:32px;width:auto;">
+  </a>
+  <a class="nav-back" href="../../en/">← Back to site</a>
+</nav>
+
+<div class="page">
+
+  <div class="doc-header">
+    <div class="doc-tag">Privacy Policy</div>
+    <h1 class="doc-title">Protection of your personal data</h1>
+    <div class="doc-meta">
+      <div class="doc-meta-item">📅 Last updated: <strong style="color:var(--text);margin-left:.25rem">May 28, 2026</strong></div>
+      <div class="doc-meta-item">🌐 English version — the French version prevails in case of conflict</div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">1</span>Data controller</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span>Data collected</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span>Purposes and legal bases for processing</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span>Hosting and data location</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span>Sub-processors and third parties</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span>Retention periods</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span>Your rights (GDPR)</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span>Specific rights — California residents (CCPA)</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span>Cookies and trackers</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span>Security</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span>Minors</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span>Changes to this policy</a></li>
+      <li><a href="#s13"><span class="toc-num">13</span>Contact and complaints</a></li>
+    </ul>
+  </div>
+
+  <!-- INTRO -->
+  <p class="legal-p">This Privacy Policy describes how Boris Mensah (hereinafter "MakerStock", "we" or the "Publisher"), operating the service accessible via makerstocks.com, collects, uses, stores and protects the personal data of users of the MakerStock service (hereinafter the "Service").</p>
+  <p class="legal-p">This policy applies to all natural persons whose data is processed in connection with the Service, whether they are direct clients, account administrators or operators designated by a client. It covers data processed through the MakerStock web application, mobile interface and public API.</p>
+
+  <hr class="doc-divider">
+
+  <!-- 1 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s1"></a>
+    <div class="section-num">Article 1</div>
+    <h2 class="section-title">Data controller</h2>
+    <p class="legal-p">The controller of personal data collected through the Service is:</p>
+    <div class="data-table" style="overflow:auto">
+      <table style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.625rem 1rem;font-weight:500;width:40%">Name</td><td style="padding:.625rem 1rem;color:var(--s600)">Boris Mensah</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.625rem 1rem;font-weight:500">Legal form</td><td style="padding:.625rem 1rem;color:var(--s600)">Sole trader (micro-enterprise)</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.625rem 1rem;font-weight:500">SIRET</td><td style="padding:.625rem 1rem;color:var(--s600)">852 444 181 00019</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.625rem 1rem;font-weight:500">City</td><td style="padding:.625rem 1rem;color:var(--s600)">Rennes, France</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.625rem 1rem;font-weight:500">GDPR contact email</td><td style="padding:.625rem 1rem;color:var(--s600)">contact@makerstocks.com</td></tr>
+          <tr><td style="padding:.625rem 1rem;font-weight:500">DPO appointed</td><td style="padding:.625rem 1rem;color:var(--s600)">Not appointed at this stage</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s2"></a>
+    <div class="section-num">Article 2</div>
+    <h2 class="section-title">Data collected</h2>
+
+    <h3 class="subsection-title">2.1 Data provided directly by the user</h3>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Data concerned</th><th>Nature</th></tr></thead>
+      <tbody>
+        <tr><td>Identity</td><td>First name, last name, professional email address</td><td>Required</td></tr>
+        <tr><td>Login data</td><td>BigCommerce credentials (via OAuth), authentication token</td><td>Required</td></tr>
+        <tr><td>Production data</td><td>Raw materials, recipes, batches, expiry dates, stock movements, production runs, COGS</td><td>Generated by use</td></tr>
+        <tr><td>Commercial data</td><td>Suppliers, resellers, B2B orders, internal pricing information</td><td>Optional depending on plan</td></tr>
+        <tr><td>Workshop data</td><td>Workshop name(s), production locations, warehouses</td><td>Required at configuration</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">2.2 Data collected automatically</h3>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Data concerned</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Technical data</td><td>IP address, browser type, operating system, language</td><td>Security, debugging</td></tr>
+        <tr><td>Navigation data</td><td>Pages visited, action timestamps, session time</td><td>Service improvement, support</td></tr>
+        <tr><td>Application logs</td><td>Errors, API requests, BigCommerce sync statuses</td><td>Debugging, technical traceability</td></tr>
+        <tr><td>Device data</td><td>Screen resolution, device type (mobile/desktop)</td><td>Interface optimisation</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">2.3 Data received via BigCommerce</h3>
+    <p class="legal-p">As part of the native integration with BigCommerce, MakerStock receives, via the BigCommerce API and with the user's consent at the time of installation, the following data:</p>
+    <ul class="legal-list">
+      <li>Product catalogue (name, SKU, retail price, BigCommerce internal identifiers)</li>
+      <li>Store information (store name, currency, BC identifier)</li>
+      <li>Order data (quantities sold per product, necessary for automatic stock deduction)</li>
+    </ul>
+    <div class="info-box">
+      <div class="info-box-icon">ℹ️</div>
+      <div class="info-box-text"><strong>We do not receive</strong> the personal data of your BigCommerce store's end customers (buyer names, addresses or emails). Only the data necessary for the production management Service to function is transmitted.</div>
+    </div>
+
+    <h3 class="subsection-title">2.4 Data we do not collect</h3>
+    <p class="legal-p">MakerStock does not and will never collect:</p>
+    <ul class="legal-list">
+      <li>Bank card details or payment credentials (managed exclusively by BigCommerce)</li>
+      <li>Health data or special categories of data within the meaning of Article 9 GDPR</li>
+      <li>Biometric data</li>
+      <li>Data relating to persons under 16 years of age</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s3"></a>
+    <div class="section-num">Article 3</div>
+    <h2 class="section-title">Purposes and legal bases for processing</h2>
+    <table class="data-table">
+      <thead><tr><th>Purpose</th><th>Legal basis (GDPR Art. 6)</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Provision of the Service (production, inventory, runs management)</td><td>Performance of a contract — Art. 6.1.b</td><td>Processing necessary for performance of the accepted ToS</td></tr>
+        <tr><td>Authentication and account security</td><td>Performance of a contract — Art. 6.1.b</td><td>User identification, access protection</td></tr>
+        <tr><td>Billing and subscription management</td><td>Performance of a contract — Art. 6.1.b<br>Legal obligation — Art. 6.1.c</td><td>Coordination with BigCommerce, retention of purchase evidence (10 years)</td></tr>
+        <tr><td>Sending transactional emails</td><td>Performance of a contract — Art. 6.1.b</td><td>Confirmations, account alerts, service notifications</td></tr>
+        <tr><td>Service improvement and debugging</td><td>Legitimate interest — Art. 6.1.f</td><td>Technical log analysis, error correction. Interest: improving service quality.</td></tr>
+        <tr><td>Customer support</td><td>Performance of a contract — Art. 6.1.b</td><td>Processing of support requests</td></tr>
+        <tr><td>Compliance with legal obligations</td><td>Legal obligation — Art. 6.1.c</td><td>Responding to court orders, accounting retention</td></tr>
+      </tbody>
+    </table>
+    <p class="legal-p">We do not use your data for commercial prospecting, advertising profiling, or fully automated decision-making producing legal effects.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s4"></a>
+    <div class="section-num">Article 4</div>
+    <h2 class="section-title">Hosting and data location</h2>
+    <p class="legal-p">All personal data processed by MakerStock is hosted on servers located in <strong>Germany</strong>, within the European Union, with Hetzner Online GmbH (Industriestr. 25, 91710 Gunzenhausen, Germany). No transfer of your personal data outside the European Economic Area (EEA) is carried out in the course of the Service's normal operation.</p>
+    <p class="legal-p">In the event of a future transfer outside the EEA (for example, use of a support provider based outside the EU), such transfer will be governed by appropriate safeguards in accordance with Chapter V GDPR, in particular by Standard Contractual Clauses (SCCs) approved by the European Commission, and this policy will be updated accordingly.</p>
+    <div class="info-box">
+      <div class="info-box-icon">🇪🇺</div>
+      <div class="info-box-text"><strong>Data hosted in the EU.</strong> Your production data (raw materials, recipes, batches, traceability records) permanently remains within the European Union. MakerStock does not outsource data storage to servers outside the EU.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s5"></a>
+    <div class="section-num">Article 5</div>
+    <h2 class="section-title">Sub-processors and third parties</h2>
+
+    <h3 class="subsection-title">5.1 Technical sub-processors</h3>
+    <p class="legal-p">MakerStock uses the following sub-processors to ensure the technical operation of the Service. These providers act solely on our instructions and are not authorised to use your data for their own purposes:</p>
+    <table class="data-table">
+      <thead><tr><th>Sub-processor</th><th>Role</th><th>Location</th></tr></thead>
+      <tbody>
+        <tr><td>Hetzner Online GmbH</td><td>Server infrastructure, data storage</td><td>Germany (EU)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">5.2 BigCommerce — integration partner</h3>
+    <p class="legal-p">BigCommerce Inc. is MakerStock's distribution and authentication partner. When installing the application from the BigCommerce App Store, you also accept BigCommerce's Terms of Service and Privacy Policy, which independently govern the management of your store and the billing of your MakerStock subscription. MakerStock is not responsible for BigCommerce's data processing practices.</p>
+
+    <h3 class="subsection-title">5.3 No commercial data sharing</h3>
+    <p class="legal-p">MakerStock <strong>does not sell, rent or transfer</strong> your personal data to third parties for commercial, advertising or prospecting purposes. Your production data (recipes, batches, COGS, raw materials) is strictly confidential and is in no way shared with other clients or partners.</p>
+
+    <h3 class="subsection-title">5.4 Mandatory legal disclosure</h3>
+    <p class="legal-p">We may be required to disclose your data when a legal, regulatory or judicial obligation compels us to do so (court order, injunction by a competent authority). In that case, we will inform the User concerned as soon as possible, unless prohibited by law from doing so.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s6"></a>
+    <div class="section-num">Article 6</div>
+    <h2 class="section-title">Retention periods</h2>
+    <table class="data-table">
+      <thead><tr><th>Data type</th><th>Retention period</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Active account data (profile, authentication)</td><td>Duration of active subscription + 90 days after termination</td><td>Performance of contract</td></tr>
+        <tr><td>Production data (recipes, batches, runs, stock)</td><td>Duration of active subscription + 90 days after termination</td><td>Performance of contract</td></tr>
+        <tr><td>Billing data and proof of payment</td><td>10 years from the transaction</td><td>Legal obligation (French Commercial Code Art. L.123-22)</td></tr>
+        <tr><td>Technical and security logs</td><td>Rolling 12 months</td><td>Legitimate interest (security)</td></tr>
+        <tr><td>Customer support exchanges</td><td>3 years from ticket closure</td><td>Legitimate interest (evidence, improvement)</td></tr>
+        <tr><td>Data retained due to legal obligation</td><td>Duration imposed by applicable law</td><td>Legal obligation</td></tr>
+      </tbody>
+    </table>
+    <p class="legal-p">At the end of the 90-day period following subscription termination, all production and account data is <strong>permanently and irreversibly deleted</strong> from our servers, unless a legal obligation requires otherwise. No backup is retained beyond this period, with the exception of billing data subject to a legal retention obligation.</p>
+    <div class="info-box">
+      <div class="info-box-icon">📥</div>
+      <div class="info-box-text"><strong>Export your data before cancellation.</strong> We strongly recommend that you export all your production data (stock movement CSV, traceability CSV, XLSX accounting export) before cancelling your subscription. These exports are available from the MakerStock desktop interface.</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s7"></a>
+    <div class="section-num">Article 7</div>
+    <h2 class="section-title">Your rights (GDPR)</h2>
+    <p class="legal-p">In accordance with Regulation (EU) 2016/679 (GDPR) and French Law No. 78-17 of 6 January 1978 as amended (Data Protection Act), any natural person whose data is processed by MakerStock has the following rights:</p>
+
+    <table class="data-table">
+      <thead><tr><th>Right</th><th>What it means</th><th>How to exercise it</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Access</strong> (Art. 15)</td><td>Obtain confirmation that your data is being processed and receive a copy</td><td rowspan="6" style="vertical-align:middle">Email to contact@makerstocks.com<br><br>Response within 30 calendar days.<br><br>In the case of a manifestly unfounded or excessive request, we reserve the right to require proof of identity and, where applicable, to charge reasonable fees.</td></tr>
+        <tr><td><strong>Rectification</strong> (Art. 16)</td><td>Have inaccurate data corrected or incomplete data completed</td></tr>
+        <tr><td><strong>Erasure</strong> (Art. 17)</td><td>Request deletion of your data in the cases provided for by the GDPR</td></tr>
+        <tr><td><strong>Restriction</strong> (Art. 18)</td><td>Request temporary suspension of processing</td></tr>
+        <tr><td><strong>Portability</strong> (Art. 20)</td><td>Receive your data in a structured, machine-readable format</td></tr>
+        <tr><td><strong>Objection</strong> (Art. 21)</td><td>Object to processing based on our legitimate interest</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection-title">7.1 Right to lodge a complaint with a supervisory authority</h3>
+    <p class="legal-p">If you believe that the processing of your personal data constitutes a violation of the GDPR, you have the right to lodge a complaint with the competent supervisory authority. In France, this is the:</p>
+    <p class="legal-p"><strong>Commission Nationale de l'Informatique et des Libertés (CNIL)</strong><br>3 Place de Fontenoy, 75007 Paris, France<br>Website: <a href="https://www.cnil.fr" target="_blank" style="color:var(--e600)">www.cnil.fr</a></p>
+    <p class="legal-p">This right of complaint is without prejudice to any other administrative or judicial remedy.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s8"></a>
+    <div class="section-num">Article 8</div>
+    <h2 class="section-title">Specific rights — California residents (CCPA / CPRA)</h2>
+    <p class="legal-p">If you are a California resident (United States), the California Consumer Privacy Act (CCPA), as amended by the California Privacy Rights Act (CPRA), grants you additional rights over your personal data:</p>
+    <ul class="legal-list">
+      <li><strong>Right to know</strong>: know the categories and purposes of data collected, the sources and any recipients.</li>
+      <li><strong>Right to delete</strong>: request deletion of your data, subject to applicable legal exceptions.</li>
+      <li><strong>Right to opt out of sale or sharing</strong>: MakerStock does not sell or share your personal data for advertising purposes. This right is therefore not applicable in the current context of the Service.</li>
+      <li><strong>Right to non-discrimination</strong>: you will not be discriminated against for having exercised your CCPA/CPRA rights.</li>
+      <li><strong>Right to correction</strong>: request correction of inaccurate data.</li>
+      <li><strong>Right to limit use of sensitive data</strong>: MakerStock does not collect sensitive personal data within the meaning of the CPRA.</li>
+    </ul>
+    <p class="legal-p">To exercise these rights, send your request to contact@makerstocks.com, stating your California residency. We will respond within the 45-day period provided by the CCPA, extendable by a further 45 days if necessary with prior notification.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s9"></a>
+    <div class="section-num">Article 9</div>
+    <h2 class="section-title">Cookies and trackers</h2>
+    <p class="legal-p">MakerStock uses a strictly limited number of cookies, exclusively necessary for the technical operation of the Service. We do not use advertising cookies, behavioural tracking tools or third-party browsing analytics.</p>
+    <table class="data-table">
+      <thead><tr><th>Cookie</th><th>Type</th><th>Purpose</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td>Authentication session</td><td>Strictly necessary</td><td>Maintaining user session</td><td>Session (deleted on close)</td></tr>
+        <tr><td>CSRF token</td><td>Strictly necessary</td><td>Protection against Cross-Site Request Forgery attacks</td><td>Session</td></tr>
+        <tr><td>Interface preferences</td><td>Functional</td><td>Storing theme (light/dark) and language preferences</td><td>12 months</td></tr>
+      </tbody>
+    </table>
+    <p class="legal-p">Strictly necessary cookies do not require your prior consent. Functional cookies may be declined without impacting the essential features of the Service.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s10"></a>
+    <div class="section-num">Article 10</div>
+    <h2 class="section-title">Security</h2>
+    <p class="legal-p">MakerStock implements appropriate technical and organisational measures to protect your data against loss, unauthorised access, disclosure, alteration or destruction, in accordance with Article 32 GDPR. These measures include in particular:</p>
+    <ul class="legal-list">
+      <li>Encryption of data in transit via TLS 1.2 minimum</li>
+      <li>Encryption of sensitive data at rest</li>
+      <li>Authentication delegated to BigCommerce via OAuth 2.0 — MakerStock does not store your passwords</li>
+      <li>Access to production data restricted to authorised personnel on a least-privilege basis</li>
+      <li>Regular backups on EU-hosted infrastructure</li>
+      <li>Logging of access and sensitive actions</li>
+    </ul>
+    <p class="legal-p">In the event of a data breach likely to result in a high risk to your rights and freedoms, we undertake to notify you as soon as possible in accordance with Article 34 GDPR, and to notify the relevant supervisory authority within the 72-hour period required by Article 33.</p>
+    <p class="legal-p">No security measure is infallible. MakerStock cannot guarantee the absolute security of data transmitted over the internet. We recommend that you never share your login credentials and immediately report any suspicious access to contact@makerstocks.com.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s11"></a>
+    <div class="section-num">Article 11</div>
+    <h2 class="section-title">Minors</h2>
+    <p class="legal-p">The MakerStock Service is intended for professionals and adults. We do not knowingly collect personal data from persons under 16 years of age. If you are a minor, please do not use the Service and do not provide us with any personal data.</p>
+    <p class="legal-p">If we learn that a minor under 16 has provided us with personal data without verifiable parental consent, we will take the necessary steps to delete that data as soon as possible. If you are a parent or legal guardian and believe your child has sent us data, please contact us at contact@makerstocks.com.</p>
+  </div>
+
+  <!-- 12 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s12"></a>
+    <div class="section-num">Article 12</div>
+    <h2 class="section-title">Changes to this policy</h2>
+    <p class="legal-p">We reserve the right to amend this Privacy Policy at any time, in particular to comply with new legal or regulatory obligations, or to reflect changes in our processing practices.</p>
+    <p class="legal-p">In the event of a material amendment affecting your rights or the nature of the processing carried out, we will inform you by email to the address registered on your account, with at least <strong>30 days</strong> notice before the amendment takes effect. Continued use of the Service after this period constitutes acceptance of the amended policy.</p>
+    <p class="legal-p">The date of last update is shown in the header of this document. Previous versions are available upon request at contact@makerstocks.com.</p>
+  </div>
+
+  <!-- 13 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="s13"></a>
+    <div class="section-num">Article 13</div>
+    <h2 class="section-title">Contact and complaints</h2>
+    <p class="legal-p">For any questions relating to this policy, to exercise your rights or to raise a concern about the protection of your data, please contact us:</p>
+    <ul class="legal-list">
+      <li><strong>By email:</strong> contact@makerstocks.com</li>
+    </ul>
+    <p class="legal-p">We undertake to acknowledge receipt of your request within <strong>5 business days</strong> and to provide a complete response within <strong>30 calendar days</strong>. In the case of a complex request requiring additional time, we will inform you before the expiry of the initial period.</p>
+  </div>
+
+  <div class="doc-footer">
+    <p>MakerStock · Privacy Policy · Version 1.0 · May 28, 2026</p>
+    <p style="margin-top:.5rem"><a href="tos.html">Terms of Service</a> · <a href="../../en/">Back to site</a></p>
+  </div>
+
+</div>
+</body>
+</html>

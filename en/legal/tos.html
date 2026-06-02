@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakerStock — Terms of Service</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --s0:#fff; --s50:#f9fafb; --s100:#f3f4f6; --s200:#e5e7eb; --s300:#d1d5db;
+  --s400:#9ca3af; --s500:#6b7280; --s600:#4b5563; --s700:#374151; --s900:#111827;
+  --e50:#ecfdf5; --e100:#d1fae5; --e200:#a7f3d0; --e500:#10b981; --e600:#059669; --e700:#047857;
+  --amber:#fef3c7; --amber-text:#92400e;
+  --border:#e5e7eb; --text:#111827; --muted:#6b7280; --dim:#9ca3af;
+  --radius:8px; --radius-lg:12px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --font:'Inter',-apple-system,sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family:var(--font); font-size:15px; background:var(--s50); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
+nav { position:sticky; top:0; z-index:100; background:var(--s0); border-bottom:1px solid var(--border); padding:0 2rem; height:60px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm); }
+.nav-logo { display:flex; align-items:center; gap:.625rem; text-decoration:none; }
+.nav-back { font-size:.875rem; color:var(--muted); text-decoration:none; transition:color .15s; }
+.nav-back:hover { color:var(--text); }
+.page { max-width:820px; margin:0 auto; padding:3rem 2rem 6rem; }
+.doc-header { margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--border); }
+.doc-tag { display:inline-flex; align-items:center; gap:.375rem; background:var(--e50); color:var(--e700); border:1px solid var(--e200); border-radius:20px; padding:.25rem .875rem; font-size:.75rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:1rem; }
+.doc-title { font-size:2rem; font-weight:800; letter-spacing:-.025em; color:var(--text); margin-bottom:.75rem; }
+.doc-meta { display:flex; gap:2rem; flex-wrap:wrap; }
+.doc-meta-item { display:flex; align-items:center; gap:.375rem; font-size:.8125rem; color:var(--muted); }
+.toc { background:var(--s0); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:3rem; box-shadow:var(--shadow-sm); }
+.toc-title { font-size:.75rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:.875rem; }
+.toc-list { list-style:none; display:flex; flex-direction:column; gap:.375rem; }
+.toc-list a { display:flex; align-items:baseline; gap:.5rem; text-decoration:none; font-size:.875rem; color:var(--muted); transition:color .12s; }
+.toc-list a:hover { color:var(--e600); }
+.toc-num { font-size:.75rem; font-weight:600; color:var(--dim); width:1.25rem; flex-shrink:0; }
+.doc-section { margin-bottom:2.5rem; }
+.section-anchor { display:block; height:80px; margin-top:-80px; }
+.section-num { font-size:.6875rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--e600); margin-bottom:.375rem; }
+h2.section-title { font-size:1.1875rem; font-weight:700; color:var(--text); margin-bottom:1rem; padding-bottom:.75rem; border-bottom:2px solid var(--e100); }
+h3.subsection-title { font-size:1rem; font-weight:600; color:var(--text); margin:1.25rem 0 .625rem; }
+p.legal-p { font-size:.9375rem; color:var(--s600); line-height:1.75; margin-bottom:.875rem; }
+p.legal-p:last-child { margin-bottom:0; }
+.legal-list { list-style:none; display:flex; flex-direction:column; gap:.5rem; margin:.75rem 0 .875rem; }
+.legal-list li { display:flex; align-items:flex-start; gap:.625rem; font-size:.9375rem; color:var(--s600); line-height:1.6; }
+.legal-list li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--e500); flex-shrink:0; margin-top:.55rem; }
+.data-table { width:100%; border-collapse:collapse; font-size:.875rem; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; margin:.875rem 0; }
+.data-table thead tr { background:var(--s50); }
+.data-table thead th { padding:.625rem 1rem; text-align:left; font-size:.75rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
+.data-table tbody tr { border-bottom:1px solid var(--border); }
+.data-table tbody tr:last-child { border-bottom:none; }
+.data-table tbody tr:hover { background:var(--s50); }
+.data-table td { padding:.625rem 1rem; color:var(--s600); vertical-align:top; }
+.data-table td:first-child { font-weight:500; color:var(--text); }
+.info-box { background:var(--e50); border:1px solid var(--e200); border-radius:var(--radius-lg); padding:1rem 1.25rem; margin:.875rem 0; display:flex; gap:.75rem; }
+.info-box-icon { font-size:1rem; flex-shrink:0; margin-top:1px; }
+.info-box-text { font-size:.875rem; color:var(--e700); line-height:1.65; }
+.info-box-text strong { font-weight:600; }
+hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 0; }
+.doc-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border); text-align:center; font-size:.8125rem; color:var(--dim); }
+.doc-footer a { color:var(--muted); text-decoration:none; }
+.doc-footer a:hover { color:var(--text); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../en/">
+    <img src="../../img/logo.png" alt="MakerStock" style="height:32px;width:auto;">
+  </a>
+  <a class="nav-back" href="../../en/">← Back to site</a>
+</nav>
+
+<div class="page">
+
+  <div class="doc-header">
+    <div class="doc-tag">Terms of Service</div>
+    <h1 class="doc-title">Terms of Service</h1>
+    <div class="doc-meta">
+      <div class="doc-meta-item">📅 Last updated: <strong style="color:var(--text);margin-left:.25rem">May 27, 2026</strong></div>
+      <div class="doc-meta-item">🌐 English version — the French version prevails in case of conflict</div>
+    </div>
+  </div>
+
+  <!-- PREAMBLE -->
+  <p class="legal-p">These Terms of Service (hereinafter "ToS") govern access to and use of the MakerStock service (hereinafter the "Service"), published by Boris Mensah, sole trader (micro-enterprise), registered with the Rennes Trade and Companies Register under number 852 444 181 00019 (hereinafter the "Publisher").</p>
+  <p class="legal-p">The Service is accessible at makerstocks.com and through the application distributed on the BigCommerce App Store.</p>
+  <p class="legal-p">Any use of the Service implies full and unconditional acceptance of these ToS. If you do not accept these terms, you must immediately cease using the Service.</p>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ul class="toc-list">
+      <li><a href="#c1"><span class="toc-num">1</span>Definitions</a></li>
+      <li><a href="#c2"><span class="toc-num">2</span>Purpose and description of the Service</a></li>
+      <li><a href="#c3"><span class="toc-num">3</span>Access to the Service — Eligibility</a></li>
+      <li><a href="#c4"><span class="toc-num">4</span>Account creation and authentication</a></li>
+      <li><a href="#c5"><span class="toc-num">5</span>Free trial period</a></li>
+      <li><a href="#c6"><span class="toc-num">6</span>Right of withdrawal — Individual users</a></li>
+      <li><a href="#c7"><span class="toc-num">7</span>User obligations and responsibilities</a></li>
+      <li><a href="#c8"><span class="toc-num">8</span>Intellectual property</a></li>
+      <li><a href="#c9"><span class="toc-num">9</span>User data — Ownership and licence</a></li>
+      <li><a href="#c10"><span class="toc-num">10</span>Service availability and maintenance</a></li>
+      <li><a href="#c11"><span class="toc-num">11</span>Limitation of liability</a></li>
+      <li><a href="#c12"><span class="toc-num">12</span>Suspension and termination</a></li>
+      <li><a href="#c13"><span class="toc-num">13</span>Amendments to the Service and ToS</a></li>
+      <li><a href="#c14"><span class="toc-num">14</span>Relationship with BigCommerce</a></li>
+      <li><a href="#c15"><span class="toc-num">15</span>Governing law and jurisdiction</a></li>
+      <li><a href="#c16"><span class="toc-num">16</span>General provisions</a></li>
+      <li><a href="#c17"><span class="toc-num">17</span>Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- 1 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c1"></a>
+    <div class="section-num">Article 1</div>
+    <h2 class="section-title">Definitions</h2>
+    <p class="legal-p">For the purposes of these ToS, the following terms have the meanings set out below:</p>
+    <ul class="legal-list">
+      <li><strong>"Service"</strong>: the MakerStock SaaS application accessible via makerstocks.com, including the desktop web interface, the mobile interface and the public API.</li>
+      <li><strong>"Publisher"</strong>: Boris Mensah, sole trader (micro-enterprise), publisher and operator of the Service.</li>
+      <li><strong>"User"</strong>: any natural or legal person who accesses the Service under an active subscription or during a trial period.</li>
+      <li><strong>"Client"</strong>: the natural or legal person holding a MakerStock account, responsible for the subscription and billing.</li>
+      <li><strong>"Administrator"</strong>: a user with full access to the desktop interface and configuration features.</li>
+      <li><strong>"Operator"</strong>: a user invited by an Administrator with restricted access to the mobile interface.</li>
+      <li><strong>"User Data"</strong>: all data created, imported or generated by the User within the Service (raw materials, recipes, batches, production runs, etc.).</li>
+      <li><strong>"Plan"</strong>: the subscription tier (Trial, Starter, Pro, Business) determining the features available and applicable limits.</li>
+      <li><strong>"BigCommerce"</strong>: the BigCommerce Inc. e-commerce platform, of which the Service is a third-party application distributed via the BigCommerce App Store.</li>
+      <li><strong>"Content"</strong>: any text, data, information, configuration or content created or imported by the User in the course of using the Service.</li>
+    </ul>
+  </div>
+
+  <!-- 2 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c2"></a>
+    <div class="section-num">Article 2</div>
+    <h2 class="section-title">Purpose and description of the Service</h2>
+    <p class="legal-p">MakerStock is a SaaS (Software as a Service) production management application designed for BigCommerce merchants. It enables, in particular:</p>
+    <ul class="legal-list">
+      <li>Management of raw material inventory, including batch and expiry date traceability (depending on the subscribed Plan)</li>
+      <li>Creation and management of manufacturing recipes (Bill of Materials — BOM)</li>
+      <li>Planning and execution of production runs</li>
+      <li>Automatic cost of goods sold (COGS) calculation</li>
+      <li>Two-way synchronisation with the BigCommerce catalogue and sales</li>
+      <li>Supplier procurement management (depending on the subscribed Plan)</li>
+      <li>B2B and reseller sales management (depending on the subscribed Plan)</li>
+      <li>Dedicated mobile access for production operators</li>
+    </ul>
+    <p class="legal-p">The Service is provided "as-is", on a best-efforts basis. The Publisher undertakes to deploy all reasonable means to ensure continuity and quality of the Service, without guaranteeing a specific result or absolute availability.</p>
+    <p class="legal-p">The features available vary depending on the subscribed Plan. The detailed list of features per Plan is available on the pricing page of makerstocks.com and in the official Service documentation. The Publisher reserves the right to change the features included in each Plan, subject to the amendment conditions set out in Article 13.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c3"></a>
+    <div class="section-num">Article 3</div>
+    <h2 class="section-title">Access to the Service — Eligibility</h2>
+    <p class="legal-p">To access the Service, the User must meet all of the following conditions:</p>
+    <ul class="legal-list">
+      <li>Be at least 18 years of age or, in the case of a legal entity, be represented by a natural person with authority to enter into contracts on its behalf</li>
+      <li>Hold an active and valid BigCommerce account</li>
+      <li>Have installed the MakerStock application from the BigCommerce App Store</li>
+      <li>Expressly accept these ToS and the MakerStock Privacy Policy</li>
+      <li>Have a working internet connection and a compatible web browser</li>
+    </ul>
+    <p class="legal-p">The Publisher reserves the right to refuse access to the Service to any person who does not meet these conditions, or whose use would be contrary to these ToS, applicable laws and regulations, or the rights of third parties.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c4"></a>
+    <div class="section-num">Article 4</div>
+    <h2 class="section-title">Account creation and authentication</h2>
+
+    <h3 class="subsection-title">4.1 Account creation</h3>
+    <p class="legal-p">Access to the Service is exclusively through authentication via the User's BigCommerce account (OAuth 2.0 protocol). MakerStock does not create an independent password system. Consequently, the security of access to the Service depends directly on the security of the User's BigCommerce account.</p>
+
+    <h3 class="subsection-title">4.2 Access responsibility</h3>
+    <p class="legal-p">The User is solely responsible for the confidentiality of their access credentials and for any activity carried out under their account. The User undertakes to immediately notify the Publisher of any unauthorised access to their account or any security breach of which they become aware, at contact@makerstocks.com.</p>
+    <p class="legal-p">The Publisher shall not be liable for damage resulting from unauthorised use of the User's account, unless such use is attributable to a security failure of the Service itself.</p>
+
+    <h3 class="subsection-title">4.3 Management of invited users (Operators)</h3>
+    <p class="legal-p">The Administrator may, depending on the subscribed Plan, invite Operators to join their MakerStock workspace. The Administrator is entirely responsible for the actions of their Operators within the Service and must ensure that those Operators have accepted these ToS before using the Service. The Administrator may revoke an Operator's access at any time from the configuration interface.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c5"></a>
+    <div class="section-num">Article 5</div>
+    <h2 class="section-title">Free trial period</h2>
+    <p class="legal-p">MakerStock offers a free trial period of <strong>14 calendar days</strong> (hereinafter the "Trial"), giving access to the features of the Starter plan within a limit of 20 active recipes and 1 user. No credit card is required to start the Trial.</p>
+    <p class="legal-p">Upon expiry of the Trial period:</p>
+    <ul class="legal-list">
+      <li>If the User has not subscribed to any paid plan, access to the Service is automatically suspended</li>
+      <li>User Data created during the Trial is retained for a further period of <strong>30 days</strong>, allowing the User to subscribe to a paid plan and recover their data</li>
+      <li>Beyond this period, data is permanently deleted</li>
+    </ul>
+    <p class="legal-p">The Publisher reserves the right to limit the number of free Trials per entity or per BigCommerce store, and to terminate the Trial early in the event of abusive use or use contrary to these ToS.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c6"></a>
+    <div class="section-num">Article 6</div>
+    <h2 class="section-title">Right of withdrawal — Individual users</h2>
+    <p class="legal-p">In accordance with Articles L. 221-18 et seq. of the French Consumer Code, Users who qualify as <strong>consumers</strong> (natural persons acting for purposes outside their commercial, industrial, craft, professional or agricultural activity) have a right of withdrawal of <strong>14 calendar days</strong> from the date of subscription to a paid plan, without having to give any reason.</p>
+
+    <h3 class="subsection-title">6.1 Exercising the right of withdrawal</h3>
+    <p class="legal-p">To exercise your right of withdrawal, you must notify your decision to withdraw before the 14-day period expires, by any means that can attest to the date:</p>
+    <ul class="legal-list">
+      <li>By email to contact@makerstocks.com, with the explicit statement: "I wish to exercise my right of withdrawal regarding my MakerStock subscription taken out on [date]"</li>
+    </ul>
+    <p class="legal-p">A model withdrawal form is available upon request.</p>
+
+    <h3 class="subsection-title">6.2 Effects of withdrawal</h3>
+    <p class="legal-p">In the event of a valid exercise of the right of withdrawal, the Publisher will refund all sums paid, without undue delay and at the latest within <strong>14 days</strong> of receiving the notification. The refund will be made via the same payment method used for the initial transaction, in coordination with BigCommerce.</p>
+
+    <h3 class="subsection-title">6.3 Exception — Full performance of the Service before the end of the withdrawal period</h3>
+    <p class="legal-p">In accordance with Article L. 221-28 12° of the French Consumer Code, the right of withdrawal cannot be exercised for contracts for the supply of digital content not supplied on a tangible medium where performance has begun and the contract has been fully performed before the end of the withdrawal period.</p>
+    <p class="legal-p">However, MakerStock <strong>does not request express waiver</strong> of the right of withdrawal at the time of subscription. Accordingly, as long as the Service has not been fully and completely performed during the withdrawal period, the right of withdrawal remains applicable.</p>
+
+    <h3 class="subsection-title">6.4 Non-applicability to professionals</h3>
+    <p class="legal-p">The right of withdrawal provided for in this article does not apply to Users acting in the course of their professional, craft, commercial or independent activity.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c7"></a>
+    <div class="section-num">Article 7</div>
+    <h2 class="section-title">User obligations and responsibilities</h2>
+
+    <h3 class="subsection-title">7.1 Lawful use</h3>
+    <p class="legal-p">The User undertakes to use the Service in accordance with these ToS, applicable laws and regulations, and the purpose for which the Service was designed. In particular, the following are prohibited:</p>
+    <ul class="legal-list">
+      <li>Using the Service for unlawful, fraudulent or public-order-threatening purposes</li>
+      <li>Importing, storing or processing data for which the User does not hold legitimate ownership or the necessary authorisations</li>
+      <li>Attempting to bypass the security measures of the Service or to access data other than that to which the User is authorised</li>
+      <li>Reselling, sub-licensing or commercially exploiting the Service for the benefit of third parties without prior written authorisation from the Publisher</li>
+      <li>Using the Service in a manner likely to impair the integrity, performance or availability of the Service for other users</li>
+      <li>Attempting reverse engineering, decompilation or disassembly of the Service</li>
+      <li>Introducing viruses, malicious code or any other harmful program into the Service</li>
+    </ul>
+
+    <h3 class="subsection-title">7.2 Data accuracy</h3>
+    <p class="legal-p">The User is solely responsible for the accuracy, completeness and lawfulness of the User Data they import or create within the Service. The Publisher does not control the content of User Data and shall not be liable for errors, inaccuracies or regulatory failures resulting from data entered by the User.</p>
+    <p class="legal-p">In particular, regulatory compliance of traceability data (batches, expiry dates, allergens, INCI sheets) is the sole responsibility of the User. MakerStock is a management and traceability tool; it does not substitute for the sector-specific regulatory obligations applicable to the User's activity.</p>
+
+    <h3 class="subsection-title">7.3 Data backup</h3>
+    <p class="legal-p">Although the Publisher performs regular infrastructure backups, the User is encouraged to regularly export their User Data using the export features available within the Service. The Publisher does not guarantee the recovery of data lost as a result of an error or action by the User.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c8"></a>
+    <div class="section-num">Article 8</div>
+    <h2 class="section-title">Intellectual property</h2>
+
+    <h3 class="subsection-title">8.1 Publisher's rights</h3>
+    <p class="legal-p">The MakerStock Service, including its source code, architecture, graphical interfaces, documentation, algorithms, trademarks, logos and all other constituent elements, is the exclusive property of the Publisher or its licensors, and is protected by French and international intellectual property laws.</p>
+    <p class="legal-p">These ToS do not confer on the User any ownership right in the Service. The Publisher grants the User a personal, non-exclusive, non-transferable, revocable licence, limited to use of the Service in accordance with these ToS during the subscription period.</p>
+
+    <h3 class="subsection-title">8.2 Feedback and suggestions</h3>
+    <p class="legal-p">If the User communicates to the Publisher suggestions, improvement ideas or feedback relating to the Service (hereinafter "Feedback"), the User acknowledges that the Publisher is free to use such Feedback without consideration, restriction or confidentiality obligation towards the User, the User hereby assigning to the Publisher free of charge all rights relating to such Feedback.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c9"></a>
+    <div class="section-num">Article 9</div>
+    <h2 class="section-title">User data — Ownership and licence</h2>
+    <p class="legal-p">The User retains full ownership of their User Data. The Publisher acquires no ownership rights over User Data by virtue of its import or creation within the Service.</p>
+    <p class="legal-p">The User grants the Publisher a worldwide, non-exclusive, royalty-free and time-limited licence (subscription period + 90 days) to host, store, process and display User Data solely as necessary for the provision of the Service, including technical support and improvement of the Service on the basis of aggregated and anonymised data.</p>
+    <p class="legal-p">The Publisher expressly undertakes not to use User Data for its own commercial purposes, not to sell it to third parties, and not to use it to train artificial intelligence models without the User's prior and explicit consent.</p>
+    <p class="legal-p">Upon termination of the subscription, the User may request an export of their User Data within 90 days. After this period, data is permanently deleted in accordance with Article 6 of the Privacy Policy.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c10"></a>
+    <div class="section-num">Article 10</div>
+    <h2 class="section-title">Service availability and maintenance</h2>
+    <p class="legal-p">The Publisher endeavours to keep the Service accessible 24/7. However, no availability commitment (SLA) is contractually guaranteed under the Starter, Pro and Business plans. The Service is provided on a <strong>"best effort"</strong> basis.</p>
+    <p class="legal-p">Interruptions may occur for the following reasons, without the Publisher being liable for compensation:</p>
+    <ul class="legal-list">
+      <li>Planned maintenance operations, for which the Publisher will endeavour to notify Users with reasonable advance notice</li>
+      <li>Technical failures or outages of the hosting infrastructure</li>
+      <li>Interruptions to the BigCommerce service or its APIs</li>
+      <li>Force majeure events (see Article 16.3)</li>
+      <li>Cyber attacks or security incidents requiring emergency intervention</li>
+    </ul>
+    <p class="legal-p">In the event of a significant and prolonged interruption (exceeding 48 consecutive hours) attributable to the Publisher, the Publisher undertakes to discuss with the User the terms of an appropriate compensation, without this constituting a prior contractual commitment.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c11"></a>
+    <div class="section-num">Article 11</div>
+    <h2 class="section-title">Limitation of liability</h2>
+
+    <h3 class="subsection-title">11.1 Exclusions of liability</h3>
+    <p class="legal-p">To the extent permitted by applicable law, the Publisher shall not be liable for indirect, consequential, incidental or punitive damages resulting from the use of or inability to use the Service, including in particular:</p>
+    <ul class="legal-list">
+      <li>Loss of data or production</li>
+      <li>Loss of profit or revenue</li>
+      <li>Loss of business opportunities</li>
+      <li>Damage resulting from a decision made on the basis of inaccurate information provided by the Service</li>
+      <li>Damage resulting from the User's regulatory non-compliance</li>
+    </ul>
+
+    <h3 class="subsection-title">11.2 Liability cap</h3>
+    <p class="legal-p">In any event, the Publisher's total liability towards a User, for all causes combined, is expressly capped at the amount of sums actually paid by that User under their MakerStock subscription during the <strong>three (3) months</strong> preceding the event giving rise to liability.</p>
+
+    <h3 class="subsection-title">11.3 Provisions applicable to consumers</h3>
+    <p class="legal-p">The limitations of liability set out in Articles 11.1 and 11.2 do not apply to Users who qualify as consumers where applicable law prohibits such limitations, in particular in cases of fraud, gross negligence or breach of an essential obligation of the contract. In such cases, the Publisher's liability is assessed in accordance with ordinary law.</p>
+
+    <h3 class="subsection-title">11.4 Accuracy of calculations</h3>
+    <p class="legal-p">MakerStock provides COGS calculations, recommended prices and financial reports for informational purposes only. These calculations depend on data entered by the User. The Publisher does not guarantee the absolute accuracy of calculations and accepts no liability for commercial, tax or accounting decisions made on their basis. The User is encouraged to have financial data from the Service reviewed by a qualified professional.</p>
+  </div>
+
+  <!-- 12 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c12"></a>
+    <div class="section-num">Article 12</div>
+    <h2 class="section-title">Suspension and termination</h2>
+
+    <h3 class="subsection-title">12.1 Termination by the User</h3>
+    <p class="legal-p">The User may terminate their subscription at any time, without notice or penalty, from the BigCommerce App Store management interface. Termination takes effect at the end of the current subscription period. No pro-rata refund is granted for unused days, except in the exercise of the right of withdrawal under the conditions of Article 6.</p>
+
+    <h3 class="subsection-title">12.2 Termination or suspension by the Publisher</h3>
+    <p class="legal-p">The Publisher reserves the right to suspend or terminate a User's access to the Service, with or without notice depending on the seriousness of the facts, in the following cases:</p>
+    <ul class="legal-list">
+      <li>Clear and established violation of these ToS</li>
+      <li>Fraudulent activity or conduct likely to cause harm to the Publisher or third parties</li>
+      <li>Persistent payment default managed by BigCommerce</li>
+      <li>Court order or requisition by a competent authority</li>
+      <li>Cessation of the Publisher's business</li>
+    </ul>
+    <p class="legal-p">In the event of termination by the Publisher for a legitimate reason other than the User's fault, the Publisher will refund the sums paid corresponding to the unused period, calculated on a pro-rata basis.</p>
+
+    <h3 class="subsection-title">12.3 Effects of termination</h3>
+    <p class="legal-p">On the effective date of termination, the User's access to the Service is immediately revoked. User Data is retained for <strong>90 days</strong> from termination, allowing the User to export it. Beyond this period, it is permanently deleted, with the exception of data subject to a legal retention obligation.</p>
+  </div>
+
+  <!-- 13 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c13"></a>
+    <div class="section-num">Article 13</div>
+    <h2 class="section-title">Amendments to the Service and ToS</h2>
+
+    <h3 class="subsection-title">13.1 Service evolution</h3>
+    <p class="legal-p">The Publisher reserves the right to modify, improve or evolve the Service at any time, in particular by adding, modifying or removing features. Changes that do not materially affect Users' rights and obligations may be made without notice. Material changes will be notified with reasonable advance notice.</p>
+
+    <h3 class="subsection-title">13.2 Amendment of the ToS</h3>
+    <p class="legal-p">The Publisher reserves the right to amend these ToS. Any material amendment will be notified to Users by email to the address registered on their account, with <strong>30 calendar days</strong> advance notice before it takes effect.</p>
+    <p class="legal-p">If the User does not accept the new ToS, they may terminate their subscription before the amendment takes effect, without additional charges. Continued use of the Service after the effective date constitutes acceptance of the amended ToS.</p>
+
+    <h3 class="subsection-title">13.3 Pricing changes</h3>
+    <p class="legal-p">Any pricing change will be notified to Users with at least <strong>30 calendar days</strong> advance notice. New pricing applies from the next subscription renewal following expiry of the notice period.</p>
+  </div>
+
+  <!-- 14 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c14"></a>
+    <div class="section-num">Article 14</div>
+    <h2 class="section-title">Relationship with BigCommerce</h2>
+    <p class="legal-p">MakerStock is a third-party application distributed via the BigCommerce App Store. The Publisher and BigCommerce Inc. are legally independent entities. These ToS govern exclusively the relationship between the Publisher and the User regarding the MakerStock Service.</p>
+    <p class="legal-p">Use of the BigCommerce platform is governed by BigCommerce's own Terms of Service, which apply independently and complementarily. In the event of a conflict between MakerStock's ToS and BigCommerce's terms on a matter falling within BigCommerce's scope (billing, merchant account, online store), BigCommerce's terms prevail.</p>
+    <p class="legal-p">The Publisher is not responsible for interruptions, modifications or cessation of the BigCommerce service, nor for their consequences on the availability of the MakerStock Service.</p>
+  </div>
+
+  <!-- 15 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c15"></a>
+    <div class="section-num">Article 15</div>
+    <h2 class="section-title">Governing law and jurisdiction</h2>
+
+    <h3 class="subsection-title">15.1 Governing law</h3>
+    <p class="legal-p">These ToS are governed by French law. The French version of these ToS prevails in the event of any discrepancy with any translation.</p>
+
+    <h3 class="subsection-title">15.2 Amicable resolution</h3>
+    <p class="legal-p">In the event of a dispute relating to the interpretation or performance of these ToS, the parties undertake to seek an amicable resolution before taking legal action. The User may submit their complaint to contact@makerstocks.com. The Publisher undertakes to provide a reasoned response within 30 days.</p>
+
+    <h3 class="subsection-title">15.3 Mediation — Consumers</h3>
+    <p class="legal-p">In accordance with Articles L. 611-1 et seq. of the French Consumer Code, Users who qualify as consumers have the right to resort free of charge to a consumer mediator for the amicable resolution of a dispute with the Publisher. Mediation may be initiated with:</p>
+    <p class="legal-p">CM2C — Centre de Médiation et d'Arbitrage de Paris, 14 rue Saint-Nom, 75017 Paris — <a href="https://www.cm2c.net" target="_blank" style="color:var(--e600)">www.cm2c.net</a></p>
+    <p class="legal-p">The European Commission also provides an online dispute resolution platform accessible at: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color:var(--e600)">https://ec.europa.eu/consumers/odr/</a></p>
+
+    <h3 class="subsection-title">15.4 Competent jurisdiction</h3>
+    <p class="legal-p">Failing an amicable resolution, any dispute relating to these ToS shall be subject to the exclusive jurisdiction of the courts having jurisdiction over the Tribunal judiciaire de Rennes, unless a mandatory contrary provision applies, in particular the protective jurisdiction rules applicable to consumers.</p>
+    <p class="legal-p">For Users who qualify as consumers, the competent court shall be that of the consumer's place of residence, in accordance with the mandatory rules of consumer law.</p>
+  </div>
+
+  <!-- 16 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c16"></a>
+    <div class="section-num">Article 16</div>
+    <h2 class="section-title">General provisions</h2>
+
+    <h3 class="subsection-title">16.1 Entire agreement</h3>
+    <p class="legal-p">These ToS, combined with the MakerStock Privacy Policy, constitute the entire agreement between the Publisher and the User regarding the Service and supersede all prior agreements, whether oral or written, on the same subject matter.</p>
+
+    <h3 class="subsection-title">16.2 Severability</h3>
+    <p class="legal-p">If any provision of these ToS is declared null or unenforceable by a competent court, such nullity shall not affect the validity of the remaining provisions, which shall remain in full force and effect.</p>
+
+    <h3 class="subsection-title">16.3 Force majeure</h3>
+    <p class="legal-p">The Publisher shall not be liable for the non-performance or delay in performance of its obligations resulting from a force majeure event within the meaning of Article 1218 of the French Civil Code, including: natural disasters, epidemics, wars, terrorist acts, widespread internet or electricity outages, failures of infrastructure subcontractors beyond the Publisher's reasonable control, or government decisions rendering the service impossible.</p>
+
+    <h3 class="subsection-title">16.4 Non-waiver</h3>
+    <p class="legal-p">The Publisher's failure to invoke a provision of these ToS at any given time shall not be construed as a waiver of the right to invoke it subsequently.</p>
+
+    <h3 class="subsection-title">16.5 Assignment</h3>
+    <p class="legal-p">The Publisher reserves the right to assign all or part of the rights and obligations arising from these ToS to a third party, in particular in the context of a merger, acquisition or asset sale. The User will be informed of such assignment with 30 days' notice and will, if applicable, have the option to terminate their subscription free of charge.</p>
+    <p class="legal-p">The User may not assign all or part of their rights and obligations arising from these ToS without the Publisher's prior written consent.</p>
+  </div>
+
+  <!-- 17 -->
+  <div class="doc-section">
+    <a class="section-anchor" id="c17"></a>
+    <div class="section-num">Article 17</div>
+    <h2 class="section-title">Contact</h2>
+    <p class="legal-p">For any questions relating to these ToS, or to exercise the rights provided for herein:</p>
+    <ul class="legal-list">
+      <li><strong>By email:</strong> contact@makerstocks.com</li>
+    </ul>
+    <p class="legal-p">Hosting provider: Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Germany — <a href="https://www.hetzner.com" target="_blank" style="color:var(--e600)">www.hetzner.com</a>.</p>
+  </div>
+
+  <div class="doc-footer">
+    <p>MakerStock · Terms of Service · Version 1.0 · May 27, 2026</p>
+    <p style="margin-top:.5rem"><a href="privacy.html">Privacy Policy</a> · <a href="../../en/">Back to site</a></p>
+  </div>
+
+</div>
+</body>
+</html>
