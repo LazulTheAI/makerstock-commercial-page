@@ -174,9 +174,9 @@ p.body-text { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; 
 
 /* ── Hero ── */
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: flex; align-items: center;
-  padding: 7rem 2rem 5rem;
+  padding: 5rem 2rem 4rem;
   background: linear-gradient(180deg, var(--s0) 0%, var(--surface-ground) 100%);
   border-bottom: 1px solid var(--surface-border);
 }
@@ -794,9 +794,11 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
             <li class="fb-item">View and prepare B2B orders (Business plan)</li>
           </ul>
         </div>
-        <div class="sshot">
-          <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
-          <img src="../img/mobile.PNG" alt="MakerStock — Mobile app" style="width:100%;display:block;">
+        <div style="display:flex; justify-content:center;">
+          <div class="sshot" style="max-width:280px; width:100%;">
+            <div class="sshot-top"><div class="sshot-dot sshot-dot-r"></div><div class="sshot-dot sshot-dot-a"></div><div class="sshot-dot sshot-dot-g"></div></div>
+            <img src="../img/mobile.PNG" alt="MakerStock — Mobile app" style="width:100%;display:block;">
+          </div>
         </div>
       </div>
 
