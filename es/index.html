@@ -632,15 +632,15 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       <ul class="cfg-pain-list">
         <li class="cfg-pain-item">
           <div class="cfg-pain-icon green">📦</div>
-          <div><div class="cfg-pain-title">Stock & recettes dans tous les plans</div><div class="cfg-pain-desc">Materials premières, BOM, alertes et synchronisation BigCommerce sont disponibles dès le Starter.</div></div>
+          <div><div class="cfg-pain-title">Stock, alertas y trazabilidad en todos los planes</div><div class="cfg-pain-desc">Materias primas, BOM, alertas de stock, trazabilidad de lotes y fecha de caducidad, y sincronización BigCommerce están disponibles desde el Starter.</div></div>
         </li>
         <li class="cfg-pain-item">
           <div class="cfg-pain-icon blue">🔬</div>
-          <div><div class="cfg-pain-title">Traçabilité lots & DLC à partir du Pro</div><div class="cfg-pain-desc">Necesario para las obligaciones normativas en cosmética, alimentación o suplementos.</div></div>
+          <div><div class="cfg-pain-title">Multi-almacén (hasta 3) y pedidos a proveedores desde el Pro</div><div class="cfg-pain-desc">Para talleres en crecimiento: varios centros de almacenamiento y gestión de compras a proveedores.</div></div>
         </li>
         <li class="cfg-pain-item">
           <div class="cfg-pain-icon amber">🏭</div>
-          <div><div class="cfg-pain-title">Multi-entrepôts & B2B en Business</div><div class="cfg-pain-desc">Para talleres con varios centros, un equipo ampliado y distribuidores que gestionar.</div></div>
+          <div><div class="cfg-pain-title">Almacenes ilimitados y ventas B2B en Business</div><div class="cfg-pain-desc">Para talleres con muchos centros, un equipo ampliado y distribuidores que gestionar.</div></div>
         </li>
       </ul>
     </div>
@@ -694,7 +694,8 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
             <div class="cfg-q-label">¿Vendes a distribuidores B2B o gestionas varios almacenes?</div>
             <div class="cfg-options">
               <div class="cfg-option" onclick="pick(this,4,'starter')"><div class="cfg-radio"></div>No, solo mi tienda BigCommerce</div>
-              <div class="cfg-option" onclick="pick(this,4,'business')"><div class="cfg-radio"></div>Sí, distribuidores o varios almacenes</div>
+              <div class="cfg-option" onclick="pick(this,4,'pro')"><div class="cfg-radio"></div>Sí, hasta 3 centros de almacenamiento, sin distribuidores B2B</div>
+              <div class="cfg-option" onclick="pick(this,4,'business')"><div class="cfg-radio"></div>Sí, distribuidores B2B o más de 3 centros</div>
             </div>
           </div>
 
@@ -789,9 +790,8 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <p class="fb-desc">Tus operarios no necesitan un ordenador. El shell móvil cubre exactamente lo que necesitan en campo, sin acceso a datos financieros ni a la configuración.</p>
           <ul class="fb-list">
             <li class="fb-item">Iniciar / finalizar un run en 3 toques</li>
-            <li class="fb-item">Réceptionner une livraison avec saisie lot & DLC</li>
-            <li class="fb-item">Escanear QR / código de barras para identificar un material</li>
-            <li class="fb-item">Consultar y preparar pedidos B2B (plan Business)</li>
+            <li class="fb-item">Recibir una entrega con registro de lote y caducidad</li>
+            <li class="fb-item">Consultar y preparar pedidos</li>
           </ul>
         </div>
         <div style="display:flex; justify-content:center;">
@@ -839,10 +839,6 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
     <div class="pricing-header reveal">
       <div class="section-tag">Precios</div>
       <h2 class="section-title">Simple. Transparente.<br><span class="em">Adaptado a tu tamaño.</span></h2>
-      <div class="pricing-toggle">
-        <button class="tgl on" onclick="setBilling('monthly',this)">Mensual</button>
-        <button class="tgl" onclick="setBilling('annual',this)">Anual <span class="save-badge">−2 meses</span></button>
-      </div>
     </div>
     <div class="pricing-cards">
 
@@ -850,7 +846,6 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         <div class="pname">Starter</div>
         <div>
           <div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/mes</span></div>
-          <div class="pannual" id="pa-s">o 25 €/mes facturado anualmente</div>
         </div>
         <div class="pdesc">Perfecto para empezar a gestionar tu producción artesanal.</div>
         <div class="pdiv"></div>
@@ -861,9 +856,9 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <li class="pf"><span class="c">✓</span>Sync BigCommerce</li>
           <li class="pf"><span class="c">✓</span>Ejecuciones de producción</li>
           <li class="pf"><span class="c">✓</span>Importación CSV / Excel</li>
-          <li class="pf off"><span class="x">—</span>Alertas de stock</li>
+          <li class="pf"><span class="c">✓</span>Alertas de stock y trazabilidad de lotes/caducidad</li>
+          <li class="pf"><span class="c">✓</span>Aplicación móvil (1 usuario)</li>
           <li class="pf off"><span class="x">—</span>Gestión multi-almacén</li>
-          <li class="pf off"><span class="x">—</span>Aplicación móvil</li>
           <li class="pf off"><span class="x">—</span>Pedidos B2B y reportes avanzados</li>
         </ul>
         <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Empezar prueba gratuita</a></div>
@@ -874,19 +869,18 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         <div class="pname">Pro</div>
         <div>
           <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/mes</span></div>
-          <div class="pannual" id="pa-p">o 49 €/mes facturado anualmente</div>
         </div>
         <div class="pdesc">Para talleres en crecimiento con necesidades avanzadas.</div>
         <div class="pdiv"></div>
         <ul class="pfeatures">
           <li class="pf"><span class="c">✓</span>Hasta 100 recetas activas</li>
-          <li class="pf"><span class="c">✓</span>Almacenes ilimitados</li>
+          <li class="pf"><span class="c">✓</span>Hasta 3 almacenes</li>
           <li class="pf"><span class="c">✓</span>Gestión de materias primas</li>
           <li class="pf"><span class="c">✓</span>Sync BigCommerce</li>
           <li class="pf"><span class="c">✓</span>Ejecuciones de producción</li>
-          <li class="pf"><span class="c">✓</span>Alertas de stock</li>
+          <li class="pf"><span class="c">✓</span>Alertas de stock y trazabilidad de lotes/caducidad</li>
           <li class="pf"><span class="c">✓</span>Gestión multi-almacén</li>
-          <li class="pf"><span class="c">✓</span>Aplicación móvil incluida</li>
+          <li class="pf"><span class="c">✓</span>Aplicación móvil (10 usuarios)</li>
           <li class="pf"><span class="c">✓</span>Pedidos a proveedores</li>
           <li class="pf off"><span class="x">—</span>Pedidos B2B y reportes avanzados</li>
         </ul>
@@ -897,7 +891,6 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         <div class="pname">Business</div>
         <div>
           <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/mes</span></div>
-          <div class="pannual" id="pa-b">o 82 €/mes facturado anualmente</div>
         </div>
         <div class="pdesc">La solución completa para talleres profesionales.</div>
         <div class="pdiv"></div>
@@ -907,8 +900,8 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <li class="pf"><span class="c">✓</span>Gestión de materias primas</li>
           <li class="pf"><span class="c">✓</span>Sync BigCommerce</li>
           <li class="pf"><span class="c">✓</span>Ejecuciones de producción</li>
-          <li class="pf"><span class="c">✓</span>Alertas de stock</li>
-          <li class="pf"><span class="c">✓</span>Aplicación móvil incluida</li>
+          <li class="pf"><span class="c">✓</span>Alertas de stock y trazabilidad de lotes/caducidad</li>
+          <li class="pf"><span class="c">✓</span>Aplicación móvil (usuarios ilimitados)</li>
           <li class="pf"><span class="c">✓</span>Pedidos a proveedores</li>
           <li class="pf"><span class="c">✓</span>Pedidos B2B y revendedores</li>
           <li class="pf"><span class="c">✓</span>Informe P&amp;L · Exportación contable</li>
@@ -956,17 +949,17 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
 /* Configurator */
 const PLANS = {
-  starter: { name:'Starter', price:'29 € / mois', annualNote:'(o 25 €/mes facturado anualmente)', cls:'starter',
-    why:'Tu perfil se corresponde con el plan Starter. Gestiona hasta 20 recetas activas, tus materias primas y runs de producción, sincronizados con tu tienda BigCommerce.',
-    features:['Hasta 20 recetas activas','1 almacén · Gestión de materias primas','Sync BigCommerce · Ejecuciones de producción','Importación CSV / Excel','14 días de prueba gratuita']
+  starter: { name:'Starter', price:'29 € / mes', cls:'starter',
+    why:'Tu perfil se corresponde con el plan Starter. Gestiona hasta 20 recetas activas, tus materias primas y runs de producción, con alertas de stock, trazabilidad de lotes/caducidad y app móvil (1 usuario), sincronizados con tu tienda BigCommerce.',
+    features:['Hasta 20 recetas activas','1 almacén · Alertas de stock y trazabilidad de lotes/caducidad','App móvil (1 usuario)','Sync BigCommerce · Ejecuciones de producción','Importación CSV / Excel']
   },
-  pro: { name:'Pro', price:'59 € / mois', annualNote:'(o 49 €/mes facturado anualmente)', cls:'pro',
-    why:'Tu perfil se corresponde con el plan Pro. Hasta 100 recetas activas, alertas de stock, gestión multi-almacén, app móvil y pedidos a proveedores.',
-    features:['Hasta 100 recetas activas','Alertas de stock · Gestión multi-almacén','App móvil para operarios','Pedidos a proveedores','Almacenes ilimitados']
+  pro: { name:'Pro', price:'59 € / mes', cls:'pro',
+    why:'Tu perfil se corresponde con el plan Pro. Hasta 100 recetas activas, hasta 3 almacenes, gestión multi-almacén, app móvil (10 usuarios) y pedidos a proveedores.',
+    features:['Hasta 100 recetas activas','Hasta 3 almacenes · Gestión multi-almacén','App móvil (10 usuarios)','Pedidos a proveedores','Alertas de stock y trazabilidad de lotes/caducidad']
   },
-  business: { name:'Business', price:'99 € / mois', annualNote:'(o 82 €/mes facturado anualmente)', cls:'business',
-    why:'Tu perfil se corresponde con el plan Business. Recetas ilimitadas, pedidos B2B y revendedores, informe P&G y exportación contable — la solución completa para talleres profesionales.',
-    features:['Recetas activas ilimitadas','Pedidos B2B y revendedores','Informe P&G · Exportación contable','App móvil incluida','Almacenes ilimitados · Planificación de producción']
+  business: { name:'Business', price:'99 € / mes', cls:'business',
+    why:'Tu perfil se corresponde con el plan Business. Recetas ilimitadas, pedidos B2B y revendedores, informe P&G y exportación contable, app móvil ilimitada — la solución completa para talleres profesionales.',
+    features:['Recetas activas ilimitadas','Pedidos B2B y revendedores','Informe P&G · Exportación contable','App móvil (usuarios ilimitados)','Almacenes ilimitados · Planificación de producción']
   }
 };
 const hierarchy = {starter:1,pro:2,business:3};
@@ -1005,7 +998,7 @@ function showResult() {
   const d = PLANS[best];
   document.getElementById('rHeader').className = 'result-header ' + d.cls;
   document.getElementById('rName').textContent = d.name;
-  document.getElementById('rPrice').textContent = d.price + ' ' + d.annualNote;
+  document.getElementById('rPrice').textContent = d.price;
   document.getElementById('rWhy').textContent = d.why;
   document.getElementById('rFeats').innerHTML = d.features.map(f=>`<li class="result-feature"><span class="ck">✓</span>${f}</li>`).join('');
   for(let i=1;i<=4;i++) document.getElementById('q'+i)?.classList.remove('active');
@@ -1040,19 +1033,6 @@ function submitEmail() {
     `<div style="width:100%;padding:.75rem;background:var(--primary-50);border:1px solid var(--e200);border-radius:var(--radius);color:var(--e700);font-size:.875rem;font-weight:600;text-align:center">✓ On vous envoie le lien d'installation — vérifiez votre boîte mail.</div>`;
 }
 
-/* Pricing toggle */
-const prices = {monthly:{s:29,p:59,b:99},annual:{s:25,p:49,b:82}};
-function setBilling(mode, btn) {
-  document.querySelectorAll('.tgl').forEach(t=>t.classList.remove('on'));
-  btn.classList.add('on');
-  const m = prices[mode];
-  document.getElementById('ps').textContent = m.s;
-  document.getElementById('pp').textContent = m.p;
-  document.getElementById('pb').textContent = m.b;
-  ['s','p','b'].forEach(k=>{
-    document.getElementById('pa-'+k).style.display = mode==='annual'?'block':'none';
-  });
-}
 </script>
 </body>
 </html>
