@@ -214,6 +214,19 @@ p.body-text { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; 
 .proof-item { display: flex; align-items: center; gap: .375rem; }
 .proof-check { color: var(--e500); font-size: .875rem; }
 
+.hero-qr {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  display: flex; flex-direction: column; align-items: center; gap: .75rem;
+  max-width: 220px; margin: 0 auto; text-align: center;
+}
+.hero-qr-img { width: 140px; height: 140px; display: block; border-radius: var(--radius); }
+.hero-qr-title { font-size: .875rem; font-weight: 700; color: var(--text-color); }
+.hero-qr-sub { font-size: .75rem; color: var(--text-dim); }
+
 /* ── App mockup — rendu identique à l'app ── */
 .app-mockup {
   background: var(--surface-card);
@@ -618,6 +631,11 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       </div>
     </div>
 
+    <div class="hero-qr reveal">
+      <img src="../img/QRcode.png" alt="QR code — MakerStock app on Google Play" class="hero-qr-img">
+      <div class="hero-qr-title">Android app</div>
+      <div class="hero-qr-sub">Scan to install it from Google Play</div>
+    </div>
   </div>
 </section>
 
