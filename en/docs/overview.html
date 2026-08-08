@@ -114,7 +114,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
 .feature-table .group-row td { background:var(--gray-50); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); padding:8px 14px; }
 .check-yes { color:#059669; font-size:15px; }
 .check-no { color:var(--gray-400); font-size:15px; }
-.check-part { color:var(--amber); font-size:14px; }
+.check-part { color:var(--amber); font-size:14px; font-weight:700; }
 .iface-badge { display:inline-flex; align-items:center; gap:3px; font-family:var(--font-mono); font-size:10.5px; font-weight:500; padding:2px 7px; border-radius:4px; }
 .iface-d { background:#EFF6FF; color:#2563EB; }
 .iface-m { background:var(--teal-light); color:var(--teal); }
@@ -376,7 +376,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Stock entries &amp; adjustments</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Movement history</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Lot &amp; expiry traceability</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>Inter-warehouse transfers</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+            <tr><td>Inter-warehouse transfers</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>CSV / Excel data import</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
 
             <tr class="group-row"><td colspan="5">Recipes &amp; production</td></tr>
@@ -384,7 +384,6 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Recipe ↔ BigCommerce product link</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Raw material COGS</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Full COGS (labor + variable overhead)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>Recommended selling price</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Launch / schedule a production run</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Automatic FIFO deduction (on sale)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Active recipe limit</td><td><span class="iface-badge iface-d">D</span></td><td class="check-part">20</td><td class="check-part">100</td><td class="check-part">∞</td></tr>
@@ -403,8 +402,8 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr class="group-row"><td colspan="5">Monitoring &amp; alerts</td></tr>
             <tr><td>Low stock alerts (materials &amp; products)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Forecast alerts (planned runs)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>Materials consumption report</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>XLSX accounting export</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Materials consumption report</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
+            <tr><td>XLSX accounting export</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
             <tr><td>P&amp;L report per product</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
 
             <tr class="group-row"><td colspan="5">Organisation &amp; team</td></tr>
