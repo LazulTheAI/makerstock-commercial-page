@@ -481,6 +481,8 @@ p.body-text { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; 
 .feature-blocks { display: flex; flex-direction: column; gap: 5rem; }
 .fblock { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .fblock.rev { direction: rtl; } .fblock.rev > * { direction: ltr; }
+.fblock-stack { grid-template-columns: 1fr; gap: 2rem; }
+.fblock-stack.rev { direction: ltr; }
 
 .fb-tag { font-size: .6875rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--e700); margin-bottom: .5rem; }
 .fb-title { font-size: clamp(1.375rem, 2.5vw, 1.875rem); font-weight: 700; line-height: 1.2; letter-spacing: -.015em; color: var(--text-color); margin-bottom: .875rem; }
@@ -767,7 +769,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   <div class="inner">
     <div class="feature-blocks">
 
-      <div class="fblock reveal">
+      <div class="fblock fblock-stack reveal">
         <div>
           <div class="fb-tag">Production</div>
           <h3 class="fb-title">Tus recetas.<br><span class="em">Tu ritmo.</span></h3>
@@ -785,7 +787,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
         </div>
       </div>
 
-      <div class="fblock rev reveal">
+      <div class="fblock fblock-stack rev reveal">
         <div>
           <div class="fb-tag">Trazabilidad</div>
           <h3 class="fb-title">Cada lote.<br><span class="em">Cada gramo.</span></h3>
