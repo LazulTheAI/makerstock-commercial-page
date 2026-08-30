@@ -184,8 +184,8 @@ p.body-text { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; 
 }
 
 .hero-inner {
-  max-width: 1100px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1fr 1fr;
+  max-width: 720px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr;
   gap: 4.5rem; align-items: center;
 }
 
@@ -216,18 +216,15 @@ p.body-text { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; 
 .proof-item { display: flex; align-items: center; gap: .375rem; }
 .proof-check { color: var(--e500); font-size: .875rem; }
 
-.hero-qr {
-  background: var(--surface-card);
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-  padding: 1.5rem;
-  display: flex; flex-direction: column; align-items: center; gap: .75rem;
-  max-width: 220px; margin: 0 auto; text-align: center;
+.video-section { padding: 5rem 2rem; border-bottom: 1px solid var(--surface-border); }
+.video-frame {
+  max-width: 900px; margin: 2.5rem auto 0;
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: var(--radius-xl); overflow: hidden;
+  box-shadow: var(--shadow-xl); border: 1px solid var(--surface-border);
+  background: #000;
 }
-.hero-qr-img { width: 140px; height: 140px; display: block; border-radius: var(--radius); }
-.hero-qr-title { font-size: .875rem; font-weight: 700; color: var(--text-color); }
-.hero-qr-sub { font-size: .75rem; color: var(--text-dim); }
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 /* ── App mockup — rendu identique à l'app ── */
 .app-mockup {
@@ -635,10 +632,19 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       </div>
     </div>
 
-    <div class="hero-qr reveal">
-      <img src="../img/QRcode.png" alt="QR code — MakerStock app on Google Play" class="hero-qr-img">
-      <div class="hero-qr-title">Android app</div>
-      <div class="hero-qr-sub">Scan to install it from Google Play</div>
+  </div>
+</section>
+
+<!-- PRESENTATION VIDEO -->
+<section class="video-section">
+  <div class="inner">
+    <div class="reveal" style="text-align:center">
+      <div class="section-tag">Watch</div>
+      <h2 class="section-title" style="margin-bottom:.5rem">MakerStock in <span class="em">action</span></h2>
+      <p class="section-lead" style="margin:0 auto">A quick demo of the app, from raw material to sold product.</p>
+    </div>
+    <div class="video-frame reveal">
+      <iframe src="https://www.youtube.com/embed/pwsjrThfFGM?rel=0" title="MakerStock presentation" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
