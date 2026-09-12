@@ -736,16 +736,16 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
             <p class="result-why" id="rWhy"></p>
             <ul class="result-features" id="rFeats"></ul>
             <div class="email-row">
-              <input type="email" class="email-input" placeholder="votre@email.com" id="emailInput">
-              <button class="btn btn-primary" onclick="submitEmail()">Démarrer →</button>
+              <input type="email" class="email-input" placeholder="you@email.com" id="emailInput">
+              <button class="btn btn-primary" onclick="submitEmail()">Start →</button>
             </div>
-            <div class="result-note">14 days free sur le plan recommandé · No credit card</div>
+            <div class="result-note">14 days free on the recommended plan · No credit card</div>
             <button class="restart-btn" onclick="restart()">↩ Start over</button>
           </div>
 
           <div class="cfg-footer" id="cfgFooter">
             <span class="cfg-hint" id="cfgHint">Select an answer</span>
-            <button class="btn btn-primary" id="cfgNext" style="opacity:.35;pointer-events:none" onclick="nextQ()">Suivant →</button>
+            <button class="btn btn-primary" id="cfgNext" style="opacity:.35;pointer-events:none" onclick="nextQ()">Next →</button>
           </div>
         </div>
       </div>
@@ -834,33 +834,6 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section" style="display:none">
-  <div class="inner">
-    <div class="reveal">
-      <div class="section-tag">Témoignages</div>
-      <h2 class="section-title">Makers who <span class="em">took the leap</span></h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card card reveal">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"The BigCommerce sync changed everything. Every sale automatically deducts my materials — I no longer open Excel to track stock."</p>
-        <div class="testi-author"><div class="testi-av av-a">ML</div><div><div class="testi-name">Marie L.</div><div class="testi-role">Artisan soap maker · Starter plan</div></div></div>
-      </div>
-      <div class="testi-card card reveal" style="transition-delay:.1s">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Lot traceability was our big blind spot. Now every gram is traced from supplier to customer. Our sanitary inspections have become a non-event."</p>
-        <div class="testi-author"><div class="testi-av av-b">TR</div><div><div class="testi-name">Thomas R.</div><div class="testi-role">Artisan cosmetics · Pro plan</div></div></div>
-      </div>
-      <div class="testi-card card reveal" style="transition-delay:.2s">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"My operators start and complete runs from their phones. I manage from my desk. No coordination meetings, no shared spreadsheets."</p>
-        <div class="testi-author"><div class="testi-av av-c">SA</div><div><div class="testi-name">Sophie A.</div><div class="testi-role">Artisan confectionery · Pro plan</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
   <div class="inner">
@@ -873,7 +846,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       <div class="pcard card reveal">
         <div class="pname">Starter</div>
         <div>
-          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="ps">29</span><span class="pper">/month</span></div>
+          <div class="pprice"><span class="pcur">$</span><span class="pamount" id="ps">29</span><span class="pper">/month</span></div>
         </div>
         <div class="pdesc">Perfect to get started managing your artisan production.</div>
         <div class="pdiv"></div>
@@ -889,14 +862,14 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <li class="pf off"><span class="x">—</span>Multi-warehouse management</li>
           <li class="pf off"><span class="x">—</span>B2B orders &amp; advanced reports</li>
         </ul>
-        <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Start free trial</a></div>
+        <div class="pcta"><a href="#configurator" class="btn btn-primary-outlined" style="width:100%">Start free trial</a></div>
       </div>
 
       <div class="pcard card pop reveal" style="transition-delay:.1s">
         <div class="pop-badge">Recommended</div>
         <div class="pname">Pro</div>
         <div>
-          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pp">59</span><span class="pper">/month</span></div>
+          <div class="pprice"><span class="pcur">$</span><span class="pamount" id="pp">59</span><span class="pper">/month</span></div>
         </div>
         <div class="pdesc">For growing workshops with advanced needs.</div>
         <div class="pdiv"></div>
@@ -912,13 +885,13 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <li class="pf"><span class="c">✓</span>Supplier purchase orders</li>
           <li class="pf off"><span class="x">—</span>B2B orders &amp; advanced reports</li>
         </ul>
-        <div class="pcta"><a href="#" class="btn btn-primary" style="width:100%">Start free trial</a></div>
+        <div class="pcta"><a href="#configurator" class="btn btn-primary" style="width:100%">Start free trial</a></div>
       </div>
 
       <div class="pcard card reveal" style="transition-delay:.2s">
         <div class="pname">Business</div>
         <div>
-          <div class="pprice"><span class="pcur">€</span><span class="pamount" id="pb">99</span><span class="pper">/month</span></div>
+          <div class="pprice"><span class="pcur">$</span><span class="pamount" id="pb">99</span><span class="pper">/month</span></div>
         </div>
         <div class="pdesc">The complete solution for professional workshops.</div>
         <div class="pdiv"></div>
@@ -934,7 +907,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
           <li class="pf"><span class="c">✓</span>B2B orders &amp; resellers</li>
           <li class="pf"><span class="c">✓</span>P&amp;L report · Accounting export</li>
         </ul>
-        <div class="pcta"><a href="#" class="btn btn-primary-outlined" style="width:100%">Start free trial</a></div>
+        <div class="pcta"><a href="#configurator" class="btn btn-primary-outlined" style="width:100%">Start free trial</a></div>
       </div>
 
     </div>
@@ -951,7 +924,7 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
       <a href="#pricing" class="btn btn-primary btn-lg">See pricing →</a>
       <a href="docs/overview.html" class="btn btn-outlined btn-lg" target="_blank">Read the documentation</a>
     </div>
-    <div class="final-note">No credit card · Annulable à tout moment · Données conservées au passage payant</div>
+    <div class="final-note">No credit card · Cancel anytime · Your data is kept when you upgrade to a paid plan</div>
   </div>
 </section>
 
@@ -960,13 +933,13 @@ footer { background: var(--surface-card); border-top: 1px solid var(--surface-bo
   <div class="footer-l">
     <img src="../img/logo.png" alt="MakerStock" style="height:28px;width:auto;">
     <span class="footer-brand">MakerStock</span>
-    <span class="footer-copy">· © 2025 · App BigCommerce</span>
+    <span class="footer-copy">· © 2026 · App BigCommerce</span>
   </div>
   <div class="footer-links">
     <a href="docs/overview.html">Documentation</a>
     <a href="legal/privacy.html">Privacy</a>
     <a href="legal/tos.html">Terms</a>
-    <a href="#">Support</a>
+    <a href="docs/overview.html">Support</a>
   </div>
 </footer>
 
@@ -977,15 +950,15 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
 /* Configurator */
 const PLANS = {
-  starter: { name:'Starter', price:'29 € / month', cls:'starter',
+  starter: { name:'Starter', price:'29 $ / month', cls:'starter',
     why:'Your profile matches the Starter plan. Manage up to 20 active recipes, your raw materials and production runs, with stock alerts, batch traceability/expiry dates and mobile app (1 user), synced with your BigCommerce store.',
     features:['Up to 20 active recipes','1 warehouse · Stock alerts & batch traceability/expiry dates','Mobile app (1 user)','BigCommerce sync · Production runs','CSV / Excel import']
   },
-  pro: { name:'Pro', price:'59 € / month', cls:'pro',
+  pro: { name:'Pro', price:'59 $ / month', cls:'pro',
     why:'Your profile matches the Pro plan. Up to 100 active recipes, up to 3 warehouses, multi-warehouse management, mobile app (10 users) and supplier purchase orders.',
     features:['Up to 100 active recipes','Up to 3 warehouses · Multi-warehouse management','Mobile app (10 users)','Supplier purchase orders','Stock alerts & batch traceability/expiry dates']
   },
-  business: { name:'Business', price:'99 € / month', cls:'business',
+  business: { name:'Business', price:'99 $ / month', cls:'business',
     why:'Your profile matches the Business plan. Unlimited recipes, B2B orders & resellers, P&L report and accounting export, unlimited mobile app — the complete solution for professional workshops.',
     features:['Unlimited active recipes','B2B orders & resellers','P&L report · Accounting export','Mobile app (unlimited users)','Unlimited warehouses · Production planning']
   }
@@ -1013,7 +986,7 @@ function nextQ() {
     document.getElementById('d'+cq).classList.add('active');
     const btn = document.getElementById('cfgNext');
     btn.style.opacity = '0.35'; btn.style.pointerEvents = 'none';
-    btn.textContent = cq === 4 ? 'See my recommendation →' : 'Suivant →';
+    btn.textContent = cq === 4 ? 'See my recommendation →' : 'Next →';
     document.getElementById('cfgHint').textContent = 'Select an answer';
   } else {
     showResult();
@@ -1046,7 +1019,7 @@ function restart() {
   document.getElementById('cfgResult').classList.remove('active');
   document.getElementById('cfgFooter').style.display = 'flex';
   const btn = document.getElementById('cfgNext');
-  btn.style.opacity = '0.35'; btn.style.pointerEvents = 'none'; btn.textContent = 'Suivant →';
+  btn.style.opacity = '0.35'; btn.style.pointerEvents = 'none'; btn.textContent = 'Next →';
   document.getElementById('cfgHint').textContent = 'Select an answer';
 }
 
@@ -1058,7 +1031,7 @@ function submitEmail() {
     return;
   }
   document.querySelector('#cfgResult .email-row').innerHTML =
-    `<div style="width:100%;padding:.75rem;background:var(--primary-50);border:1px solid var(--e200);border-radius:var(--radius);color:var(--e700);font-size:.875rem;font-weight:600;text-align:center">✓ On vous envoie le lien d'installation — vérifiez votre boîte mail.</div>`;
+    `<div style="width:100%;padding:.75rem;background:var(--primary-50);border:1px solid var(--e200);border-radius:var(--radius);color:var(--e700);font-size:.875rem;font-weight:600;text-align:center">✓ We'll send you the install link — check your inbox.</div>`;
 }
 
 </script>
