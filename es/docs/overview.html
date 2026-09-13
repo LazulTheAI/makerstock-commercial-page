@@ -248,8 +248,8 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
         <div class="section-num-badge">1.1</div>
         <h2 class="section-title">¿Qué es MakerStock?</h2>
       </div>
-      <p class="doc-p">MakerStock es una aplicación de gestión de producción artesanal diseñada para creadores, fabricantes y talleres que venden a través de <strong>BigCommerce</strong>. Cubre el espacio entre la tienda online y el taller: donde BigCommerce gestiona los pedidos y el escaparate, MakerStock gestiona las materias primas, las recetas de fabricación, los runs de producción y el stock de productos acabados.</p>
-      <p class="doc-p">La aplicación se instala directamente desde la App Store de BigCommerce y se autentica automáticamente con la cuenta del comerciante — sin necesidad de crear una cuenta separada.</p>
+      <p class="doc-p">MakerStock es una aplicación de gestión de producción artesanal diseñada para creadores, fabricantes y talleres que venden a través de <strong>BigCommerce o Shopify</strong>. Cubre el espacio entre la tienda online y el taller: donde tu plataforma e-commerce gestiona los pedidos y el escaparate, MakerStock gestiona las materias primas, las recetas de fabricación, los runs de producción y el stock de productos acabados.</p>
+      <p class="doc-p">La aplicación se instala directamente desde la App Store de BigCommerce o Shopify y se autentica automáticamente con la cuenta del comerciante — sin necesidad de crear una cuenta separada.</p>
       <div class="subsection">
         <div class="subsection-title">Casos de uso típicos</div>
         <ul class="doc-list">
@@ -260,19 +260,19 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
         </ul>
       </div>
       <div class="subsection">
-        <div class="subsection-title">Integración con BigCommerce</div>
-        <p class="doc-p">La sincronización con BigCommerce es bidireccional en el catálogo de productos. Estos son los flujos clave:</p>
+        <div class="subsection-title">Integración con BigCommerce & Shopify</div>
+        <p class="doc-p">La sincronización con tu tienda BigCommerce o Shopify es bidireccional en el catálogo de productos. Estos son los flujos clave:</p>
         <ul class="doc-list">
-          <li>El catálogo de productos (nombre, SKU, precio de venta) se importa desde BigCommerce y se mantiene actualizado.</li>
-          <li>Cada producto de BigCommerce puede vincularse a una receta. Cuando se produce una venta, MakerStock calcula automáticamente los lotes consumidos y deduce las materias primas correspondientes (<strong>método FIFO</strong>).</li>
-          <li>El stock interno de MakerStock es independiente del stock de BigCommerce, lo que permite tener una visión separada del stock disponible para la venta y el stock físico en el taller.</li>
+          <li>El catálogo de productos (nombre, SKU, precio de venta) se importa desde tu tienda y se mantiene actualizado.</li>
+          <li>Cada producto puede vincularse a una receta. Cuando se produce una venta, MakerStock calcula automáticamente los lotes consumidos y deduce las materias primas correspondientes (<strong>método FIFO</strong>).</li>
+          <li>El stock interno de MakerStock es independiente del stock de tu tienda, lo que permite tener una visión separada del stock disponible para la venta y el stock físico en el taller.</li>
         </ul>
       </div>
       <div class="callout callout-warning">
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
           <strong>Requisito previo</strong>
-          MakerStock requiere una tienda BigCommerce activa. Por el momento no está disponible como herramienta independiente.
+          MakerStock requiere una tienda BigCommerce o Shopify activa. Por el momento no está disponible como herramienta independiente.
         </div>
       </div>
     </section>
@@ -395,7 +395,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
  
             <tr class="group-row"><td colspan="5">Recetas y producción</td></tr>
             <tr><td>Gestión de recetas (BOM)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>Enlace receta ↔ producto BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Enlace receta ↔ producto BigCommerce/Shopify</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>COGS materias primas</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>COGS completo (MO + gastos variables)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Lanzar / planificar un run de producción</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
@@ -408,7 +408,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Recepción móvil con entrada de lotes</td><td><span class="iface-badge iface-m">M</span></td><td class="check-yes">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
  
             <tr class="group-row"><td colspan="5">Productos y ventas</td></tr>
-            <tr><td>Sincronización catálogo BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Sincronización catálogo BigCommerce/Shopify</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Stock de productos acabados por almacén</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Lotes y caducidad de productos acabados</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Pedidos B2B (distribuidores)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
@@ -426,7 +426,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Gestión de talleres</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
  
             <tr class="group-row"><td colspan="5">Integración y otros</td></tr>
-            <tr><td>Integración nativa BigCommerce</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Integración nativa BigCommerce/Shopify</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Interfaz multilingüe (FR / EN / ES)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Modo oscuro</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Soporte prioritario</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>

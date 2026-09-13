@@ -234,8 +234,8 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
         <div class="section-num-badge">1.1</div>
         <h2 class="section-title">What is MakerStock?</h2>
       </div>
-      <p class="doc-p">MakerStock is a production management application designed for makers, manufacturers and workshops selling through <strong>BigCommerce</strong>. It fills the gap between the online store and the workshop: where BigCommerce handles orders and the storefront, MakerStock manages raw materials, manufacturing recipes, production runs and finished goods inventory.</p>
-      <p class="doc-p">The app installs directly from the BigCommerce App Store and authenticates automatically via the merchant account — no separate account needed.</p>
+      <p class="doc-p">MakerStock is a production management application designed for makers, manufacturers and workshops selling through <strong>BigCommerce or Shopify</strong>. It fills the gap between the online store and the workshop: where your e-commerce platform handles orders and the storefront, MakerStock manages raw materials, manufacturing recipes, production runs and finished goods inventory.</p>
+      <p class="doc-p">The app installs directly from the BigCommerce or Shopify App Store and authenticates automatically via the merchant account — no separate account needed.</p>
       <div class="subsection">
         <div class="subsection-title">Typical use cases</div>
         <ul class="doc-list">
@@ -246,19 +246,19 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
         </ul>
       </div>
       <div class="subsection">
-        <div class="subsection-title">BigCommerce integration</div>
-        <p class="doc-p">Synchronisation with BigCommerce is bidirectional on the product catalogue. Here are the key flows:</p>
+        <div class="subsection-title">BigCommerce & Shopify integration</div>
+        <p class="doc-p">Synchronisation with your BigCommerce or Shopify store is bidirectional on the product catalogue. Here are the key flows:</p>
         <ul class="doc-list">
-          <li>The product catalogue (name, SKU, selling price) is imported from BigCommerce and kept up to date.</li>
-          <li>Each BigCommerce product can be linked to a recipe. When a sale occurs, MakerStock automatically calculates the batches consumed and deducts the corresponding raw materials (<strong>FIFO method</strong>).</li>
-          <li>MakerStock's internal stock remains separate from BigCommerce stock, providing a distinct view of stock available for sale and physical stock in the workshop.</li>
+          <li>The product catalogue (name, SKU, selling price) is imported from your store and kept up to date.</li>
+          <li>Each product can be linked to a recipe. When a sale occurs, MakerStock automatically calculates the batches consumed and deducts the corresponding raw materials (<strong>FIFO method</strong>).</li>
+          <li>MakerStock's internal stock remains separate from your store's stock, providing a distinct view of stock available for sale and physical stock in the workshop.</li>
         </ul>
       </div>
       <div class="callout callout-warning">
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
           <strong>Prerequisite</strong>
-          MakerStock requires an active BigCommerce store. It is not available as a standalone tool at this time.
+          MakerStock requires an active BigCommerce or Shopify store. It is not available as a standalone tool at this time.
         </div>
       </div>
     </section>
@@ -381,7 +381,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
 
             <tr class="group-row"><td colspan="5">Recipes &amp; production</td></tr>
             <tr><td>Recipe management (BOM)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
-            <tr><td>Recipe ↔ BigCommerce product link</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Recipe ↔ BigCommerce/Shopify product link</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Raw material COGS</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Full COGS (labor + variable overhead)</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Launch / schedule a production run</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
@@ -394,7 +394,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Mobile receiving with lot entry</td><td><span class="iface-badge iface-m">M</span></td><td class="check-yes">—</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
 
             <tr class="group-row"><td colspan="5">Products &amp; sales</td></tr>
-            <tr><td>BigCommerce catalog sync</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>BigCommerce/Shopify catalog sync</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Finished goods stock by warehouse</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Finished goods lots &amp; expiry</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>B2B orders (resellers)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>
@@ -412,7 +412,7 @@ p.doc-p { font-size:15px; line-height:1.8; color:var(--text); margin-bottom:18px
             <tr><td>Workshop management</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
 
             <tr class="group-row"><td colspan="5">Integration &amp; other</td></tr>
-            <tr><td>Native BigCommerce integration</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
+            <tr><td>Native BigCommerce/Shopify integration</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Multilingual interface (FR / EN / ES)</td><td><span class="iface-badge iface-dm">D+M</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Dark mode</td><td><span class="iface-badge iface-d">D</span></td><td class="check-yes">✓</td><td class="check-yes">✓</td><td class="check-yes">✓</td></tr>
             <tr><td>Priority support</td><td><span class="iface-badge iface-d">D</span></td><td class="check-no">—</td><td class="check-no">—</td><td class="check-yes">✓</td></tr>

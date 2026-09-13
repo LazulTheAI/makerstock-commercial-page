@@ -283,7 +283,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
       <a class="nav-link" href="#p43"><div class="nav-dot"></div>4.3 Approvisionnements</a>
       <a class="nav-link" href="#p44"><div class="nav-dot"></div>4.4 Alertes</a>
       <a class="nav-link" href="#p45"><div class="nav-dot"></div>4.5 Calcul du COGS</a>
-      <a class="nav-link" href="#p46"><div class="nav-dot"></div>4.6 Sync BigCommerce</a>
+      <a class="nav-link" href="#p46"><div class="nav-dot"></div>4.6 Sync BigCommerce & Shopify</a>
     </div>
   </nav>
   <div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — Avril 2025</div></div>
@@ -311,7 +311,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
     <div class="doc-hero fade-in" id="intro">
       <div class="doc-part-label">⚙️ Partie 4</div>
       <h1 class="doc-title">Description fonctionnelle — <em>points critiques</em></h1>
-      <p class="doc-lead">Cette partie documente le fonctionnement interne des six mécaniques clés de MakerStock : ce qui se passe sous le capot quand vous exécutez un run, quand vous réceptionnez une livraison, ou quand une vente est enregistrée dans BigCommerce.</p>
+      <p class="doc-lead">Cette partie documente le fonctionnement interne des six mécaniques clés de MakerStock : ce qui se passe sous le capot quand vous exécutez un run, quand vous réceptionnez une livraison, ou quand une vente est enregistrée sur BigCommerce ou Shopify.</p>
       <div class="doc-meta">
         <div>⏱ Lecture ~12 min</div>
         <div>·</div>
@@ -330,7 +330,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
         <li><a href="#p43"><span class="toc-num">4.3</span> Cycle d'approvisionnement fournisseur</a></li>
         <li><a href="#p44"><span class="toc-num">4.4</span> Système d'alertes — types et déclencheurs</a></li>
         <li><a href="#p45"><span class="toc-num">4.5</span> Calcul du COGS — méthode et composantes</a></li>
-        <li><a href="#p46"><span class="toc-num">4.6</span> Synchronisation BigCommerce</a></li>
+        <li><a href="#p46"><span class="toc-num">4.6</span> Synchronisation BigCommerce & Shopify</a></li>
       </ul>
     </div>
 
@@ -741,7 +741,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="mechanic-icon teal">💡</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Prix de vente recommandé — calcul automatique (Pro+)</div>
-            <div class="mechanic-desc">À partir du COGS complet, MakerStock peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce — il est consultatif.</div>
+            <div class="mechanic-desc">À partir du COGS complet, MakerStock peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce ou Shopify — il est consultatif.</div>
             <span class="mechanic-badge mb-pro">Pro+</span>
           </div>
         </div>
@@ -767,22 +767,22 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
     <hr class="section-divider">
 
     <!-- ══════════════════════════════════════════
-         4.6 — Sync BigCommerce
+         4.6 — Sync BigCommerce & Shopify
     ══════════════════════════════════════════ -->
     <section class="critical-section fade-in">
       <a class="critical-anchor" id="p46"></a>
       <div class="critical-header">
         <div class="critical-eyebrow">Point critique 4.6</div>
-        <h2 class="critical-title">Synchronisation <em>BigCommerce</em></h2>
-        <p class="critical-lead">La relation entre MakerStock et BigCommerce est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
+        <h2 class="critical-title">Synchronisation <em>BigCommerce & Shopify</em></h2>
+        <p class="critical-lead">La relation entre MakerStock et votre boutique BigCommerce ou Shopify est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
       </div>
 
       <div class="sync-flow">
         <div class="sync-box bc">
-          <div class="sync-box-title">BigCommerce</div>
+          <div class="sync-box-title">BigCommerce / Shopify</div>
           <div class="sync-item">Catalogue produits (nom, SKU, prix)</div>
           <div class="sync-item">Commandes clients</div>
-          <div class="sync-item">Stock BC (géré par BC)</div>
+          <div class="sync-item">Stock boutique (géré par la plateforme)</div>
           <div class="sync-item">Identité marchand (auth)</div>
         </div>
         <div class="sync-arrows">
@@ -805,22 +805,22 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
         <div class="mechanic-item">
           <div class="mechanic-icon blue">🔄</div>
           <div class="mechanic-body">
-            <div class="mechanic-title">Synchronisation du catalogue produits (BC → MS)</div>
-            <div class="mechanic-desc">MakerStock importe le catalogue produits depuis BigCommerce : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits & stock. Les produits créés dans BigCommerce après l'installation doivent être synchronisés pour apparaître dans MakerStock.</div>
+            <div class="mechanic-title">Synchronisation du catalogue produits (boutique → MS)</div>
+            <div class="mechanic-desc">MakerStock importe le catalogue produits depuis votre boutique BigCommerce ou Shopify : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits & stock. Les produits créés dans votre boutique après l'installation doivent être synchronisés pour apparaître dans MakerStock.</div>
           </div>
         </div>
         <div class="mechanic-item">
           <div class="mechanic-icon teal">⚡</div>
           <div class="mechanic-body">
-            <div class="mechanic-title">Déduction automatique à la vente (BC → MS)</div>
-            <div class="mechanic-desc">Quand une vente est enregistrée dans BigCommerce pour un produit lié à une recette principale dans MakerStock, la déduction de matières premières est déclenchée automatiquement. MakerStock calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
+            <div class="mechanic-title">Déduction automatique à la vente (boutique → MS)</div>
+            <div class="mechanic-desc">Quand une vente est enregistrée dans votre boutique BigCommerce ou Shopify pour un produit lié à une recette principale dans MakerStock, la déduction de matières premières est déclenchée automatiquement. MakerStock calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
           </div>
         </div>
         <div class="mechanic-item">
           <div class="mechanic-icon amber">🧮</div>
           <div class="mechanic-body">
-            <div class="mechanic-title">Deux stocks indépendants — BC stock ≠ MS stock</div>
-            <div class="mechanic-desc">MakerStock maintient son propre stock de produits finis, indépendant du stock BigCommerce. Le stock BC est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
+            <div class="mechanic-title">Deux stocks indépendants — stock boutique ≠ stock MS</div>
+            <div class="mechanic-desc">MakerStock maintient son propre stock de produits finis, indépendant du stock de votre boutique BigCommerce ou Shopify. Le stock boutique est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
             <span class="mechanic-badge mb-warn">Important</span>
           </div>
         </div>
@@ -846,7 +846,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
         <div class="callout-icon">📖</div>
         <div class="callout-body">
           <strong>Fin de la documentation</strong>
-          Vous avez parcouru les quatre parties de la documentation MakerStock. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis votre admin BigCommerce (plan Business : support prioritaire).
+          Vous avez parcouru les quatre parties de la documentation MakerStock. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis l'admin de votre boutique BigCommerce ou Shopify (plan Business : support prioritaire).
         </div>
       </div>
 

@@ -174,7 +174,7 @@ hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 
       <thead><tr><th>Catégorie</th><th>Données concernées</th><th>Caractère</th></tr></thead>
       <tbody>
         <tr><td>Identité</td><td>Nom, prénom, adresse email professionnelle</td><td>Obligatoire</td></tr>
-        <tr><td>Données de connexion</td><td>Identifiants BigCommerce (via OAuth), jeton d'authentification</td><td>Obligatoire</td></tr>
+        <tr><td>Données de connexion</td><td>Identifiants BigCommerce ou Shopify (via OAuth), jeton d'authentification</td><td>Obligatoire</td></tr>
         <tr><td>Données de production</td><td>Matières premières, recettes, lots, DLC, mouvements de stock, runs de production, COGS</td><td>Généré par l'utilisation</td></tr>
         <tr><td>Données commerciales</td><td>Fournisseurs, revendeurs, commandes B2B, informations tarifaires internes</td><td>Optionnel selon plan</td></tr>
         <tr><td>Données de l'atelier</td><td>Nom(s) d'atelier(s), lieux de production, entrepôts</td><td>Obligatoire à la configuration</td></tr>
@@ -187,27 +187,27 @@ hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 
       <tbody>
         <tr><td>Données techniques</td><td>Adresse IP, type de navigateur, système d'exploitation, langue</td><td>Sécurité, débogage</td></tr>
         <tr><td>Données de navigation</td><td>Pages visitées, horodatage des actions, temps de session</td><td>Amélioration du Service, support</td></tr>
-        <tr><td>Logs applicatifs</td><td>Erreurs, requêtes API, statuts de synchronisation BigCommerce</td><td>Débogage, traçabilité technique</td></tr>
+        <tr><td>Logs applicatifs</td><td>Erreurs, requêtes API, statuts de synchronisation BigCommerce/Shopify</td><td>Débogage, traçabilité technique</td></tr>
         <tr><td>Données d'appareil</td><td>Résolution d'écran, type d'appareil (mobile/desktop)</td><td>Optimisation de l'interface</td></tr>
       </tbody>
     </table>
 
-    <h3 class="subsection-title">2.3 Données reçues via BigCommerce</h3>
-    <p class="legal-p">Dans le cadre de l'intégration native avec BigCommerce, MakerStock reçoit, via l'API BigCommerce et avec le consentement de l'utilisateur au moment de l'installation, les données suivantes :</p>
+    <h3 class="subsection-title">2.3 Données reçues via BigCommerce et Shopify</h3>
+    <p class="legal-p">Dans le cadre de l'intégration native avec BigCommerce et Shopify, MakerStock reçoit, via l'API de la plateforme utilisée et avec le consentement de l'utilisateur au moment de l'installation, les données suivantes :</p>
     <ul class="legal-list">
-      <li>Catalogue produits (nom, SKU, prix de vente, identifiants internes BigCommerce)</li>
-      <li>Informations de la boutique (nom de la boutique, devise, identifiant BC)</li>
+      <li>Catalogue produits (nom, SKU, prix de vente, identifiants internes BigCommerce/Shopify)</li>
+      <li>Informations de la boutique (nom de la boutique, devise, identifiant de boutique)</li>
       <li>Données de commandes (quantités vendues par produit, nécessaires à la déduction automatique de stock)</li>
     </ul>
     <div class="info-box">
       <div class="info-box-icon">ℹ️</div>
-      <div class="info-box-text"><strong>Nous ne recevons pas</strong> les données personnelles des clients finaux de votre boutique BigCommerce (nom, adresse, email d'acheteurs). Seules les données nécessaires au fonctionnement du Service de gestion de production sont transmises.</div>
+      <div class="info-box-text"><strong>Nous ne recevons pas</strong> les données personnelles des clients finaux de votre boutique BigCommerce ou Shopify (nom, adresse, email d'acheteurs). Seules les données nécessaires au fonctionnement du Service de gestion de production sont transmises.</div>
     </div>
 
     <h3 class="subsection-title">2.4 Données que nous ne collectons pas</h3>
     <p class="legal-p">MakerStock ne collecte pas, et ne sollicitera jamais :</p>
     <ul class="legal-list">
-      <li>Données de carte bancaire ou coordonnées de paiement (gérés exclusivement par BigCommerce)</li>
+      <li>Données de carte bancaire ou coordonnées de paiement (gérés exclusivement par BigCommerce ou Shopify)</li>
       <li>Données de santé ou catégories particulières de données au sens de l'article 9 du RGPD</li>
       <li>Données biométriques</li>
       <li>Données relatives à des mineurs de moins de 16 ans</li>
@@ -224,7 +224,7 @@ hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 
       <tbody>
         <tr><td>Fourniture du Service (gestion de production, stock, runs)</td><td>Exécution du contrat — art. 6.1.b</td><td>Traitement nécessaire à l'exécution des CGU acceptées</td></tr>
         <tr><td>Authentification et sécurité des comptes</td><td>Exécution du contrat — art. 6.1.b</td><td>Identification de l'utilisateur, protection de l'accès</td></tr>
-        <tr><td>Facturation et gestion de l'abonnement</td><td>Exécution du contrat — art. 6.1.b<br>Obligation légale — art. 6.1.c</td><td>Coordination avec BigCommerce, conservation des preuves d'achat (10 ans)</td></tr>
+        <tr><td>Facturation et gestion de l'abonnement</td><td>Exécution du contrat — art. 6.1.b<br>Obligation légale — art. 6.1.c</td><td>Coordination avec BigCommerce ou Shopify, conservation des preuves d'achat (10 ans)</td></tr>
         <tr><td>Envoi d'emails transactionnels</td><td>Exécution du contrat — art. 6.1.b</td><td>Confirmations, alertes de compte, notifications de service</td></tr>
         <tr><td>Amélioration du Service et débogage</td><td>Intérêt légitime — art. 6.1.f</td><td>Analyse des logs techniques, correction d'erreurs. Intérêt : amélioration de la qualité du service.</td></tr>
         <tr><td>Support client</td><td>Exécution du contrat — art. 6.1.b</td><td>Traitement des demandes d'assistance</td></tr>
@@ -262,8 +262,8 @@ hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 
       </tbody>
     </table>
 
-    <h3 class="subsection-title">5.2 BigCommerce — partenaire d'intégration</h3>
-    <p class="legal-p">BigCommerce Inc. est le partenaire de distribution et d'authentification de MakerStock. Lors de l'installation de l'application depuis l'App Store BigCommerce, vous acceptez également les conditions d'utilisation et la politique de confidentialité de BigCommerce, qui régissent indépendamment la gestion de votre boutique et la facturation de votre abonnement MakerStock. MakerStock n'est pas responsable des pratiques de traitement de données de BigCommerce.</p>
+    <h3 class="subsection-title">5.2 BigCommerce et Shopify — partenaires d'intégration</h3>
+    <p class="legal-p">BigCommerce Inc. et Shopify Inc. sont les partenaires de distribution et d'authentification de MakerStock. Lors de l'installation de l'application depuis l'App Store BigCommerce ou Shopify, vous acceptez également les conditions d'utilisation et la politique de confidentialité de la plateforme concernée, qui régissent indépendamment la gestion de votre boutique et la facturation de votre abonnement MakerStock. MakerStock n'est pas responsable des pratiques de traitement de données de BigCommerce ou de Shopify.</p>
 
     <h3 class="subsection-title">5.3 Absence de partage commercial</h3>
     <p class="legal-p">MakerStock <strong>ne vend pas, ne loue pas et ne cède pas</strong> vos données à caractère personnel à des tiers à des fins commerciales, publicitaires ou de prospection. Vos données de production (recettes, lots, COGS, matières premières) sont strictement confidentielles et ne sont en aucun cas partagées avec d'autres clients ou partenaires.</p>
@@ -363,7 +363,7 @@ hr.doc-divider { border:none; border-top:1px solid var(--border); margin:2.5rem 
     <ul class="legal-list">
       <li>Chiffrement des données en transit via TLS 1.2 minimum</li>
       <li>Chiffrement des données sensibles au repos</li>
-      <li>Authentification déléguée à BigCommerce via OAuth 2.0 — MakerStock ne stocke pas vos mots de passe</li>
+      <li>Authentification déléguée à BigCommerce ou Shopify via OAuth 2.0 — MakerStock ne stocke pas vos mots de passe</li>
       <li>Accès aux données de production restreint aux personnels autorisés selon le principe du moindre privilège</li>
       <li>Sauvegardes régulières sur l'infrastructure hébergée en France</li>
       <li>Journalisation des accès et actions sensibles</li>

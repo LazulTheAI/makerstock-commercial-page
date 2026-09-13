@@ -276,12 +276,12 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="nav-section">
 <div class="nav-section-label">Part 4 — Critical points</div>
 <a class="nav-link active" href="#intro"><div class="nav-dot"></div>Introduction</a>
-<a class="nav-link" href="#p41"><div class="nav-dot"></div>4.1 Cycle de production</a>
-<a class="nav-link" href="#p42"><div class="nav-dot"></div>4.2 Gestion du stock &amp; FIFO</a>
-<a class="nav-link" href="#p43"><div class="nav-dot"></div>4.3 Approvisionnements</a>
-<a class="nav-link" href="#p44"><div class="nav-dot"></div>4.4 Alertes</a>
+<a class="nav-link" href="#p41"><div class="nav-dot"></div>4.1 Production cycle</a>
+<a class="nav-link" href="#p42"><div class="nav-dot"></div>4.2 Stock management &amp; FIFO</a>
+<a class="nav-link" href="#p43"><div class="nav-dot"></div>4.3 Procurement</a>
+<a class="nav-link" href="#p44"><div class="nav-dot"></div>4.4 Alerts</a>
 <a class="nav-link" href="#p45"><div class="nav-dot"></div>4.5 COGS calculation</a>
-<a class="nav-link" href="#p46"><div class="nav-dot"></div>4.6 Sync BigCommerce</a>
+<a class="nav-link" href="#p46"><div class="nav-dot"></div>4.6 Sync BigCommerce &amp; Shopify</a>
 </div>
 </nav>
 <div class="sidebar-footer"><div class="plan-badge">📄 v1.0 — April 2025</div></div>
@@ -305,8 +305,8 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <!-- Hero -->
 <div class="doc-hero fade-in" id="intro">
 <div class="doc-part-label">⚙️ Part 4</div>
-<h1 class="doc-title">Description fonctionnelle — <em>points critiques</em></h1>
-<p class="doc-lead">This section documents the internal workings of the six key mechanics of MakerStock: what happens under the hood when you execute a run, receive a delivery, or when a sale is recorded in BigCommerce.</p>
+<h1 class="doc-title">Functional description — <em>critical points</em></h1>
+<p class="doc-lead">This section documents the internal workings of the six key mechanics of MakerStock: what happens under the hood when you execute a run, receive a delivery, or when a sale is recorded on BigCommerce or Shopify.</p>
 <div class="doc-meta">
 <div>⏱ Reading ~12 min</div>
 <div>·</div>
@@ -324,7 +324,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <li><a href="#p43"><span class="toc-num">4.3</span> Supplier procurement cycle</a></li>
 <li><a href="#p44"><span class="toc-num">4.4</span> Alert system — types and triggers</a></li>
 <li><a href="#p45"><span class="toc-num">4.5</span> COGS calculation — method and components</a></li>
-<li><a href="#p46"><span class="toc-num">4.6</span> BigCommerce synchronisation</a></li>
+<li><a href="#p46"><span class="toc-num">4.6</span> BigCommerce &amp; Shopify synchronization</a></li>
 </ul>
 </div>
 <!-- ══════════════════════════════════════════
@@ -335,7 +335,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="critical-header">
 <div class="critical-eyebrow">Critical point 4.1</div>
 <h2 class="critical-title">Production run <em>lifecycle</em></h2>
-<p class="critical-lead">Un run est l'unité atomique de production dans MakerStock. Il représente l'exécution d'un nombre défini de batches d'une recette donnée. Comprendre son cycle de vie est essentiel pour piloter la production correctement.</p>
+<p class="critical-lead">A run is the atomic unit of production in MakerStock. It represents the execution of a defined number of batches of a given recipe. Understanding its lifecycle is essential to managing production correctly.</p>
 </div>
 <div class="subsection-title">The four statuses</div>
 <div class="state-machine">
@@ -363,38 +363,38 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-item">
 <div class="mechanic-icon amber">📋</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Planned → mise en file d'attente sans déduction de stock</div>
-<div class="mechanic-desc">Quand un run est planifié (depuis desktop ou mobile), il est enregistré mais le stock n'est pas encore touché. Si le stock est insuffisant au moment de la planification, MakerStock le signale mais laisse passer le run en file — une alerte prévisionnelle est générée. Un run planifié peut être annulé sans conséquence sur le stock.</div>
+<div class="mechanic-title">Planned → queued with no stock deduction</div>
+<div class="mechanic-desc">When a run is scheduled (from desktop or mobile), it is recorded but stock is not touched yet. If stock is insufficient at the time of scheduling, MakerStock flags it but still lets the run join the queue — a forecast alert is generated. A scheduled run can be cancelled with no impact on stock.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon blue">⚙️</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Planned → In progress : démarrage par l'opérateur</div>
-<div class="mechanic-desc">Un opérateur (depuis le mobile, onglet Fabrication) ou un admin (depuis le desktop) appuie sur "Démarrer". Le statut passe à <code class="inline">EN_COURS</code>. À ce moment, MakerStock vérifie à nouveau la disponibilité du stock. Le run est visible en temps réel sur le desktop.</div>
+<div class="mechanic-title">Planned → In progress: started by the operator</div>
+<div class="mechanic-desc">An operator (from mobile, Manufacturing tab) or an admin (from desktop) taps "Start". The status switches to <code class="inline">EN_COURS</code>. At this point, MakerStock checks stock availability again. The run is visible in real time on desktop.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon green">✅</div>
 <div class="mechanic-body">
-<div class="mechanic-title">In progress → Completed : déduction, crédit stock, COGS</div>
-<div class="mechanic-desc">À la terminaison, trois actions atomiques sont déclenchées simultanément : (1) les matières premières sont déduites du stock selon la méthode FIFO, lot par lot, avec enregistrement de la traçabilité ; (2) le stock de produits finis est crédité du nombre d'unités produites ; (3) le COGS réel du run est calculé à partir des coûts unitaires des lots consommés. Ces trois opérations sont réversibles uniquement via un ajustement manuel ultérieur.</div>
-<span class="mechanic-badge mb-pro">Traçabilité lots — Pro+</span>
+<div class="mechanic-title">In progress → Completed: deduction, stock credit, COGS</div>
+<div class="mechanic-desc">On completion, three atomic actions are triggered simultaneously: (1) raw materials are deducted from stock using the FIFO method, lot by lot, with traceability recorded; (2) finished goods stock is credited with the number of units produced; (3) the run's actual COGS is calculated from the unit costs of the lots consumed. These three operations can only be reversed through a later manual adjustment.</div>
+<span class="mechanic-badge mb-pro">Lot traceability — Pro+</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon amber">⚠️</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Run terminé avec stock insuffisant</div>
-<div class="mechanic-desc">Si le stock d'une ou plusieurs matières est insuffisant au moment de l'exécution, MakerStock l'indique dans le détail du run (onglet "Manques") mais laisse le run se terminer. Le stock descend à zéro pour les matières concernées — il ne devient pas négatif. Une alerte de rupture est générée.</div>
+<div class="mechanic-title">Run completed with insufficient stock</div>
+<div class="mechanic-desc">If stock for one or more materials is insufficient at the time of execution, MakerStock flags it in the run's detail (the "Shortages" tab) but still lets the run complete. Stock drops to zero for the affected materials — it never goes negative. An out-of-stock alert is generated.</div>
 <span class="mechanic-badge mb-warn">Alerte de rupture</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon" style="background:var(--coral-light)">🚫</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Annulation — irréversible, aucune restitution automatique</div>
-<div class="mechanic-desc">Un run en statut <code class="inline">PLANIFIE</code> ou <code class="inline">EN_COURS</code> peut être annulé. L'annulation est définitive. Si le run était <code class="inline">EN_COURS</code> et que des matières avaient déjà été physiquement consommées, le stock ne sera pas restitué automatiquement — une correction manuelle via ajustement de stock est nécessaire.</div>
+<div class="mechanic-title">Cancellation — irreversible, no automatic restoration</div>
+<div class="mechanic-desc">A run with status <code class="inline">PLANIFIE</code> or <code class="inline">EN_COURS</code> can be cancelled. Cancellation is final. If the run was <code class="inline">EN_COURS</code> and materials had already been physically consumed, stock will not be automatically restored — a manual correction via stock adjustment is required.</div>
 <span class="mechanic-badge mb-danger">Irreversible</span>
 </div>
 </div>
@@ -402,19 +402,19 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="info-grid">
 <div class="info-card">
 <div class="info-card-label">From desktop</div>
-<div class="info-card-value">Planifier, lancer directement, voir le détail, exporter le CSV de traçabilité, annuler.</div>
+<div class="info-card-value">Schedule, launch directly, view the detail, export the traceability CSV, cancel.</div>
 </div>
 <div class="info-card">
 <div class="info-card-label">From mobile</div>
-<div class="info-card-value">Planifier, démarrer un run planifié, terminer un run en cours. Pas d'accès au détail financier.</div>
+<div class="info-card-value">Schedule, start a scheduled run, complete a run in progress. No access to financial detail.</div>
 </div>
 <div class="info-card">
 <div class="info-card-label">CSV traceability export</div>
-<div class="info-card-value">Disponible après terminaison : matière, lot, quantité consommée, DLC, fournisseur, coût. Format compatible comptabilité.</div>
+<div class="info-card-value">Available after completion: material, lot, quantity consumed, expiry date, supplier, cost. Accounting-compatible format.</div>
 </div>
 <div class="info-card">
 <div class="info-card-label">Launch without scheduling</div>
-<div class="info-card-value">Possible depuis le desktop uniquement. Le run passe directement de "nouveau" à <code>TERMINE</code> si le stock est suffisant, sans étape intermédiaire.</div>
+<div class="info-card-value">Possible from desktop only. The run goes directly from "new" to <code>TERMINE</code> if stock is sufficient, with no intermediate step.</div>
 </div>
 </div>
 </section>
@@ -431,7 +431,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 </div>
 <div class="subsection-title">Illustrated FIFO operation</div>
 <div class="fifo-diagram">
-<div class="fifo-header">Example — Farine de blé · 3 lots en stock · Run de production consommant 8 kg</div>
+<div class="fifo-header">Example — Wheat flour · 3 lots in stock · Production run consuming 8 kg</div>
 <div class="fifo-body">
 <div class="fifo-row">
 <div class="fifo-label">Before run</div>
@@ -458,26 +458,26 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="fifo-row">
 <div class="fifo-label">After run<br/>(8 kg deducted)</div>
 <div class="fifo-lot depleted">
-<div><div class="fifo-lot-name">LOT-A · épuisé</div><div class="fifo-lot-detail">3 kg consommés en totalité</div></div>
+<div><div class="fifo-lot-name">LOT-A · depleted</div><div class="fifo-lot-detail">3 kg fully consumed</div></div>
 <div class="fifo-lot-qty" style="color:var(--gray-400)">0 kg</div>
 </div>
 </div>
 <div class="fifo-row">
 <div class="fifo-label"></div>
 <div class="fifo-lot lot2">
-<div><div class="fifo-lot-name">LOT-B · partiel</div><div class="fifo-lot-detail">5 kg consommés sur 7</div></div>
+<div><div class="fifo-lot-name">LOT-B · partial</div><div class="fifo-lot-detail">5 kg consumed out of 7</div></div>
 <div class="fifo-lot-qty">2 kg</div>
 </div>
 </div>
 <div class="fifo-row">
 <div class="fifo-label"></div>
 <div class="fifo-lot lot3">
-<div><div class="fifo-lot-name">LOT-C · intact</div><div class="fifo-lot-detail">Non touché</div></div>
+<div><div class="fifo-lot-name">LOT-C · intact</div><div class="fifo-lot-detail">Untouched</div></div>
 <div class="fifo-lot-qty">10 kg</div>
 </div>
 </div>
 <div class="fifo-consumed" style="margin-top:10px">
-            COGS matière = (3 kg × 1,20 €) + (5 kg × 1,15 €) = 3,60 € + 5,75 € = 9,35 €
+            COGS materials = (3 kg × €1.20) + (5 kg × €1.15) = €3.60 + €5.75 = €9.35
           </div>
 </div>
 </div>
@@ -485,46 +485,46 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-item">
 <div class="mechanic-icon blue">📥</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Entrée en stock — création d'un lot</div>
-<div class="mechanic-desc">Chaque entrée de stock (manuelle, réception fournisseur ou import) crée un nouveau lot horodaté avec : quantité, coût unitaire au moment de l'entrée (snapshot), numéro de lot optionnel, DLC optionnelle. Si le matériau est configuré avec "DLC obligatoire", la date d'expiration est requise à chaque entrée.</div>
+<div class="mechanic-title">Stock entry — creating a lot</div>
+<div class="mechanic-desc">Every stock entry (manual, supplier receipt, or import) creates a new timestamped lot with: quantity, unit cost at the time of entry (snapshot), optional lot number, optional expiry date. If the material is configured with "expiry date required," an expiration date is required on every entry.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon amber">⚡</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Ajustement de stock — pas de création de lot</div>
-<div class="mechanic-desc">Un ajustement (+ ou −) modifie directement le lot sélectionné ou le lot le plus ancien (FIFO). L'ajustement nécessite une raison obligatoire (inventaire physique, perte, casse, correction…). Le mouvement est tracé dans l'historique avec le type <code class="inline">AJUSTEMENT</code>.</div>
+<div class="mechanic-title">Stock adjustment — no lot created</div>
+<div class="mechanic-desc">An adjustment (+ or −) directly modifies the selected lot or the oldest lot (FIFO). The adjustment requires a mandatory reason (physical inventory, loss, breakage, correction…). The movement is logged in the history with type <code class="inline">AJUSTEMENT</code>.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon" style="background:var(--coral-light)">⚠️</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Dégrèvement de lot — retrait ciblé</div>
-<div class="mechanic-desc">Depuis la vue des lots d'un matériau, il est possible de "dégrever" un lot spécifique (perte, casse, contrôle qualité) en indiquant la quantité et une raison. Le dégrèvement cible précisément ce lot, indépendamment de l'ordre FIFO. Cette opération est irréversible.</div>
+<div class="mechanic-title">Lot write-off — targeted removal</div>
+<div class="mechanic-desc">From a material's lots view, it's possible to "write off" a specific lot (loss, breakage, quality control) by entering a quantity and a reason. The write-off targets precisely that lot, independent of FIFO order. This operation is irreversible.</div>
 <span class="mechanic-badge mb-danger">Irreversible</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon purple">🔁</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Transfert inter-entrepôts</div>
-<div class="mechanic-desc">Disponible depuis le desktop uniquement (plan Business). Un lot peut être transféré d'un entrepôt source vers un entrepôt destination. Le lot conserve son numéro, sa DLC et son coût unitaire d'origine. Le stock de l'entrepôt source diminue, celui de la destination augmente.</div>
+<div class="mechanic-title">Inter-warehouse transfer</div>
+<div class="mechanic-desc">Available from desktop only (Business plan). A lot can be transferred from a source warehouse to a destination warehouse. The lot keeps its number, expiry date, and original unit cost. The source warehouse's stock decreases, the destination's increases.</div>
 <span class="mechanic-badge mb-pro">Business</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon teal">📊</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Valorisation du stock</div>
-<div class="mechanic-desc">La valeur totale du stock d'un matériau est calculée en temps réel : somme des (quantité restante × coût unitaire) pour chaque lot actif. Cette valeur est visible dans la colonne "Valeur stock" du tableau des matières et utilisée dans le rapport financier.</div>
+<div class="mechanic-title">Stock valuation</div>
+<div class="mechanic-desc">The total stock value of a material is calculated in real time: the sum of (remaining quantity × unit cost) for each active lot. This value is visible in the "Stock value" column of the materials table and used in the financial report.</div>
 </div>
 </div>
 </div>
 <div class="callout callout-warning">
 <div class="callout-icon">⚠️</div>
 <div class="callout-body">
-<strong>Le coût unitaire d'une matière ≠ le coût d'un lot</strong>
-          Le champ "coût unitaire" dans la fiche d'une matière première est le coût de référence par défaut. Chaque lot a son propre coût unitaire, enregistré au moment de l'entrée en stock (snapshot). C'est le coût du lot — pas le coût de référence — qui est utilisé dans le calcul du COGS lors d'un run.
+<strong>A material's unit cost ≠ a lot's cost</strong>
+          The "unit cost" field on a raw material's record is the default reference cost. Each lot has its own unit cost, recorded at the time of stock entry (snapshot). It's the lot's cost — not the reference cost — that is used in the COGS calculation during a run.
         </div>
 </div>
 </section>
@@ -536,8 +536,8 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <a class="critical-anchor" id="p43"></a>
 <div class="critical-header">
 <div class="critical-eyebrow">Critical point 4.3</div>
-<h2 class="critical-title">Cycle d'<em>approvisionnement fournisseur</em></h2>
-<p class="critical-lead">Les bons de commande fournisseurs permettent de tracer le cycle complet d'une commande matières : de la création en bureau à la réception physique en atelier. Ce module est disponible à partir du plan Pro.</p>
+<h2 class="critical-title">Supplier <em>procurement cycle</em></h2>
+<p class="critical-lead">Supplier purchase orders let you trace the complete cycle of a materials order: from creation at the desk to physical receipt in the workshop. This module is available starting with the Pro plan.</p>
 </div>
 <div class="subsection-title">The five statuses of a purchase order</div>
 <div class="state-machine">
@@ -570,39 +570,39 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-item">
 <div class="mechanic-icon blue">📝</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Création du bon (Draft) — desktop uniquement</div>
-<div class="mechanic-desc">L'admin crée un bon de commande en sélectionnant un fournisseur, en ajoutant des lignes (matériau, quantité, prix unitaire), et en renseignant une date de livraison prévue. Le bon en statut Draft peut être modifié et supprimé librement.</div>
+<div class="mechanic-title">Creating the order (Draft) — desktop only</div>
+<div class="mechanic-desc">The admin creates a purchase order by selecting a supplier, adding lines (material, quantity, unit price), and entering an expected delivery date. An order in Draft status can be freely edited and deleted.</div>
 <span class="mechanic-badge mb-pro">Pro+</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon teal">📤</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Envoi au fournisseur — passage en statut Sent</div>
-<div class="mechanic-desc">En cliquant "Marquer comme envoyé", le bon bascule en <code class="inline">ENVOYE</code>. Il n'est plus modifiable. Il devient visible dans l'onglet "Approvisionnements" du mobile, pour que les opérateurs puissent le réceptionner à la livraison. En retard si la date de livraison prévue est dépassée.</div>
+<div class="mechanic-title">Sending to the supplier — switching to Sent status</div>
+<div class="mechanic-desc">By clicking "Mark as sent," the order switches to <code class="inline">ENVOYE</code>. It can no longer be edited. It becomes visible in the "Supply orders" tab on mobile, so operators can receive it on delivery. It's marked late if the expected delivery date has passed.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon green">📦</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Réception — mise à jour du stock par ligne</div>
-<div class="mechanic-desc">Depuis le mobile (ou le desktop), l'opérateur saisit pour chaque ligne : la quantité effectivement reçue, le numéro de lot fournisseur (optionnel), la DLC (obligatoire si le matériau l'exige) et l'entrepôt de destination. La quantité est immédiatement créditée en stock à la validation. Si toutes les lignes ne sont pas complètement reçues, le bon passe en <code class="inline">PARTIELLEMENT_RECU</code>.</div>
-<span class="mechanic-badge mb-pro">Traçabilité lots — Pro+</span>
+<div class="mechanic-title">Receiving — stock updated line by line</div>
+<div class="mechanic-desc">From mobile (or desktop), the operator enters for each line: the quantity actually received, the supplier's lot number (optional), the expiry date (required if the material demands it), and the destination warehouse. The quantity is credited to stock immediately upon confirmation. If not all lines are fully received, the order switches to <code class="inline">PARTIELLEMENT_RECU</code>.</div>
+<span class="mechanic-badge mb-pro">Lot traceability — Pro+</span>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon amber">🔄</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Réceptions partielles successives</div>
-<div class="mechanic-desc">Un bon peut être réceptionné en plusieurs fois. À chaque réception partielle, le stock est crédité de la quantité saisie. La progression de réception est visible en pourcentage par ligne. Le bon passe en <code class="inline">RECU</code> uniquement quand toutes les lignes ont atteint leur quantité commandée.</div>
+<div class="mechanic-title">Successive partial receipts</div>
+<div class="mechanic-desc">An order can be received in multiple deliveries. On each partial receipt, stock is credited with the quantity entered. Receiving progress is shown as a percentage per line. The order switches to <code class="inline">RECU</code> only when every line has reached its ordered quantity.</div>
 </div>
 </div>
 </div>
 <div class="callout callout-info">
 <div class="callout-icon">💡</div>
 <div class="callout-body">
-<strong>Sur-réception possible</strong>
-          Il est possible de réceptionner plus que la quantité commandée sur une ligne (livraison excédentaire). MakerStock l'indique visuellement mais l'autorise. Le stock est crédité de la quantité réellement saisie.
+<strong>Over-receiving is possible</strong>
+          It's possible to receive more than the ordered quantity on a line (surplus delivery). MakerStock flags it visually but allows it. Stock is credited with the quantity actually entered.
         </div>
 </div>
 </section>
@@ -615,54 +615,54 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="critical-header">
 <div class="critical-eyebrow">Critical point 4.4</div>
 <h2 class="critical-title">Alert system — <em>types and triggers</em></h2>
-<p class="critical-lead">Le tableau de bord Alertes est la page d'accueil de MakerStock. Il affiche en temps réel les situations nécessitant une attention, regroupées par niveau d'urgence. Les alertes sont rafraîchies automatiquement toutes les 30 secondes.</p>
+<p class="critical-lead">The Alerts dashboard is MakerStock's home page. It shows in real time the situations that need attention, grouped by urgency level. Alerts refresh automatically every 30 seconds.</p>
 </div>
 <div class="alert-grid">
 <div class="alert-card urgent">
 <div class="alert-card-icon">🔴</div>
-<div class="alert-card-title">Stock bas — matière première</div>
-<div class="alert-card-desc">Le stock total d'une matière première est descendu sous le seuil d'alerte configuré dans la fiche matériau.</div>
-<div class="alert-card-trigger">Déclencheur : stock total &lt; seuil d'alerte</div>
+<div class="alert-card-title">Low stock — raw material</div>
+<div class="alert-card-desc">The total stock of a raw material has dropped below the alert threshold configured on the material's record.</div>
+<div class="alert-card-trigger">Trigger: total stock &lt; alert threshold</div>
 </div>
 <div class="alert-card forecast">
 <div class="alert-card-icon">🟡</div>
-<div class="alert-card-title">Alerte prévisionnelle — run à risque</div>
-<div class="alert-card-desc">Un run planifié ne pourra pas être exécuté faute de stock suffisant au moment où il est prévu. Affiché dans le bandeau "Prévisionnelles".</div>
-<div class="alert-card-trigger">Déclencheur : stock insuffisant pour un run planifié</div>
+<div class="alert-card-title">Forecast alert — run at risk</div>
+<div class="alert-card-desc">A scheduled run won't be able to run for lack of sufficient stock by the time it's due. Shown in the "Forecast" banner.</div>
+<div class="alert-card-trigger">Trigger: insufficient stock for a scheduled run</div>
 </div>
 <div class="alert-card product">
 <div class="alert-card-icon">🔵</div>
-<div class="alert-card-title">Stock bas — produit fini</div>
-<div class="alert-card-desc">Le stock total d'un produit fini est descendu sous le seuil d'alerte configuré dans la fiche produit.</div>
-<div class="alert-card-trigger">Déclencheur : stock produit &lt; seuil d'alerte</div>
+<div class="alert-card-title">Low stock — finished product</div>
+<div class="alert-card-desc">The total stock of a finished product has dropped below the alert threshold configured on the product's record.</div>
+<div class="alert-card-trigger">Trigger: product stock &lt; alert threshold</div>
 </div>
 <div class="alert-card cancel">
 <div class="alert-card-icon">⚫</div>
-<div class="alert-card-title">Rupture produit / Annulation</div>
-<div class="alert-card-desc">Rupture totale (stock = 0) ou annulation d'une commande fournisseur impactant un approvisionnement attendu.</div>
-<div class="alert-card-trigger">Déclencheur : stock = 0 ou annulation de commande</div>
+<div class="alert-card-title">Product stockout / Cancellation</div>
+<div class="alert-card-desc">Total stockout (stock = 0) or cancellation of a purchase order impacting an expected supply delivery.</div>
+<div class="alert-card-trigger">Trigger: stock = 0 or order cancellation</div>
 </div>
 </div>
 <div class="mechanic-list">
 <div class="mechanic-item">
 <div class="mechanic-icon blue">🔔</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Acquittement d'une alerte</div>
-<div class="mechanic-desc">Toute alerte peut être acquittée manuellement depuis le desktop (bouton "Acquitter"). L'alerte acquittée est archivée et disparaît des alertes actives. Elle reste visible dans l'historique des 30 derniers jours. Une alerte acquittée peut réapparaître si la condition qui la déclenchait n'est toujours pas résolue (par exemple, le stock est toujours bas).</div>
+<div class="mechanic-title">Acknowledging an alert</div>
+<div class="mechanic-desc">Any alert can be acknowledged manually from desktop (the "Acknowledge" button). An acknowledged alert is archived and disappears from active alerts. It remains visible in the last 30 days' history. An acknowledged alert can reappear if the condition that triggered it is still unresolved (for example, stock is still low).</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon amber">📊</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Bandeau d'alerte en haut du mobile</div>
-<div class="mechanic-desc">L'interface mobile affiche un bandeau rouge persistant en haut de chaque écran quand il existe au moins une alerte de stock bas non acquittée. Ce bandeau est visible depuis tous les onglets, pas seulement depuis le dashboard. Il disparaît dès que toutes les alertes urgentes sont résolues ou acquittées.</div>
+<div class="mechanic-title">Alert banner at the top of mobile</div>
+<div class="mechanic-desc">The mobile interface shows a persistent red banner at the top of every screen when there's at least one unacknowledged low-stock alert. This banner is visible from every tab, not just the dashboard. It disappears as soon as all urgent alerts are resolved or acknowledged.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon green">🔄</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Rafraîchissement automatique — 30 secondes</div>
-<div class="mechanic-desc">Le tableau de bord Alertes se rafraîchit automatiquement toutes les 30 secondes sans rechargement de page. Le dashboard mobile se rafraîchit toutes les 60 secondes. Un bouton "Actualiser" permet un rafraîchissement manuel immédiat depuis le desktop.</div>
+<div class="mechanic-title">Automatic refresh — 30 seconds</div>
+<div class="mechanic-desc">The Alerts dashboard refreshes automatically every 30 seconds without reloading the page. The mobile dashboard refreshes every 60 seconds. A "Refresh" button allows an immediate manual refresh from desktop.</div>
 </div>
 </div>
 </div>
@@ -676,30 +676,30 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="critical-header">
 <div class="critical-eyebrow">Critical point 4.5</div>
 <h2 class="critical-title">COGS calculation — <em>method and components</em></h2>
-<p class="critical-lead">Le COGS (Cost of Goods Sold — coût de revient) est calculé automatiquement à chaque run terminé. Sa précision dépend du plan souscrit : le plan Starter ne couvre que les matières premières, le plan Pro ajoute la main-d'œuvre et les charges, le plan Business permet le rapport P&amp;L complet.</p>
+<p class="critical-lead">COGS (Cost of Goods Sold) is calculated automatically for every completed run. Its precision depends on the plan you're on: the Starter plan covers raw materials only, the Pro plan adds labor and overhead, and the Business plan enables the full P&amp;L report.</p>
 </div>
 <div class="subsection-title">Formula by plan</div>
 <div class="formula-box">
 <div class="formula-title">COGS — Starter (raw materials only)</div>
 <div class="formula-eq">
-<span class="line"><span class="var">COGS</span> <span class="op">=</span> Σ ( <span class="var">qté_lot</span> <span class="op">×</span> <span class="var">coût_unit_lot</span> ) <span class="comment">par lot FIFO consommé</span></span>
+<span class="line"><span class="var">COGS</span> <span class="op">=</span> Σ ( <span class="var">qty_lot</span> <span class="op">×</span> <span class="var">unit_cost_lot</span> ) <span class="comment">per FIFO lot consumed</span></span>
 </div>
 </div>
 <div class="formula-box" style="margin-top:12px">
-<div class="formula-title">COGS complet — Pro+ (materials + labor + variable costs)</div>
+<div class="formula-title">Full COGS — Pro+ (materials + labor + variable costs)</div>
 <div class="formula-eq">
 <span class="line"><span class="var">COGS</span> <span class="op">=</span></span>
-<span class="line indent">Σ ( <span class="var">qté_lot</span> <span class="op">×</span> <span class="var">coût_unit_lot</span> ) <span class="comment">matières premières FIFO</span></span>
-<span class="line indent"><span class="op">+</span> ( <span class="var">taux_horaire</span> <span class="op">×</span> <span class="var">nb_opérateurs</span> <span class="op">×</span> <span class="var">durée_recette</span> ) <span class="comment">coût MO par batch</span></span>
-<span class="line indent"><span class="op">+</span> <span class="var">coût_variable_batch</span> <span class="comment">énergie, emballage (saisi sur la recette)</span></span>
+<span class="line indent">Σ ( <span class="var">qty_lot</span> <span class="op">×</span> <span class="var">unit_cost_lot</span> ) <span class="comment">FIFO raw materials</span></span>
+<span class="line indent"><span class="op">+</span> ( <span class="var">hourly_rate</span> <span class="op">×</span> <span class="var">nb_operators</span> <span class="op">×</span> <span class="var">recipe_duration</span> ) <span class="comment">labor cost per batch</span></span>
+<span class="line indent"><span class="op">+</span> <span class="var">variable_cost_batch</span> <span class="comment">energy, packaging (entered on the recipe)</span></span>
 </div>
 </div>
 <div class="formula-box" style="margin-top:12px">
-<div class="formula-title">COGS + charges fixes imputées — Business (rapport P&amp;L)</div>
+<div class="formula-title">COGS + allocated fixed costs — Business (P&amp;L report)</div>
 <div class="formula-eq">
-<span class="line"><span class="var">Coût complet / unité</span> <span class="op">=</span></span>
-<span class="line indent"><span class="var">COGS Pro</span> / <span class="var">unités_produites</span></span>
-<span class="line indent"><span class="op">+</span> Σ ( <span class="var">charge_fixe_mensuelle</span> / <span class="var">volume_cible_mensuel</span> ) <span class="comment">loyer, amortissement…</span></span>
+<span class="line"><span class="var">Full cost / unit</span> <span class="op">=</span></span>
+<span class="line indent"><span class="var">COGS Pro</span> / <span class="var">units_produced</span></span>
+<span class="line indent"><span class="op">+</span> Σ ( <span class="var">monthly_fixed_cost</span> / <span class="var">monthly_target_volume</span> ) <span class="comment">rent, depreciation…</span></span>
 </div>
 </div>
 <div class="mechanic-list" style="margin-top:24px">
@@ -707,7 +707,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-icon teal">💡</div>
 <div class="mechanic-body">
 <div class="mechanic-title">Recommended selling price — calcul automatique (Pro+)</div>
-<div class="mechanic-desc">À partir du COGS complet, MakerStock peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce — il est consultatif.</div>
+<div class="mechanic-desc">From the full COGS, MakerStock can calculate a suggested selling price. This calculation factors in the target margin defined on the recipe. The recommended price is visible on the recipe's record and on the product's record. It is not automatically synced to BigCommerce or Shopify — it's advisory only.</div>
 <span class="mechanic-badge mb-pro">Pro+</span>
 </div>
 </div>
@@ -715,7 +715,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-icon blue">📤</div>
 <div class="mechanic-body">
 <div class="mechanic-title">XLSX accounting export (Pro+)</div>
-<div class="mechanic-desc">Disponible depuis Pilotage → Rapports. Exporte sur la période choisie : mouvements de stock, valorisation FIFO, COGS détaillé par run et par produit, récapitulatif des charges. Format structuré, compatible avec les logiciels comptables courants. Méthode des coûts complets, valorisation FIFO, mention légale incluse.</div>
+<div class="mechanic-desc">Available from Management → Reports. Exports for the selected period: stock movements, FIFO valuation, detailed COGS per run and per product, cost summary. Structured format, compatible with common accounting software. Full-cost method, FIFO valuation, legal disclosure included.</div>
 <span class="mechanic-badge mb-pro">Pro+</span>
 </div>
 </div>
@@ -723,7 +723,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-icon purple">📊</div>
 <div class="mechanic-body">
 <div class="mechanic-title">P&amp;L report per product (Business)</div>
-<div class="mechanic-desc">Génère un document complet : synthèse exécutive (CA, COGS, marge brute), détail des coûts par produit, structure des charges fixes, calcul du seuil de rentabilité (point mort) et projection CA / marge sur 12 mois. Requiert au minimum un run terminé, un taux horaire et des charges fixes configurés.</div>
+<div class="mechanic-desc">Generates a complete document: executive summary (revenue, COGS, gross margin), cost breakdown per product, fixed cost structure, break-even point calculation, and a 12-month revenue/margin projection. Requires at minimum one completed run, an hourly rate, and configured fixed costs.</div>
 <span class="mechanic-badge mb-pro">Business</span>
 </div>
 </div>
@@ -737,29 +737,29 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <a class="critical-anchor" id="p46"></a>
 <div class="critical-header">
 <div class="critical-eyebrow">Critical point 4.6</div>
-<h2 class="critical-title"><em>BigCommerce</em> synchronisation</h2>
-<p class="critical-lead">La relation entre MakerStock et BigCommerce est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
+<h2 class="critical-title"><em>BigCommerce and Shopify</em> synchronization</h2>
+<p class="critical-lead">The relationship between MakerStock and your BigCommerce or Shopify store is the heart of the system. It isn't bidirectional for all data — it's important to understand what flows in which direction, and what stays independent.</p>
 </div>
 <div class="sync-flow">
 <div class="sync-box bc">
-<div class="sync-box-title">BigCommerce</div>
-<div class="sync-item">Catalogue produits (nom, SKU, prix)</div>
-<div class="sync-item">Commandes clients</div>
-<div class="sync-item">Stock BC (géré par BC)</div>
-<div class="sync-item">Identité marchand (auth)</div>
+<div class="sync-box-title">BigCommerce / Shopify</div>
+<div class="sync-item">Product catalog (name, SKU, price)</div>
+<div class="sync-item">Customer orders</div>
+<div class="sync-item">Store stock (managed by the platform)</div>
+<div class="sync-item">Merchant identity (auth)</div>
 </div>
 <div class="sync-arrows">
 <div class="sync-arrow-down">↓</div>
-<div class="sync-arrow-label">vers MS</div>
+<div class="sync-arrow-label">to MS</div>
 <div style="height:16px"></div>
 <div class="sync-arrow-up">↑</div>
-<div class="sync-arrow-label">depuis MS</div>
+<div class="sync-arrow-label">from MS</div>
 </div>
 <div class="sync-box ms">
 <div class="sync-box-title">MakerStock</div>
-<div class="sync-item">Stock interne (géré par MS)</div>
-<div class="sync-item">Recipes &amp; COGS liés aux SKU</div>
-<div class="sync-item">Raw materials consommées</div>
+<div class="sync-item">Internal stock (managed by MS)</div>
+<div class="sync-item">Recipes &amp; COGS linked to SKUs</div>
+<div class="sync-item">Raw materials consumed</div>
 <div class="sync-item">Lot &amp; expiry traceability</div>
 </div>
 </div>
@@ -767,22 +767,22 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-item">
 <div class="mechanic-icon blue">🔄</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Synchronisation du catalogue produits (BC → MS)</div>
-<div class="mechanic-desc">MakerStock importe le catalogue produits depuis BigCommerce : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits &amp; stock. Les produits créés dans BigCommerce après l'installation doivent être synchronisés pour apparaître dans MakerStock.</div>
+<div class="mechanic-title">Product catalog synchronization (store → MS)</div>
+<div class="mechanic-desc">MakerStock imports the product catalog from your BigCommerce or Shopify store: name, SKU, product ID, variant ID, selling price. This sync can be triggered manually from the Products &amp; stock page. Products created in your store after installation must be synced to appear in MakerStock.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon teal">⚡</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Déduction automatique à la vente (BC → MS)</div>
-<div class="mechanic-desc">Quand une vente est enregistrée dans BigCommerce pour un produit lié à une recette principale dans MakerStock, la déduction de matières premières est déclenchée automatiquement. MakerStock calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
+<div class="mechanic-title">Automatic deduction on sale (store → MS)</div>
+<div class="mechanic-desc">When a sale is recorded on BigCommerce or Shopify for a product linked to a primary recipe in MakerStock, raw material deduction is triggered automatically. MakerStock calculates the number of batches consumed (quantity sold × batches per unit), then deducts materials using FIFO. This mechanism only works if the recipe is marked "primary" on the product.</div>
 </div>
 </div>
 <div class="mechanic-item">
 <div class="mechanic-icon amber">🧮</div>
 <div class="mechanic-body">
-<div class="mechanic-title">Two independent stocks — BC stock ≠ MS stock</div>
-<div class="mechanic-desc">MakerStock maintient son propre stock de produits finis, indépendant du stock BigCommerce. Le stock BC est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
+<div class="mechanic-title">Two independent stocks — store stock ≠ MS stock</div>
+<div class="mechanic-desc">MakerStock maintains its own finished goods stock, independent of your BigCommerce or Shopify stock. Store stock is the stock available for sale, visible on the storefront. MS stock is the physical stock in the workshop, coming from production runs. These two stocks are not synced automatically — this is an intentional separation that lets you manage reserves, held-back lots, or delayed listing.</div>
 <span class="mechanic-badge mb-warn">Important</span>
 </div>
 </div>
@@ -790,7 +790,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="mechanic-icon green">🔗</div>
 <div class="mechanic-body">
 <div class="mechanic-title">Batches per sold unit ratio — key to the link</div>
-<div class="mechanic-desc">Lors de la liaison recette ↔ produit, l'admin renseigne le ratio "batches par unité vendue". Example : si 1 batch produit 12 bougies, et qu'une bougie est vendue à l'unité, le ratio est 1/12 = 0,0833 batch par unité. Ce ratio est utilisé pour calculer la consommation matières à chaque vente. Un ratio mal configuré entraîne une déduction incorrecte.</div>
+<div class="mechanic-desc">When linking a recipe to a product, the admin enters the "batches per unit sold" ratio. Example: if 1 batch produces 12 candles, and a candle is sold individually, the ratio is 1/12 = 0.0833 batch per unit. This ratio is used to calculate materials consumption on every sale. A misconfigured ratio causes an incorrect deduction.</div>
 <span class="mechanic-badge mb-warn">Configure carefully</span>
 </div>
 </div>
@@ -798,15 +798,15 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
 <div class="callout callout-danger">
 <div class="callout-icon">🚨</div>
 <div class="callout-body">
-<strong>Le ratio batches/unité est critique</strong>
-          Une erreur dans ce ratio entraîne une déduction de stock incorrecte à chaque vente. Vérifiez-le attentivement lors de la liaison et après tout changement de taille de batch dans une recette. Il est modifiable à tout moment dans la fiche produit, onglet "Recipes liées".
+<strong>The batches/unit ratio is critical</strong>
+          An error in this ratio causes an incorrect stock deduction on every sale. Check it carefully when linking and after any batch size change in a recipe. It can be edited at any time on the product's record, "Linked recipes" tab.
         </div>
 </div>
 <div class="callout callout-teal" style="margin-top:16px">
 <div class="callout-icon">📖</div>
 <div class="callout-body">
 <strong>End of documentation</strong>
-          Vous avez parcouru les quatre parties de la documentation MakerStock. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis votre admin BigCommerce (plan Business : support prioritaire).
+          You've now gone through all four parts of the MakerStock documentation. For any specific question or use case not covered here, contact support from your BigCommerce or Shopify store's admin (Business plan: priority support).
         </div>
 </div>
 </section>
