@@ -1,5 +1,11 @@
 {
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "makerstock-commercial-page.vercel.app" }],
+      "destination": "https://www.makerstocks.com/:path*",
+      "permanent": true
+    },
     { "source": "/privacy", "destination": "/fr/legal/privacy.html", "permanent": false },
     { "source": "/tos",     "destination": "/fr/legal/tos.html",     "permanent": false }
   ],

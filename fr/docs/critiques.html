@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MakerStock — Points critiques</title>
+<title>MakerStocks — Points critiques</title>
+<link rel="canonical" href="https://www.makerstocks.com/fr/docs/critiques.html" />
+<link rel="alternate" hreflang="fr" href="https://www.makerstocks.com/fr/docs/critiques.html" />
+<link rel="alternate" hreflang="en" href="https://www.makerstocks.com/en/docs/critical.html" />
+<link rel="alternate" hreflang="es" href="https://www.makerstocks.com/es/docs/critical.html" />
+<link rel="alternate" hreflang="x-default" href="https://www.makerstocks.com/en/docs/critical.html" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
@@ -264,7 +269,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
   <div class="sidebar-brand">
     <a class="brand-logo" href="../index.html">
       <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-1 8H5V9h14v6zm-9-5H6v2h4v-2zm7 0h-4v2h4v-2z"/></svg></div>
-      <span class="brand-name">MakerStock</span>
+      <span class="brand-name">MakerStocks</span>
     </a>
     <div class="brand-tagline">Documentation</div>
   </div>
@@ -311,7 +316,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
     <div class="doc-hero fade-in" id="intro">
       <div class="doc-part-label">⚙️ Partie 4</div>
       <h1 class="doc-title">Description fonctionnelle — <em>points critiques</em></h1>
-      <p class="doc-lead">Cette partie documente le fonctionnement interne des six mécaniques clés de MakerStock : ce qui se passe sous le capot quand vous exécutez un run, quand vous réceptionnez une livraison, ou quand une vente est enregistrée sur BigCommerce ou Shopify.</p>
+      <p class="doc-lead">Cette partie documente le fonctionnement interne des six mécaniques clés de MakerStocks : ce qui se passe sous le capot quand vous exécutez un run, quand vous réceptionnez une livraison, ou quand une vente est enregistrée sur BigCommerce ou Shopify.</p>
       <div class="doc-meta">
         <div>⏱ Lecture ~12 min</div>
         <div>·</div>
@@ -342,7 +347,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
       <div class="critical-header">
         <div class="critical-eyebrow">Point critique 4.1</div>
         <h2 class="critical-title">Le cycle de vie d'un <em>run de production</em></h2>
-        <p class="critical-lead">Un run est l'unité atomique de production dans MakerStock. Il représente l'exécution d'un nombre défini de batches d'une recette donnée. Comprendre son cycle de vie est essentiel pour piloter la production correctement.</p>
+        <p class="critical-lead">Un run est l'unité atomique de production dans MakerStocks. Il représente l'exécution d'un nombre défini de batches d'une recette donnée. Comprendre son cycle de vie est essentiel pour piloter la production correctement.</p>
       </div>
 
       <div class="subsection-title">Les quatre statuts</div>
@@ -374,14 +379,14 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="mechanic-icon amber">📋</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Planifié → mise en file d'attente sans déduction de stock</div>
-            <div class="mechanic-desc">Quand un run est planifié (depuis desktop ou mobile), il est enregistré mais le stock n'est pas encore touché. Si le stock est insuffisant au moment de la planification, MakerStock le signale mais laisse passer le run en file — une alerte prévisionnelle est générée. Un run planifié peut être annulé sans conséquence sur le stock.</div>
+            <div class="mechanic-desc">Quand un run est planifié (depuis desktop ou mobile), il est enregistré mais le stock n'est pas encore touché. Si le stock est insuffisant au moment de la planification, MakerStocks le signale mais laisse passer le run en file — une alerte prévisionnelle est générée. Un run planifié peut être annulé sans conséquence sur le stock.</div>
           </div>
         </div>
         <div class="mechanic-item">
           <div class="mechanic-icon blue">⚙️</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Planifié → En cours : démarrage par l'opérateur</div>
-            <div class="mechanic-desc">Un opérateur (depuis le mobile, onglet Fabrication) ou un admin (depuis le desktop) appuie sur "Démarrer". Le statut passe à <code class="inline">EN_COURS</code>. À ce moment, MakerStock vérifie à nouveau la disponibilité du stock. Le run est visible en temps réel sur le desktop.</div>
+            <div class="mechanic-desc">Un opérateur (depuis le mobile, onglet Fabrication) ou un admin (depuis le desktop) appuie sur "Démarrer". Le statut passe à <code class="inline">EN_COURS</code>. À ce moment, MakerStocks vérifie à nouveau la disponibilité du stock. Le run est visible en temps réel sur le desktop.</div>
           </div>
         </div>
         <div class="mechanic-item">
@@ -396,7 +401,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="mechanic-icon amber">⚠️</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Run terminé avec stock insuffisant</div>
-            <div class="mechanic-desc">Si le stock d'une ou plusieurs matières est insuffisant au moment de l'exécution, MakerStock l'indique dans le détail du run (onglet "Manques") mais laisse le run se terminer. Le stock descend à zéro pour les matières concernées — il ne devient pas négatif. Une alerte de rupture est générée.</div>
+            <div class="mechanic-desc">Si le stock d'une ou plusieurs matières est insuffisant au moment de l'exécution, MakerStocks l'indique dans le détail du run (onglet "Manques") mais laisse le run se terminer. Le stock descend à zéro pour les matières concernées — il ne devient pas négatif. Une alerte de rupture est générée.</div>
             <span class="mechanic-badge mb-warn">Alerte de rupture</span>
           </div>
         </div>
@@ -625,7 +630,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Sur-réception possible</strong>
-          Il est possible de réceptionner plus que la quantité commandée sur une ligne (livraison excédentaire). MakerStock l'indique visuellement mais l'autorise. Le stock est crédité de la quantité réellement saisie.
+          Il est possible de réceptionner plus que la quantité commandée sur une ligne (livraison excédentaire). MakerStocks l'indique visuellement mais l'autorise. Le stock est crédité de la quantité réellement saisie.
         </div>
       </div>
     </section>
@@ -640,7 +645,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
       <div class="critical-header">
         <div class="critical-eyebrow">Point critique 4.4</div>
         <h2 class="critical-title">Système d'alertes — <em>types et déclencheurs</em></h2>
-        <p class="critical-lead">Le tableau de bord Alertes est la page d'accueil de MakerStock. Il affiche en temps réel les situations nécessitant une attention, regroupées par niveau d'urgence. Les alertes sont rafraîchies automatiquement toutes les 30 secondes.</p>
+        <p class="critical-lead">Le tableau de bord Alertes est la page d'accueil de MakerStocks. Il affiche en temps réel les situations nécessitant une attention, regroupées par niveau d'urgence. Les alertes sont rafraîchies automatiquement toutes les 30 secondes.</p>
       </div>
 
       <div class="alert-grid">
@@ -741,7 +746,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="mechanic-icon teal">💡</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Prix de vente recommandé — calcul automatique (Pro+)</div>
-            <div class="mechanic-desc">À partir du COGS complet, MakerStock peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce ou Shopify — il est consultatif.</div>
+            <div class="mechanic-desc">À partir du COGS complet, MakerStocks peut calculer un prix de vente suggéré. Ce calcul intègre la marge cible définie sur la recette. Le prix recommandé est visible dans la fiche recette et dans la fiche produit. Il n'est pas synchronisé automatiquement dans BigCommerce ou Shopify — il est consultatif.</div>
             <span class="mechanic-badge mb-pro">Pro+</span>
           </div>
         </div>
@@ -774,7 +779,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
       <div class="critical-header">
         <div class="critical-eyebrow">Point critique 4.6</div>
         <h2 class="critical-title">Synchronisation <em>BigCommerce & Shopify</em></h2>
-        <p class="critical-lead">La relation entre MakerStock et votre boutique BigCommerce ou Shopify est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
+        <p class="critical-lead">La relation entre MakerStocks et votre boutique BigCommerce ou Shopify est le cœur du système. Elle n'est pas bidirectionnelle sur toutes les données — il est important de comprendre ce qui circule dans quel sens, et ce qui reste indépendant.</p>
       </div>
 
       <div class="sync-flow">
@@ -793,7 +798,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="sync-arrow-label">depuis MS</div>
         </div>
         <div class="sync-box ms">
-          <div class="sync-box-title">MakerStock</div>
+          <div class="sync-box-title">MakerStocks</div>
           <div class="sync-item">Stock interne (géré par MS)</div>
           <div class="sync-item">Recettes & COGS liés aux SKU</div>
           <div class="sync-item">Matières premières consommées</div>
@@ -806,21 +811,21 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
           <div class="mechanic-icon blue">🔄</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Synchronisation du catalogue produits (boutique → MS)</div>
-            <div class="mechanic-desc">MakerStock importe le catalogue produits depuis votre boutique BigCommerce ou Shopify : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits & stock. Les produits créés dans votre boutique après l'installation doivent être synchronisés pour apparaître dans MakerStock.</div>
+            <div class="mechanic-desc">MakerStocks importe le catalogue produits depuis votre boutique BigCommerce ou Shopify : nom, SKU, ID produit, ID variante, prix de vente. Cette synchronisation peut être déclenchée manuellement depuis la page Produits & stock. Les produits créés dans votre boutique après l'installation doivent être synchronisés pour apparaître dans MakerStocks.</div>
           </div>
         </div>
         <div class="mechanic-item">
           <div class="mechanic-icon teal">⚡</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Déduction automatique à la vente (boutique → MS)</div>
-            <div class="mechanic-desc">Quand une vente est enregistrée dans votre boutique BigCommerce ou Shopify pour un produit lié à une recette principale dans MakerStock, la déduction de matières premières est déclenchée automatiquement. MakerStock calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
+            <div class="mechanic-desc">Quand une vente est enregistrée dans votre boutique BigCommerce ou Shopify pour un produit lié à une recette principale dans MakerStocks, la déduction de matières premières est déclenchée automatiquement. MakerStocks calcule le nombre de batches consommés (quantité vendue × batches par unité), puis déduit les matières en FIFO. Ce mécanisme fonctionne uniquement si la recette est marquée "principale" sur le produit.</div>
           </div>
         </div>
         <div class="mechanic-item">
           <div class="mechanic-icon amber">🧮</div>
           <div class="mechanic-body">
             <div class="mechanic-title">Deux stocks indépendants — stock boutique ≠ stock MS</div>
-            <div class="mechanic-desc">MakerStock maintient son propre stock de produits finis, indépendant du stock de votre boutique BigCommerce ou Shopify. Le stock boutique est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
+            <div class="mechanic-desc">MakerStocks maintient son propre stock de produits finis, indépendant du stock de votre boutique BigCommerce ou Shopify. Le stock boutique est le stock disponible à la vente visible sur la boutique. Le stock MS est le stock physique en atelier, issu des runs de production. Ces deux stocks ne sont pas synchronisés automatiquement — c'est une séparation intentionnelle qui permet de gérer des réserves, des lots réservés ou des délais de mise en vente.</div>
             <span class="mechanic-badge mb-warn">Important</span>
           </div>
         </div>
@@ -846,7 +851,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
         <div class="callout-icon">📖</div>
         <div class="callout-body">
           <strong>Fin de la documentation</strong>
-          Vous avez parcouru les quatre parties de la documentation MakerStock. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis l'admin de votre boutique BigCommerce ou Shopify (plan Business : support prioritaire).
+          Vous avez parcouru les quatre parties de la documentation MakerStocks. Pour toute question spécifique ou cas d'usage non couvert ici, contactez le support depuis l'admin de votre boutique BigCommerce ou Shopify (plan Business : support prioritaire).
         </div>
       </div>
 
@@ -855,7 +860,7 @@ code.inline { font-family:var(--font-mono); font-size:12.5px; background:var(--g
   </div><!-- /content -->
 
   <footer class="doc-footer">
-    <div>MakerStock Documentation · v1.0 · Avril 2025</div>
+    <div>MakerStocks Documentation · v1.0 · Avril 2025</div>
     <nav class="footer-nav">
       <a href="desktop-mobile.html">← Partie 3 : Desktop & Mobile</a>
     </nav>
