@@ -188,7 +188,31 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://www.makerstocks.com/fr/compare/craftybase-alternative.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.makerstocks.com/fr/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.makerstocks.com/es/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.makerstocks.com/en/compare/craftybase-alternative.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.makerstocks.com/fr/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.makerstocks.com/es/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.makerstocks.com/es/compare/craftybase-alternative.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.makerstocks.com/fr/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.makerstocks.com/es/compare/craftybase-alternative.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html" />
     <lastmod>2026-09-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
