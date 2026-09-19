@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakerStocks vs Craftybase — Inventory &amp; Manufacturing Software Compared</title>
+<meta name="description" content="MakerStocks vs Craftybase (now Stocksmith): compare BigCommerce &amp; Shopify sync, production run scheduling, mobile app, pricing and batch traceability for makers, feature by feature.">
+<link rel="canonical" href="https://www.makerstocks.com/en/compare/craftybase-alternative.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://www.makerstocks.com/en/compare/craftybase-alternative.html">
+<meta property="og:title" content="MakerStocks vs Craftybase — Inventory & Manufacturing Software Compared">
+<meta property="og:description" content="MakerStocks vs Craftybase (now Stocksmith): compare BigCommerce & Shopify sync, production run scheduling, mobile app, pricing and batch traceability for makers, feature by feature.">
+<meta property="og:image" content="https://www.makerstocks.com/img/banner.PNG">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Craftybase the same as Stocksmith?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Craftybase rebranded to Stocksmith in 2026 — same team, same software, new name. Its content and reviews online are still mostly indexed under the name Craftybase, which is why both names are used interchangeably." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Craftybase (Stocksmith) integrate with BigCommerce?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not currently. As of this writing, BigCommerce is not a live integration on Craftybase/Stocksmith — their own help center lists it as a feature request on a waitlist, not a supported sales channel. MakerStocks has native two-way BigCommerce sync in every plan." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the cheapest way to get production run scheduling for a small workshop?",
+      "acceptedAnswer": { "@type": "Answer", "text": "MakerStocks includes production run planning and execution starting on its $29/month Starter plan. On Craftybase/Stocksmith, production scheduling is only available from the Business tier, priced at $166–199/month." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Craftybase have a mobile app for production workers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No dedicated native mobile app — Craftybase/Stocksmith is a responsive website that works in a mobile browser. MakerStocks ships a dedicated mobile interface built specifically for shop-floor operators, included from the Starter plan." }
+    }
+  ]
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --s0:   #ffffff; --s50:  #f9fafb; --s100: #f3f4f6; --s200: #e5e7eb; --s300: #d1d5db;
+  --s400: #9ca3af; --s500: #6b7280; --s600: #4b5563; --s700: #374151; --s800: #1f2937; --s900: #111827;
+  --e50:  #ecfdf5; --e100: #d1fae5; --e200: #a7f3d0; --e300: #6ee7b7; --e400: #34d399;
+  --e500: #10b981; --e600: #059669; --e700: #047857; --e800: #065f46; --e900: #064e3b;
+  --surface-ground:  var(--s100); --surface-card:    var(--s0); --surface-border:  var(--s200);
+  --surface-hover:   var(--s100); --text-color:      var(--s900); --text-muted:      var(--s500);
+  --text-dim:        var(--s400); --primary:         var(--e500); --primary-hover:   var(--e600);
+  --primary-50:      var(--e50); --primary-100:     var(--e100);
+  --radius-sm: 6px; --radius: 8px; --radius-lg: 12px; --radius-xl: 16px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:    0 4px 12px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.09), 0 3px 8px rgba(0,0,0,.05);
+  --shadow-xl: 0 24px 48px rgba(0,0,0,.1), 0 6px 16px rgba(0,0,0,.06);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition: 0.18s ease;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); font-size: 14px; background: var(--surface-ground); color: var(--text-color); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 64px; padding: 0 2rem;
+  background: var(--surface-card); border-bottom: 1px solid var(--surface-border);
+  display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);
+}
+.nav-logo { display: flex; align-items: center; gap: .625rem; text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-size: .875rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+.nav-links a:hover { color: var(--text-color); }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .625rem 1.25rem; border-radius: var(--radius); font-family: var(--font); font-size: .875rem; font-weight: 600; cursor: pointer; transition: all var(--transition); text-decoration: none; border: 1px solid transparent; white-space: nowrap; }
+.btn-outlined { background: transparent; border-color: var(--surface-border); color: var(--text-muted); }
+.btn-outlined:hover { background: var(--surface-hover); color: var(--text-color); border-color: var(--s300); }
+.btn-primary { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 1px 3px rgba(5,150,105,.3); }
+.btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(5,150,105,.25); }
+.btn-lg { padding: .75rem 1.75rem; font-size: .9375rem; border-radius: var(--radius-lg); }
+
+.card { background: var(--surface-card); border: 1px solid var(--surface-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+
+section { padding: 4rem 2rem; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.inner-narrow { max-width: 760px; margin: 0 auto; }
+
+.section-tag { display: inline-flex; align-items: center; gap: .375rem; background: var(--primary-50); color: var(--e700); border: 1px solid var(--e200); border-radius: 20px; padding: .25rem .875rem; font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 1rem; }
+.section-title { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; line-height: 1.2; color: var(--text-color); letter-spacing: -.02em; margin-bottom: .875rem; }
+.section-title .em { color: var(--e600); }
+.section-lead { font-size: 1rem; color: var(--text-muted); line-height: 1.75; max-width: 640px; }
+
+/* Hero */
+.hero { padding: 8.5rem 2rem 3.5rem; border-bottom: 1px solid var(--surface-border); background: var(--surface-card); }
+.hero-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+.vs-badge { display: inline-flex; align-items: center; gap: .625rem; background: var(--surface-ground); border: 1px solid var(--surface-border); border-radius: 20px; padding: .375rem 1.125rem; font-size: .8125rem; font-weight: 600; color: var(--text-muted); margin-bottom: 1.5rem; }
+.hero-title { font-size: clamp(1.875rem, 4.5vw, 2.875rem); font-weight: 800; line-height: 1.15; letter-spacing: -.025em; color: var(--text-color); margin-bottom: 1.125rem; }
+.hero-title .em { color: var(--e600); }
+.hero-sub { font-size: 1.0625rem; color: var(--text-muted); line-height: 1.7; margin: 0 auto 1.75rem; max-width: 620px; }
+.hero-actions { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; }
+.updated-note { font-size: .75rem; color: var(--text-dim); margin-top: 1.75rem; }
+
+/* Verdict box */
+.verdict { background: var(--surface-ground); border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border); }
+.verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.verdict-card { padding: 1.75rem; }
+.verdict-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .875rem; display: flex; align-items: center; gap: .5rem; }
+.verdict-card ul { list-style: none; display: flex; flex-direction: column; gap: .625rem; }
+.verdict-card li { font-size: .875rem; color: var(--text-muted); line-height: 1.55; display: flex; align-items: flex-start; gap: .5rem; }
+.verdict-card li::before { content: '✓'; color: var(--e500); font-weight: 700; flex-shrink: 0; }
+.verdict-card.alt li::before { color: #7c3aed; }
+
+/* Comparison table */
+.cmp-table-wrap { overflow-x: auto; border-radius: var(--radius-xl); border: 1px solid var(--surface-border); box-shadow: var(--shadow-sm); }
+table.cmp { width: 100%; border-collapse: collapse; background: var(--surface-card); font-size: .875rem; min-width: 640px; }
+table.cmp th, table.cmp td { padding: .875rem 1.25rem; text-align: left; border-bottom: 1px solid var(--surface-border); }
+table.cmp th { font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); background: var(--surface-ground); }
+table.cmp th.brand-ms { color: var(--e700); }
+table.cmp td.feat { font-weight: 600; color: var(--text-color); }
+table.cmp td.ms, table.cmp th.brand-ms { background: var(--primary-50); }
+table.cmp tr:last-child td { border-bottom: none; }
+.yes { color: var(--e600); font-weight: 700; }
+.no  { color: var(--text-dim); }
+.partial { color: #b45309; font-weight: 600; }
+
+/* Deep dive blocks */
+.dive { display: flex; flex-direction: column; gap: 3.5rem; }
+.dive-item { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+.dive-label { font-size: .8125rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .05em; position: sticky; top: 5.5rem; }
+.dive-body h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: .625rem; color: var(--text-color); }
+.dive-body p { font-size: .9375rem; color: var(--text-muted); line-height: 1.75; margin-bottom: .75rem; }
+.dive-body p:last-child { margin-bottom: 0; }
+.dive-body strong { color: var(--text-color); }
+
+/* Pricing recap */
+.price-table { width: 100%; border-collapse: collapse; background: var(--surface-card); border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--surface-border); font-size: .875rem; }
+.price-table th, .price-table td { padding: .875rem 1.25rem; text-align: left; border-bottom: 1px solid var(--surface-border); }
+.price-table th { background: var(--surface-ground); font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); }
+.price-table tr:last-child td { border-bottom: none; }
+.price-table td.amount { font-weight: 700; color: var(--text-color); font-variant-numeric: tabular-nums; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 1rem; }
+.faq-item { padding: 1.25rem 1.5rem; }
+.faq-q { font-size: .9375rem; font-weight: 700; color: var(--text-color); margin-bottom: .5rem; }
+.faq-a { font-size: .875rem; color: var(--text-muted); line-height: 1.65; }
+
+/* Disclaimer */
+.disclaimer { font-size: .75rem; color: var(--text-dim); line-height: 1.7; border-top: 1px solid var(--surface-border); padding-top: 1.5rem; }
+
+/* Final CTA */
+.final { text-align: center; background: linear-gradient(180deg, var(--surface-ground) 0%, var(--surface-card) 100%); border-top: 1px solid var(--surface-border); }
+.final-title { font-size: clamp(1.625rem, 3.5vw, 2.375rem); font-weight: 800; letter-spacing: -.02em; color: var(--text-color); margin-bottom: 1rem; }
+.final-title .em { color: var(--e600); }
+.final-sub { font-size: 1rem; color: var(--text-muted); max-width: 440px; margin: 0 auto 2rem; line-height: 1.75; }
+.final-actions { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.final-note { font-size: .8125rem; color: var(--text-dim); }
+
+footer { background: var(--surface-card); border-top: 1px solid var(--surface-border); padding: 2rem; display: flex; align-items: center; justify-content: space-between; }
+.footer-l { display: flex; align-items: center; gap: .75rem; }
+.footer-brand { font-size: .875rem; font-weight: 700; color: var(--text-color); }
+.footer-copy  { font-size: .75rem; color: var(--text-dim); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: .75rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+.footer-links a:hover { color: var(--text-color); }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.v { opacity: 1; transform: translateY(0); }
+
+@media (max-width:900px) {
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  section { padding: 3rem 1rem; }
+  .hero { padding: 6.5rem 1rem 3rem; }
+  .verdict-grid { grid-template-columns: 1fr; }
+  .dive-item { grid-template-columns: 1fr; gap: .75rem; }
+  .dive-label { position: static; }
+  .final { padding: 3.5rem 1rem; }
+  footer { flex-direction: column; gap: 1.25rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="../index.html">
+    <img src="../../img/logo.png" alt="MakerStocks" style="height:36px;width:auto;">
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#features">Features</a>
+    <a href="../index.html#pricing">Pricing</a>
+    <a href="../docs/overview.html" target="_blank">Documentation</a>
+  </div>
+  <div class="nav-cta">
+    <a href="../index.html#configurator" class="btn btn-primary">Find my plan →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div class="vs-badge">🔍 Independent comparison</div>
+    <h1 class="hero-title">MakerStocks vs Craftybase:<br><span class="em">which one fits your shop?</span></h1>
+    <p class="hero-sub">Craftybase rebranded to Stocksmith in 2026 — same product, new name. Here's an honest, feature-by-feature comparison for makers deciding between MakerStocks and Craftybase (Stocksmith), based on each company's own public pricing and documentation.</p>
+    <div class="hero-actions">
+      <a href="../index.html#configurator" class="btn btn-primary btn-lg">Try MakerStocks free →</a>
+      <a href="#comparison" class="btn btn-outlined btn-lg">Jump to the table ↓</a>
+    </div>
+    <div class="updated-note">Last checked against Craftybase/Stocksmith's public site — prices and features can change; see the note at the bottom of this page.</div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<section class="verdict">
+  <div class="inner">
+    <div class="reveal" style="text-align:center; margin-bottom:2.5rem">
+      <div class="section-tag">Quick answer</div>
+      <h2 class="section-title">Pick based on how you sell</h2>
+    </div>
+    <div class="verdict-grid">
+      <div class="verdict-card card reveal">
+        <h3>✅ Choose MakerStocks if…</h3>
+        <ul>
+          <li>You sell on <strong>BigCommerce</strong> — Craftybase/Stocksmith doesn't support it yet</li>
+          <li>You want <strong>production run scheduling</strong> without paying for their top $166–199/mo tier</li>
+          <li>Your operators need a <strong>dedicated mobile app</strong>, not just a mobile browser</li>
+          <li>You mainly sell through your own BigCommerce or Shopify store, not five different marketplaces</li>
+          <li>You want a lower entry price ($29/mo) to get BOM, COGS and batch traceability together</li>
+        </ul>
+      </div>
+      <div class="verdict-card alt card reveal" style="transition-delay:.1s">
+        <h3>🟣 Choose Craftybase (Stocksmith) if…</h3>
+        <ul>
+          <li>You sell across <strong>many channels</strong> — Etsy, Amazon, Wix, Squarespace, Faire, Square — beyond just BigCommerce/Shopify</li>
+          <li>You want <strong>unlimited team members</strong> included on every plan, even the cheapest one</li>
+          <li>You need US-specific accounting reports (GAAP, Schedule C) built in</li>
+          <li>You don't need production run scheduling or a mobile app for the shop floor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="comparison">
+  <div class="inner">
+    <div class="reveal" style="margin-bottom:2rem">
+      <div class="section-tag">Side by side</div>
+      <h2 class="section-title">Feature comparison</h2>
+      <p class="section-lead">Based on MakerStocks' published pricing and Craftybase/Stocksmith's public pricing and help-center pages.</p>
+    </div>
+    <div class="cmp-table-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="brand-ms">MakerStocks</th>
+            <th>Craftybase (Stocksmith)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feat">Starting price</td><td class="ms"><strong>$29/mo</strong></td><td>$41–49/mo</td></tr>
+          <tr><td class="feat">BigCommerce sync</td><td class="ms yes">✓ Native, every plan</td><td class="no">✗ Waitlist only</td></tr>
+          <tr><td class="feat">Shopify sync</td><td class="ms yes">✓ Native</td><td class="yes">✓ Native</td></tr>
+          <tr><td class="feat">Other channels (Etsy, Amazon, Wix, Faire…)</td><td class="ms no">✗</td><td class="yes">✓ Many</td></tr>
+          <tr><td class="feat">Production run scheduling</td><td class="ms yes">✓ From Starter ($29/mo)</td><td class="partial">Only on Business tier ($166–199/mo)</td></tr>
+          <tr><td class="feat">Dedicated mobile app for operators</td><td class="ms yes">✓ Included from Starter</td><td class="no">✗ Web browser only</td></tr>
+          <tr><td class="feat">Multi-warehouse / multi-location</td><td class="ms yes">✓ (1 → 3 → unlimited by plan)</td><td class="yes">✓</td></tr>
+          <tr><td class="feat">Batch/lot &amp; expiry-date traceability</td><td class="ms yes">✓</td><td class="yes">✓</td></tr>
+          <tr><td class="feat">Supplier purchase orders</td><td class="ms yes">✓ From Pro ($59/mo)</td><td class="yes">✓</td></tr>
+          <tr><td class="feat">B2B / reseller order management</td><td class="ms yes">✓ Native, Business tier</td><td class="partial">Via Faire marketplace</td></tr>
+          <tr><td class="feat">Team members included</td><td class="ms partial">1 → 10 → unlimited by plan</td><td class="yes">Unlimited, every plan</td></tr>
+          <tr><td class="feat">Free trial</td><td class="ms yes">14 days, no card required</td><td class="yes">14 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section style="background:var(--surface-card); border-top:1px solid var(--surface-border); border-bottom:1px solid var(--surface-border);">
+  <div class="inner">
+    <div class="reveal" style="margin-bottom:2.5rem">
+      <div class="section-tag">The details</div>
+      <h2 class="section-title">Where the two products actually differ</h2>
+    </div>
+    <div class="dive">
+      <div class="dive-item reveal">
+        <div class="dive-label">Sales channels</div>
+        <div class="dive-body">
+          <h3>BigCommerce vs multi-channel breadth</h3>
+          <p>This is the single biggest structural difference. MakerStocks was built specifically for <strong>BigCommerce and Shopify</strong> merchants and syncs natively with both. Craftybase/Stocksmith covers a wider net of channels — Etsy, Amazon, WooCommerce, Wix, Weebly, Squarespace and Faire — but as of this writing <strong>does not support BigCommerce</strong>; their own help center lists it as a feature request you can vote for, not a working integration.</p>
+          <p>If BigCommerce is your storefront, that alone settles it. If you sell across five marketplaces and BigCommerce isn't one of them, Craftybase/Stocksmith's channel breadth is a genuine advantage.</p>
+        </div>
+      </div>
+      <div class="dive-item reveal" style="transition-delay:.05s">
+        <div class="dive-label">Production runs</div>
+        <div class="dive-body">
+          <h3>Planning and executing a batch</h3>
+          <p>MakerStocks treats production run scheduling as core functionality, included from the $29/mo Starter plan: plan a run from the desktop, let an operator start and complete it from the shop floor, and stock is deducted automatically in FIFO order.</p>
+          <p>Craftybase/Stocksmith does have production scheduling, but it's gated behind their Business tier at $166–199/month — roughly 3–5× the price of MakerStocks' entry plan. Their lower tiers cover inventory, BOM and COGS, but not run scheduling.</p>
+        </div>
+      </div>
+      <div class="dive-item reveal" style="transition-delay:.1s">
+        <div class="dive-label">Shop-floor access</div>
+        <div class="dive-body">
+          <h3>Mobile app vs mobile browser</h3>
+          <p>MakerStocks ships a dedicated mobile interface built for operators — start/complete runs, receive deliveries, check stock — without exposing pricing, financial reports or account settings.</p>
+          <p>Craftybase/Stocksmith is a responsive web app: it works from a phone's browser, but there's no purpose-built mobile experience scoped to what a floor operator actually needs to see.</p>
+        </div>
+      </div>
+      <div class="dive-item reveal" style="transition-delay:.15s">
+        <div class="dive-label">Team size</div>
+        <div class="dive-body">
+          <h3>Where Craftybase/Stocksmith wins outright</h3>
+          <p>To be fair: Craftybase/Stocksmith includes <strong>unlimited users on every plan</strong>, including its cheapest. MakerStocks ties mobile-app seats to the plan (1 on Starter, 10 on Pro, unlimited on Business). If you have a large team and a tight budget, that's a real point in their favor.</p>
+        </div>
+      </div>
+      <div class="dive-item reveal" style="transition-delay:.2s">
+        <div class="dive-label">Compliance &amp; traceability</div>
+        <div class="dive-body">
+          <h3>Batch, lot and expiry-date tracking</h3>
+          <p>Both products cover this well. MakerStocks tracks lot numbers and expiry dates on every raw-material entry and deducts stock in FIFO order, prioritizing lots closest to expiry. Craftybase/Stocksmith advertises GMP-compliant batch and lot tracking with recall documentation. Neither is a compliance guarantee on its own — regulated categories like cosmetics or food still require you to follow the applicable rules — but both give you the underlying traceability data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING RECAP -->
+<section>
+  <div class="inner-narrow">
+    <div class="reveal" style="margin-bottom:2rem; text-align:center">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-title">Monthly plans, side by side</h2>
+    </div>
+    <table class="price-table reveal">
+      <thead>
+        <tr><th>MakerStocks</th><th>Craftybase (Stocksmith)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="amount">Starter — $29/mo</td><td class="amount">Studio — $41–49/mo</td></tr>
+        <tr><td class="amount">Pro — $59/mo</td><td class="amount">Indie — $83–99/mo</td></tr>
+        <tr><td class="amount">Business — $99/mo</td><td class="amount">Business — $166–199/mo</td></tr>
+        <tr><td></td><td class="amount">Growth — $291–349/mo</td></tr>
+      </tbody>
+    </table>
+    <p style="text-align:center; margin-top:1rem; font-size:.8125rem; color:var(--text-dim)">Craftybase/Stocksmith's lower price is the annual-billing rate; the higher one is month-to-month. MakerStocks prices are the same either way.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--surface-card); border-top:1px solid var(--surface-border);">
+  <div class="inner-narrow">
+    <div class="reveal" style="margin-bottom:2rem; text-align:center">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-title">Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item card reveal">
+        <div class="faq-q">Is Craftybase the same as Stocksmith?</div>
+        <div class="faq-a">Yes. Craftybase rebranded to Stocksmith in 2026 — same team, same software, new name. Most existing content and reviews online are still indexed under "Craftybase," which is why you'll see both names used for the same product.</div>
+      </div>
+      <div class="faq-item card reveal">
+        <div class="faq-q">Does Craftybase (Stocksmith) integrate with BigCommerce?</div>
+        <div class="faq-a">Not currently. Their own help center lists BigCommerce as a feature request on a waitlist, not a supported sales channel. MakerStocks has native two-way BigCommerce sync included in every plan.</div>
+      </div>
+      <div class="faq-item card reveal">
+        <div class="faq-q">What's the cheapest way to get production run scheduling for a small workshop?</div>
+        <div class="faq-a">MakerStocks includes production run planning and execution starting on its $29/month Starter plan. On Craftybase/Stocksmith, that same capability only unlocks on the Business tier, priced at $166–199/month.</div>
+      </div>
+      <div class="faq-item card reveal">
+        <div class="faq-q">Does Craftybase have a mobile app for production workers?</div>
+        <div class="faq-a">No dedicated native app — it's a responsive website that works in a mobile browser. MakerStocks ships a purpose-built mobile interface for shop-floor operators, included from the Starter plan.</div>
+      </div>
+    </div>
+    <div class="disclaimer" style="margin-top:2rem">
+      This comparison is written and maintained by MakerStocks based on publicly available pricing and documentation from Craftybase/Stocksmith as of the date this page was last updated. Features and prices change — if you spot something outdated, we'd genuinely like to know: it helps us keep this page accurate. Craftybase and Stocksmith are trademarks of their respective owner; this page is not affiliated with or endorsed by them.
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final reveal">
+  <div class="inner-narrow">
+    <h2 class="final-title">See it on your own <span class="em">catalog.</span></h2>
+    <p class="final-sub">Install MakerStocks from the BigCommerce or Shopify App Store. Your first production run in under 30 minutes.</p>
+    <div class="final-actions">
+      <a href="../index.html#pricing" class="btn btn-primary btn-lg">See pricing →</a>
+      <a href="../docs/overview.html" class="btn btn-outlined btn-lg" target="_blank">Read the documentation</a>
+    </div>
+    <div class="final-note">No credit card · Cancel anytime · 14 days free</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-l">
+    <img src="../../img/logo.png" alt="MakerStocks" style="height:28px;width:auto;">
+    <span class="footer-brand">MakerStocks</span>
+    <span class="footer-copy">· © 2026 · App BigCommerce & Shopify</span>
+  </div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../docs/overview.html">Documentation</a>
+    <a href="../legal/privacy.html">Privacy</a>
+    <a href="../legal/tos.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+const ro = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('v');ro.unobserve(x.target);} }), {threshold:.07});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
